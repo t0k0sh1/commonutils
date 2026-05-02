@@ -60,10 +60,9 @@ import org.commonutils.lang.ObjectSupport;
  * These helpers do <em>not</em> throw for ordinary null maps, missing keys, or failed parsing of
  * string values: they return defaults as documented. {@link #size(Map)} throws {@link
  * IllegalArgumentException} when {@link Map#size()} returns a negative value. {@link
- * #defaultIfNull(Map, Map)} delegates to
- * {@link ObjectSupport#requireNonNullElse(Object, Object)} and throws {@link NullPointerException}
- * if both arguments are {@code null}. A broken {@link Map} implementation in user code may still
- * throw at runtime.
+ * #defaultIfNull(Map, Map)} delegates to {@link ObjectSupport#requireNonNullElse(Object, Object)}
+ * and throws {@link NullPointerException} if both arguments are {@code null}. A broken {@link Map}
+ * implementation in user code may still throw at runtime.
  *
  * <h2 id="examples">Examples</h2>
  *
