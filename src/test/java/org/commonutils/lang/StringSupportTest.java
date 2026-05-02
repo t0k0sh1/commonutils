@@ -167,4 +167,62 @@ class StringSupportTest {
     assertEquals("", StringSupport.stripToEmpty("\u3000"));
     assertNull(StringSupport.stripToNull("\u3000"));
   }
+
+  @Test
+  void lengthReturnsZeroForNullSequence() {
+    assertEquals(0, StringSupport.length(null));
+    assertEquals(0, StringSupport.length(null, Lengths.POINTS));
+    assertEquals(0, StringSupport.length(null, Lengths.EAW));
+    assertEquals(0, StringSupport.length(null, Lengths.UNITS));
+  }
+
+  @Test
+  void lengthRejectsNullCounter() {
+    assertThrows(NullPointerException.class, () -> StringSupport.length("a", null));
+  }
+
+  @Test
+  void lengthAsciiMatchesAllBuiltinStrategies() {
+    assertEquals(3, StringSupport.length("abc"));
+    assertEquals(3, StringSupport.length("abc", Lengths.UNITS));
+    assertEquals(3, StringSupport.length("abc", Lengths.POINTS));
+    assertEquals(3, StringSupport.length("abc", Lengths.EAW));
+  }
+
+  @Test
+  void lengthEmojiSurrogatePair() {
+    final String grinning = "\uD83D\uDE00";
+    assertEquals(2, StringSupport.length(grinning));
+    assertEquals(2, StringSupport.length(grinning, Lengths.UNITS));
+    assertEquals(1, StringSupport.length(grinning, Lengths.POINTS));
+    assertEquals(2, StringSupport.length(grinning, Lengths.EAW));
+  }
+
+  @Test
+  void lengthMixedHalfAndFullWidth() {
+    assertEquals(2, StringSupport.length("a\u30A2"));
+    assertEquals(2, StringSupport.length("a\u30A2", Lengths.POINTS));
+    assertEquals(3, StringSupport.length("a\u30A2", Lengths.EAW));
+  }
+
+  @Test
+  void lengthAmbiguousGreekCountsAsTwoColumns() {
+    assertEquals(2, StringSupport.length("\u0391", Lengths.EAW));
+    assertEquals(1, StringSupport.length("\u0391", Lengths.POINTS));
+  }
+
+  @Test
+  void customLengthCounter() {
+    final LengthCounter zeroOrOne = seq -> StringSupport.isEmpty(seq) ? 0 : 1;
+    assertEquals(0, StringSupport.length(null, zeroOrOne));
+    assertEquals(0, StringSupport.length("", zeroOrOne));
+    assertEquals(1, StringSupport.length("x", zeroOrOne));
+  }
+
+  @Test
+  void lengthWorksOnStringBuilder() {
+    final StringBuilder sb = new StringBuilder("a\u30A2");
+    assertEquals(2, StringSupport.length(sb, Lengths.POINTS));
+    assertEquals(3, Lengths.EAW.count(sb));
+  }
 }
