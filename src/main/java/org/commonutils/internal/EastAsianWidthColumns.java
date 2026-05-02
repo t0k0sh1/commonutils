@@ -6,6 +6,10 @@ package org.commonutils.internal;
  * Categories F, W, and A map to 2 columns; H, Na, and N map to 1. Code points not listed in that
  * file are treated as N (neutral), width 1.
  *
+ * <p>Lookup tables are validated at class initialization: array lengths match, each range has
+ * {@code START <= END}, ranges are strictly increasing with no overlap, and each width is {@code 1}
+ * or {@code 2}.
+ *
  * <p>For use only inside this module; not exported to library consumers.
  */
 public final class EastAsianWidthColumns {
@@ -281,4 +285,30 @@ public final class EastAsianWidthColumns {
     2, 1, 2, 1, 2, 2, 1, 2, 1, 2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 2, 2, 2, 2,
     2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 2, 2, 2
   };
+
+  static {
+    if (START.length != END.length || START.length != WIDTH.length) {
+      throw new IllegalStateException(
+          "EastAsianWidth table length mismatch: START="
+              + START.length
+              + " END="
+              + END.length
+              + " WIDTH="
+              + WIDTH.length);
+    }
+    for (int i = 0; i < START.length; i++) {
+      if (START[i] > END[i]) {
+        throw new IllegalStateException(
+            "EastAsianWidth invalid range at index " + i + ": START > END");
+      }
+      if (i > 0 && START[i] <= END[i - 1]) {
+        throw new IllegalStateException(
+            "EastAsianWidth overlapping or unsorted range at index " + i);
+      }
+      final byte w = WIDTH[i];
+      if (w != 1 && w != 2) {
+        throw new IllegalStateException("EastAsianWidth WIDTH[" + i + "] must be 1 or 2, was " + w);
+      }
+    }
+  }
 }

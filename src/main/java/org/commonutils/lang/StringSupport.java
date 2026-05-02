@@ -190,10 +190,13 @@ public final class StringSupport {
    * @param s text to measure, may be {@code null}
    * @param how counting strategy; must not be {@code null}
    * @return count from {@code how}
+   * @throws IllegalArgumentException if {@code how.count(s)} is negative
    */
   public static @NonNegative int length(
       final @Nullable CharSequence s, final @NonNull LengthCounter how) {
-    return Objects.requireNonNull(how, "how").count(s);
+    final int count = Objects.requireNonNull(how, "how").count(s);
+    Contracts.requireNonNegative("LengthCounter.count(s) [" + how + "]", count);
+    return count;
   }
 
   /**

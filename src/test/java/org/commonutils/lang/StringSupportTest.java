@@ -182,6 +182,14 @@ class StringSupportTest {
   }
 
   @Test
+  void lengthRejectsNegativeCountFromCustomCounter() {
+    final LengthCounter bad = s -> -1;
+    final IllegalArgumentException ex =
+        assertThrows(IllegalArgumentException.class, () -> StringSupport.length("", bad));
+    assertTrue(ex.getMessage().contains("LengthCounter.count"));
+  }
+
+  @Test
   void lengthAsciiMatchesAllBuiltinStrategies() {
     assertEquals(3, StringSupport.length("abc"));
     assertEquals(3, StringSupport.length("abc", Lengths.UNITS));
