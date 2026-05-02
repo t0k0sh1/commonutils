@@ -1,5 +1,7 @@
 plugins {
     id 'java-library'
+    id 'maven-publish'
+    id 'signing'
     id 'checkstyle'
     alias(libs.plugins.spotbugs)
     alias(libs.plugins.spotless)
@@ -21,6 +23,8 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
+    withSourcesJar()
+    withJavadocJar()
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -77,4 +81,118 @@ tasks.named('javadoc', org.gradle.api.tasks.javadoc.Javadoc) {
     options.encoding = 'UTF-8'
     options.charSet = 'UTF-8'
     options.docEncoding = 'UTF-8'
+}
+
+/* Maven Central / OSSRH: POM metadata and artifacts (main + sources + javadoc). */
+def githubRepoPath = 't0k0sh1/commonutils'
+
+def mavenCentralUsernameValue = {
+    (findProperty('mavenCentralUsername')
+                    ?: System.getenv('ORG_GRADLE_PROJECT_mavenCentralUsername')
+                    ?: System.getenv('MAVEN_CENTRAL_USERNAME')
+                    ?: '')
+            .toString()
+}
+def mavenCentralPasswordValue = {
+    (findProperty('mavenCentralPassword')
+                    ?: System.getenv('ORG_GRADLE_PROJECT_mavenCentralPassword')
+                    ?: System.getenv('MAVEN_CENTRAL_PASSWORD')
+                    ?: '')
+            .toString()
+}
+
+publishing {
+    publications {
+        create('mavenJava', MavenPublication) {
+            from components.java
+            pom {
+                name = 'commonutils'
+                description =
+                        'Small JDK 21+ utility library (JPMS module org.commonutils); no third-party runtime dependencies.'
+                url = "https://github.com/${githubRepoPath}"
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://opensource.org/licenses/MIT'
+                        distribution = 'repo'
+                    }
+                }
+                developers {
+                    developer {
+                        name = 'Takashi Yamashina'
+                        email = 'takashi.yamashina@gmail.com'
+                    }
+                }
+                scm {
+                    connection = "scm:git:https://github.com/${githubRepoPath}.git"
+                    developerConnection = "scm:git:ssh://git@github.com/${githubRepoPath}.git"
+                    url = "https://github.com/${githubRepoPath}"
+                }
+            }
+        }
+    }
+    repositories {
+        mavenLocal()
+        /*
+         * Central Publisher Portal: user token from https://central.sonatype.com/usertoken
+         * (not legacy OSSRH password). Defaults follow Portal OSSRH Staging API for maven-publish:
+         * https://central.sonatype.org/publish/publish-portal-ossrh-staging-api/
+         *
+         * Set mavenCentralUsername / mavenCentralPassword in:
+         *   GRADLE_USER_HOME/gradle.properties (default: ~/.gradle/gradle.properties), or
+         *   project gradle.properties (do not commit secrets), or
+         *   env ORG_GRADLE_PROJECT_mavenCentralUsername / _Password, or MAVEN_CENTRAL_USERNAME / _PASSWORD.
+         * Use the User Token from https://central.sonatype.com/usertoken (not a Nexus UI password).
+         * If credentials are missing or wrong, PUT fails with 401.
+         *
+         * After publish, uploads must be finalized with POST .../manual/upload/defaultRepository/org.commonutils
+         * from the same IP (e.g. end of CI), or via the API docs / portal workflows — see link above.
+         */
+        maven {
+            name = 'sonatype'
+            def releaseRepo =
+                    (findProperty('sonatypeStagingRepoUrl')
+                                    ?: 'https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/')
+                            .toString()
+            def snapshotRepo =
+                    (findProperty('sonatypeSnapshotsRepoUrl')
+                                    ?: 'https://central.sonatype.com/repository/maven-snapshots/')
+                            .toString()
+            url = uri(version.toString().endsWith('SNAPSHOT') ? snapshotRepo : releaseRepo)
+            credentials {
+                username = mavenCentralUsernameValue()
+                password = mavenCentralPasswordValue()
+            }
+        }
+    }
+}
+
+tasks.register('checkMavenCentralCredentials') {
+    group = 'publishing'
+    description =
+            'Prints whether Maven Central credentials resolve to non-empty values (does not print secrets).'
+    def u = mavenCentralUsernameValue()
+    def p = mavenCentralPasswordValue()
+    doLast {
+        def uh = !u.trim().isEmpty()
+        def ph = !p.trim().isEmpty()
+        println "mavenCentral username non-empty: ${uh}"
+        println "mavenCentral password non-empty: ${ph}"
+        println "GRADLE_USER_HOME: ${System.getenv('GRADLE_USER_HOME') ?: '(default: ~/.gradle)'}"
+        if (!uh || !ph) {
+            throw new GradleException(
+                    'mavenCentralUsername/password missing. Put them in ~/.gradle/gradle.properties or set ORG_GRADLE_PROJECT_* / MAVEN_CENTRAL_* env vars.')
+        }
+    }
+}
+
+signing {
+    required {
+        def v = version.toString()
+        !v.endsWith('-SNAPSHOT')
+                && (project.hasProperty('signing.keyId')
+                        || project.hasProperty('signing.secretKeyRingFile')
+                        || System.getenv('ORG_GRADLE_PROJECT_signingKey') != null)
+    }
+    sign publishing.publications.mavenJava
 }
