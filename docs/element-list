@@ -1,0 +1,5 @@
+module:org.commonutils
+org.commonutils.annotation
+org.commonutils.internal
+org.commonutils.lang
+org.commonutils.util

@@ -1,0 +1,15 @@
+---
+description: commonutils の契約アノテーションとランタイム検証の方針
+alwaysApply: true
+---
+
+# 契約アノテーション（commonutils）
+
+`org.commonutils.annotation` の **`@Nullable`**, **`@NonNull`**, **`@NonNegative`**, **`@Positive`** は次の役割を持つ。
+
+1. **マーカー**: シグネチャだけ読んで、渡す値・返す値の制約をメソッド本体を読まずに把握できるようにする（人間・AI 向けのドキュメント）。
+2. **ランタイム検証**: 該当する公開 API では、契約に反したとき **`NullPointerException`**（参照が null になってはいけない場合）または **`IllegalArgumentException`**（数値が範囲外の場合）で失敗させる。アノテーション本体は検証ロジックを持たない。
+
+実装では `org.commonutils.internal.Contracts` で `@NonNegative` / `@Positive` を検証し、`java.util.Objects.requireNonNull` で `@NonNull` を検証する。**`org.commonutils.internal` はモジュール宣言でエクスポートしない**（JPMS 利用時、ライブラリ利用者のコンパイルからは見えない）。
+
+新規コードでは、(1) 制約があるパラメータ・戻り値に適切なアノテーションを付ける、(2) メソッド先頭で契約どおりに検証する、(3) クラス Javadoc で「検証する」と書く、を揃える。

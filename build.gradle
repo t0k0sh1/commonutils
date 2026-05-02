@@ -1,0 +1,80 @@
+plugins {
+    id 'java-library'
+    id 'checkstyle'
+    alias(libs.plugins.spotbugs)
+    alias(libs.plugins.spotless)
+}
+
+group = 'org.commonutils'
+version = '0.1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation libs.junit.jupiter
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.compilerArgs += [
+            '-Xlint:all',
+            '-Xlint:-processing',
+    ]
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+base {
+    archivesName = 'commonutils'
+}
+
+checkstyle {
+    toolVersion = libs.versions.checkstyle.get()
+    configFile = layout.projectDirectory.file('config/checkstyle/checkstyle.xml').asFile
+    maxWarnings = 0
+}
+
+spotbugs {
+    ignoreFailures = false
+    effort = 'max'
+    reportLevel = 'medium'
+}
+
+spotless {
+    enforceCheck = true
+    java {
+        target 'src/**/*.java'
+        googleJavaFormat(libs.versions.google.java.format.get())
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+}
+
+// Enforce: Spotless (format) -> Checkstyle & SpotBugs (lint) -> test
+['checkstyleMain', 'checkstyleTest', 'spotbugsMain', 'spotbugsTest'].each { taskName ->
+    tasks.named(taskName).configure { mustRunAfter('spotlessCheck') }
+}
+tasks.named('test').configure {
+    mustRunAfter('checkstyleMain')
+    mustRunAfter('checkstyleTest')
+    mustRunAfter('spotbugsMain')
+    mustRunAfter('spotbugsTest')
+}
+
+tasks.named('javadoc', org.gradle.api.tasks.javadoc.Javadoc) {
+    destinationDir = rootProject.layout.projectDirectory.dir('docs').asFile
+    options.encoding = 'UTF-8'
+    options.charSet = 'UTF-8'
+    options.docEncoding = 'UTF-8'
+}
