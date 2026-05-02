@@ -1,8 +1,10 @@
 package org.commonutils.util;
 
 import java.util.Map;
+import org.commonutils.annotation.NonNegative;
 import org.commonutils.annotation.NonNull;
 import org.commonutils.annotation.Nullable;
+import org.commonutils.internal.Contracts;
 import org.commonutils.lang.NumberSupport;
 import org.commonutils.lang.ObjectSupport;
 
@@ -17,6 +19,8 @@ import org.commonutils.lang.ObjectSupport;
  *
  * <ul>
  *   <li>Predicates such as {@link #isEmpty(Map)} treat {@code null} like an empty map.
+ *   <li>{@link #size(Map)} returns {@code 0} when {@code map} is {@code null}; otherwise {@link
+ *       Map#size()}.
  *   <li>Accessor methods return the supplied default when the map is {@code null}, the key is not
  *       contained, parsing fails, or (for some methods) the stored value is {@code null}; see each
  *       method for exact rules.
@@ -54,10 +58,11 @@ import org.commonutils.lang.ObjectSupport;
  * <h2 id="exceptions">Exceptions</h2>
  *
  * These helpers do <em>not</em> throw for ordinary null maps, missing keys, or failed parsing of
- * string values: they return defaults as documented. {@link #defaultIfNull(Map, Map)} delegates to
- * {@link ObjectSupport#requireNonNullElse(Object, Object)} and throws {@link NullPointerException}
- * if both arguments are {@code null}. A broken {@link Map} implementation in user code may still
- * throw at runtime.
+ * string values: they return defaults as documented. {@link #size(Map)} throws {@link
+ * IllegalArgumentException} when {@link Map#size()} returns a negative value. {@link
+ * #defaultIfNull(Map, Map)} delegates to {@link ObjectSupport#requireNonNullElse(Object, Object)}
+ * and throws {@link NullPointerException} if both arguments are {@code null}. A broken {@link Map}
+ * implementation in user code may still throw at runtime.
  *
  * <h2 id="examples">Examples</h2>
  *
@@ -79,10 +84,12 @@ import org.commonutils.lang.ObjectSupport;
  *
  * <p><strong id="numeric-contracts">Numeric constraints</strong> ({@link
  * org.commonutils.annotation.NonNegative}, {@link org.commonutils.annotation.Positive}) document
- * ranges where applicable in related APIs; map accessors here use defaults rather than validating
- * numeric ranges on keys.
+ * ranges where applicable in related APIs; {@link #size(Map)} enforces {@link
+ * org.commonutils.annotation.NonNegative} at runtime when {@link Map#size()} returns a negative
+ * value. Other map accessors use defaults rather than validating numeric ranges on keys.
  *
  * @see Map#isEmpty()
+ * @see Map#size()
  * @see Map#containsKey(Object)
  * @see CollectionSupport
  */
@@ -111,6 +118,26 @@ public final class MapSupport {
    */
   public static boolean isNotEmpty(final @Nullable Map<?, ?> map) {
     return !isEmpty(map);
+  }
+
+  /**
+   * Returns {@code map.size()} when {@code map} is non-null; otherwise {@code 0}. Use instead of
+   * {@code map == null ? 0 : map.size()} at call sites.
+   *
+   * @param map map to measure, may be {@code null}
+   * @return entry count, or {@code 0} when {@code map} is {@code null}
+   * @throws IllegalArgumentException when {@code map} is non-null and {@link Map#size()} is
+   *     negative
+   * @see #isEmpty(Map)
+   * @see CollectionSupport#size(java.util.Collection)
+   */
+  public static @NonNegative int size(final @Nullable Map<?, ?> map) {
+    if (ObjectSupport.isNull(map)) {
+      return 0;
+    }
+    final int n = map.size();
+    Contracts.requireNonNegative("map.size()", n);
+    return n;
   }
 
   /**

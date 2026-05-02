@@ -9,9 +9,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.AbstractMap;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class MapSupportTest {
@@ -24,6 +28,33 @@ class MapSupportTest {
     assertFalse(MapSupport.isNotEmpty(null));
     assertFalse(MapSupport.isNotEmpty(Map.of()));
     assertTrue(MapSupport.isNotEmpty(Map.of("a", 1)));
+  }
+
+  @Test
+  void sizeReturnsZeroForNullOrEmptyAndCountOtherwise() {
+    assertEquals(0, MapSupport.size(null));
+    assertEquals(0, MapSupport.size(Map.of()));
+    assertEquals(2, MapSupport.size(Map.of("a", 1, "b", 2)));
+  }
+
+  @Test
+  void sizeThrowsWhenMapReportsNegativeSize() {
+    final Map<String, String> broken =
+        new AbstractMap<String, String>() {
+          @Override
+          public Set<Entry<String, String>> entrySet() {
+            return Collections.emptySet();
+          }
+
+          @Override
+          public int size() {
+            return -1;
+          }
+        };
+
+    final IllegalArgumentException ex =
+        assertThrows(IllegalArgumentException.class, () -> MapSupport.size(broken));
+    assertTrue(ex.getMessage().contains("map.size()"));
   }
 
   @Test
