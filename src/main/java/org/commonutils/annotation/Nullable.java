@@ -12,6 +12,9 @@ import java.lang.annotation.Target;
  * parameter is also validated as non-null at runtime, the method uses {@link NullPointerException}
  * for violations rather than relying on this marker alone.
  *
+ * <p>This is a documentation marker only on your own declarations; it does not cause commonutils to
+ * validate your code at runtime (see {@link org.commonutils.annotation the package description}).
+ *
  * @see org.commonutils.annotation.NonNull
  * @see org.commonutils.annotation.NonNegative
  * @see org.commonutils.annotation.Positive

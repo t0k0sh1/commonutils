@@ -89,7 +89,10 @@ loadScripts(document, 'script');</script>
 </span><span class="modifiers">public @interface </span><span class="element-name type-name-label">NonNull</span></div>
 <div class="block">Marks a type usage whose value must not be <code>null</code>. For documentation and static analysis;
  on public API methods in this library that validate arguments, passing <code>null</code> where <code>
- NonNull</code> is required causes <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/NullPointerException.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>NullPointerException</code></a> (see each method's description).</div>
+ NonNull</code> is required causes <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/NullPointerException.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>NullPointerException</code></a> (see each method's description).
+
+ <p>This annotation does not add runtime null checks to your own API; use explicit validation or
+ tooling (see <a href="package-summary.html"><code>the package description</code></a>).</div>
 <dl class="notes">
 <dt>関連項目:</dt>
 <dd>

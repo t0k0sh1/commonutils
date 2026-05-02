@@ -1,6 +1,8 @@
 /**
- * Small JDK 21+ utility library: null-tolerant string and collection helpers, map accessors,
- * numeric string parsing, and marker annotations for API contracts.
+ * Small JDK 21+ utility library. The public API is <em>curated</em>: it favors high-frequency,
+ * broadly useful helpers over exhaustive coverage of every category, and it is not limited to any
+ * single domain—the set of packages and types may grow over time. Implementations aim to be safe
+ * and fast and depend on no third-party libraries; this module requires only {@code java.base}.
  *
  * <h2>Depend on this module</h2>
  *

@@ -11,6 +11,9 @@ import java.lang.annotation.Target;
  * on public API methods in this library that validate arguments, passing {@code null} where {@code
  * NonNull} is required causes {@link NullPointerException} (see each method's description).
  *
+ * <p>This annotation does not add runtime null checks to your own API; use explicit validation or
+ * tooling (see {@link org.commonutils.annotation the package description}).
+ *
  * @see org.commonutils.annotation.Nullable
  * @see org.commonutils.annotation.NonNegative
  * @see org.commonutils.annotation.Positive

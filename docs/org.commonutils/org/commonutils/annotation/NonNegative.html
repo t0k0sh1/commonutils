@@ -90,7 +90,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Marks a numeric type usage intended to be zero or greater: primitive integrals (<code>int</code>,
  <code>long</code>, …) — &gt;= 0; non-<code>NaN</code> floating-point — &gt;= 0.0. For
  documentation and static analysis. On public API methods in this library that validate arguments,
- out-of-range values cause <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>IllegalArgumentException</code></a> (see each method).</div>
+ out-of-range values cause <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>IllegalArgumentException</code></a> (see each method).
+
+ <p>This annotation does not add runtime range checks to your own API; use explicit validation or
+ tooling (see <a href="package-summary.html"><code>the package description</code></a>).</div>
 <dl class="notes">
 <dt>関連項目:</dt>
 <dd>

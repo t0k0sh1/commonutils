@@ -75,6 +75,13 @@ loadScripts(document, 'script');</script>
  and <a href="../util/package-summary.html"><code>org.commonutils.util</code></a> enforce the contracts at runtime where stated (see each
  annotation).
 
+ <p><strong>Library consumers</strong>: these annotations do not implement validation. Applying
+ them to your own fields, parameters, methods, or types does not cause commonutils to enforce
+ anything at runtime; add your own checks or rely on static analysis or other tooling as needed.
+ Documented <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/NullPointerException.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>NullPointerException</code></a> and <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>IllegalArgumentException</code></a>
+ behavior applies only where this library's public methods explicitly validate arguments (see each
+ method in <a href="../lang/package-summary.html"><code>org.commonutils.lang</code></a> and <a href="../util/package-summary.html"><code>org.commonutils.util</code></a>).
+
  <h2 id="annotations-heading">Annotations</h2>
 
  <ul>

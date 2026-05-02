@@ -90,7 +90,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Marks a type usage whose value may be <code>null</code>. Callers should read each method for how
  <code>null</code> is interpreted (for example treated as empty, or rejected after validation). Where a
  parameter is also validated as non-null at runtime, the method uses <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/NullPointerException.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>NullPointerException</code></a>
- for violations rather than relying on this marker alone.</div>
+ for violations rather than relying on this marker alone.
+
+ <p>This is a documentation marker only on your own declarations; it does not cause commonutils to
+ validate your code at runtime (see <a href="package-summary.html"><code>the package description</code></a>).</div>
 <dl class="notes">
 <dt>関連項目:</dt>
 <dd>

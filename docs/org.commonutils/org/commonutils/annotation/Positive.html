@@ -91,7 +91,10 @@ loadScripts(document, 'script');</script>
  than zero (&gt;= 1). Floating-point primitives (and boxed wrappers where applicable) must
  be strictly greater than zero (&gt; 0.0); <code>NaN</code> is not considered positive here.
  For documentation and static analysis. On public API methods in this library that validate
- arguments, out-of-range values cause <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>IllegalArgumentException</code></a> (see each method).</div>
+ arguments, out-of-range values cause <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>IllegalArgumentException</code></a> (see each method).
+
+ <p>This annotation does not add runtime range checks to your own API; use explicit validation or
+ tooling (see <a href="package-summary.html"><code>the package description</code></a>).</div>
 <dl class="notes">
 <dt>関連項目:</dt>
 <dd>
