@@ -6,8 +6,11 @@
  * <h2>Main entry points</h2>
  *
  * <ul>
- *   <li>{@link org.commonutils.lang.StringSupport} &mdash; empty/blank, trim/strip, padding, safe
- *       equality
+ *   <li>{@link org.commonutils.lang.StringSupport} &mdash; empty/blank, trim/strip, padding, length
+ *       counting, safe equality
+ *   <li>{@link org.commonutils.lang.LengthCounter} / {@link org.commonutils.lang.Lengths} &mdash;
+ *       how to count {@link java.lang.CharSequence} length (code units, code points, East Asian
+ *       columns)
  *   <li>{@link org.commonutils.lang.NumberSupport} &mdash; digit checks, parsing with defaults,
  *       {@code clamp}
  *   <li>{@link org.commonutils.lang.ObjectSupport} &mdash; forwarding to {@code Objects} plus extra

@@ -1,5 +1,7 @@
 package org.commonutils.lang;
 
+import java.util.Objects;
+import org.commonutils.annotation.NonNegative;
 import org.commonutils.annotation.NonNull;
 import org.commonutils.annotation.Nullable;
 import org.commonutils.annotation.Positive;
@@ -63,6 +65,15 @@ import org.commonutils.internal.Contracts;
  * considered equal. {@link #equalsIgnoreCase(CharSequence, CharSequence)} uses per-character case
  * folding suitable for typical ASCII/Unicode strings; it is not a substitute for locale-sensitive
  * {@link java.text.Collator} comparisons.
+ *
+ * <h2 id="length-counting">Length counting</h2>
+ *
+ * {@link #length(CharSequence)} and {@link #length(CharSequence, LengthCounter)} measure size in
+ * different ways. Pass {@link Lengths#UNITS} for UTF-16 code units (Java {@code String}-style
+ * length), {@link Lengths#POINTS} for Unicode code points, or {@link Lengths#EAW} for East Asian
+ * display columns (UAX #11). Like {@link java.util.Comparator}, you can supply a custom {@link
+ * LengthCounter} when none of the built-in enum constants fit. {@code null} sequences count as
+ * length {@code 0}; the {@link LengthCounter} argument must not be {@code null}.
  *
  * <h2 id="examples">Examples</h2>
  *
@@ -157,6 +168,35 @@ public final class StringSupport {
    */
   public static boolean isNotBlank(final @Nullable CharSequence value) {
     return !isBlank(value);
+  }
+
+  /**
+   * Returns the UTF-16 code unit count: same as {@link #length(CharSequence, LengthCounter)
+   * length}{@code (s, Lengths.UNITS)}.
+   *
+   * @param s text to measure, may be {@code null} (treated as length {@code 0})
+   * @return non-negative code unit count
+   * @see Lengths#UNITS
+   * @see CharSequence#length()
+   */
+  public static @NonNegative int length(final @Nullable CharSequence s) {
+    return length(s, Lengths.UNITS);
+  }
+
+  /**
+   * Returns a non-negative length count for {@code s} using {@code how}. {@code null} {@code s}
+   * counts as {@code 0}.
+   *
+   * @param s text to measure, may be {@code null}
+   * @param how counting strategy; must not be {@code null}
+   * @return count from {@code how}
+   * @throws IllegalArgumentException if {@code how.count(s)} is negative
+   */
+  public static @NonNegative int length(
+      final @Nullable CharSequence s, final @NonNull LengthCounter how) {
+    final int count = Objects.requireNonNull(how, "how").count(s);
+    Contracts.requireNonNegative("LengthCounter.count(s) [" + how + "]", count);
+    return count;
   }
 
   /**
