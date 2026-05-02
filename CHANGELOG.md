@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **`MapSupport.size`**: returns `Map.size()` when the map is non-null, or `0` when it is `null`; throws `IllegalArgumentException` if `size()` is negative (same contract as `CollectionSupport.size`).
+- **Tests**: `MapSupportTest` coverage for `MapSupport.size`.
 - **`LengthCounter`**: functional strategy for measuring `CharSequence` length; `null` sequences count as 0.
 - **`Lengths`**: built-in enum with `UNITS` (UTF-16 code units, same as `CharSequence.length()`), `POINTS` (Unicode code points; not grapheme clusters), and `EAW` (East Asian display columns per UAX #11: F/W/A → 2 columns, H/Na/N → 1; unlisted code points → 1).
 - **`StringSupport.length`**: one-arg form uses `UNITS`; two-arg form takes a `LengthCounter` (non-null); `how` null throws `NullPointerException`.
