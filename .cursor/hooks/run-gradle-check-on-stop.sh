@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Cursor `stop` hook: run ./gradlew check when the agent run ends with status "completed".
-# Logs go to stderr; stdout must be JSON for Cursor.
-# Disable temporarily: SKIP_GRADLE_CHECK_ON_STOP=1 (e.g. in shell profile — not read by Cursor by default).
+# Gradle output goes to stderr; stdout is always `{}` (valid JSON for Cursor). Exits with Gradle's
+# exit code so a failed check marks the hook as failed (use failClosed on the hook entry).
+# Disable temporarily: SKIP_GRADLE_CHECK_ON_STOP=1 (not read by Cursor by default).
 
 set -euo pipefail
 
@@ -31,7 +32,8 @@ cd "$ROOT"
 
 set +e
 ./gradlew check --no-daemon >&2
+gradle_exit=$?
 set -e
 
 echo '{}'
-exit 0
+exit "$gradle_exit"
