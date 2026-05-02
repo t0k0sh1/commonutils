@@ -145,8 +145,9 @@ publishing {
          * Use the User Token from https://central.sonatype.com/usertoken (not a Nexus UI password).
          * If credentials are missing or wrong, PUT fails with 401.
          *
-         * After publish, uploads must be finalized with POST .../manual/upload/defaultRepository/org.commonutils
-         * from the same IP (e.g. end of CI), or via the API docs / portal workflows — see link above.
+         * Gradle task finalizeSonatypeDeployment (or publishToCentralPortal) performs this POST; run
+         * from the same machine or CI job as publish. See also:
+         * https://central.sonatype.org/publish/publish-portal-ossrh-staging-api/
          */
         maven {
             name = 'sonatype'
@@ -195,4 +196,57 @@ signing {
                         || System.getenv('ORG_GRADLE_PROJECT_signingKey') != null)
     }
     sign publishing.publications.mavenJava
+}
+
+/*
+ * Central Portal: maven-publish only PUTs files; a follow-up POST is required to appear under
+ * Deployments. Optional properties: sonatypePortalNamespace (default: project.group),
+ * sonatypePublishingType (default: user_managed).
+ */
+tasks.register('finalizeSonatypeDeployment') {
+    group = 'publishing'
+    description =
+            'POST /manual/upload/defaultRepository/<namespace> so the deployment shows in Central Portal.'
+    def u = mavenCentralUsernameValue()
+    def p = mavenCentralPasswordValue()
+    def namespace = (findProperty('sonatypePortalNamespace') ?: group.toString()).toString()
+    def publishingType = (findProperty('sonatypePublishingType') ?: 'user_managed').toString()
+    doLast {
+        if (!u.trim() || !p.trim()) {
+            throw new GradleException(
+                    'mavenCentralUsername/password required for finalizeSonatypeDeployment.')
+        }
+        def token =
+                java.util.Base64.encoder.encodeToString(
+                        "${u}:${p}".getBytes(java.nio.charset.StandardCharsets.UTF_8))
+        def qs = java.net.URLEncoder.encode(publishingType, java.nio.charset.StandardCharsets.UTF_8)
+        def uri =
+                "https://ossrh-staging-api.central.sonatype.com/manual/upload/defaultRepository/${namespace}?publishing_type=${qs}"
+        def client = java.net.http.HttpClient.newHttpClient()
+        def request =
+                java.net.http.HttpRequest.newBuilder()
+                        .uri(java.net.URI.create(uri))
+                        .header('Authorization', "Bearer ${token}")
+                        .POST(java.net.http.HttpRequest.BodyPublishers.noBody())
+                        .build()
+        def response = client.send(request, java.net.http.HttpResponse.BodyHandlers.ofString())
+        logger.lifecycle(
+                'finalizeSonatypeDeployment: HTTP {}\n{}',
+                response.statusCode(),
+                response.body())
+        if (response.statusCode() < 200 || response.statusCode() >= 300) {
+            throw new GradleException("finalizeSonatypeDeployment failed: HTTP ${response.statusCode()}")
+        }
+    }
+}
+
+tasks.named('finalizeSonatypeDeployment').configure {
+    mustRunAfter publishMavenJavaPublicationToSonatypeRepository
+}
+
+tasks.register('publishToCentralPortal') {
+    group = 'publishing'
+    description =
+            'Publishes to Sonatype staging (PUTs) then POSTs manual/upload (same process / IP).'
+    dependsOn publishMavenJavaPublicationToSonatypeRepository, finalizeSonatypeDeployment
 }
