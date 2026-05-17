@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - YYYY-MM-DD
+
 ### Added
 
 - **`MapSupport.size`**: returns `Map.size()` when the map is non-null, or `0` when it is `null`; throws `IllegalArgumentException` if `size()` is negative (same contract as `CollectionSupport.size`).

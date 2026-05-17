@@ -130,6 +130,7 @@ public final class MapSupport {
    *     negative
    * @see #isEmpty(Map)
    * @see CollectionSupport#size(java.util.Collection)
+   * @since 0.2.0
    */
   public static @NonNegative int size(final @Nullable Map<?, ?> map) {
     if (ObjectSupport.isNull(map)) {
