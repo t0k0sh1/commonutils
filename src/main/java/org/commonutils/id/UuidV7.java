@@ -57,6 +57,7 @@ public final class UuidV7 {
    * @since 0.2.0
    */
   public static @NonNull UUID fromInstant(final @NonNull Instant instant) {
+    Objects.requireNonNull(instant, "instant");
     return fromInstant(instant, SECURE_RANDOM);
   }
 
@@ -90,6 +91,7 @@ public final class UuidV7 {
    * @since 0.2.0
    */
   public static @NonNull UUID fromClock(final @NonNull Clock clock) {
+    Objects.requireNonNull(clock, "clock");
     return fromClock(clock, SECURE_RANDOM);
   }
 
@@ -107,6 +109,7 @@ public final class UuidV7 {
   public static @NonNull UUID fromClock(
       final @NonNull Clock clock, final @NonNull RandomGenerator random) {
     Objects.requireNonNull(clock, "clock");
+    Objects.requireNonNull(random, "random");
     return fromInstant(clock.instant(), random);
   }
 
