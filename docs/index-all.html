@@ -49,7 +49,7 @@ loadScripts(document, 'script');</script>
 <div class="header">
 <h1>索引</h1>
 </div>
-<a href="#I:A">A</a>&nbsp;<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<a href="#I:V">V</a>&nbsp;<br><a href="allclasses-index.html">すべてのクラスおよびインタフェース</a><span class="vertical-separator">|</span><a href="allpackages-index.html">すべてのパッケージ</a>
+<a href="#I:A">A</a>&nbsp;<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<a href="#I:V">V</a>&nbsp;<br><a href="allclasses-index.html">すべてのクラスおよびインタフェース</a><span class="vertical-separator">|</span><a href="allpackages-index.html">すべてのパッケージ</a><span class="vertical-separator">|</span><a href="constant-values.html">定数フィールド値</a>
 <h2 class="title" id="I:A">A</h2>
 <dl class="index">
 <dt><a href="org.commonutils/org/commonutils/util/MapSupport.html#keys-vs-values" class="search-tag-link">Absent keys vs null values</a> - クラス org.commonutils.util.MapSupportの検索タグ</dt>
@@ -59,6 +59,21 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:B">B</h2>
 <dl class="index">
+<dt><a href="org.commonutils/org/commonutils/id/UuidV7.html#batchFromClock(java.time.Clock,int,java.util.random.RandomGenerator)" class="member-name-link">batchFromClock(Clock, int, RandomGenerator)</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UuidV7.html" title="org.commonutils.id内のクラス">UuidV7</a></dt>
+<dd>
+<div class="block">Returns <code>count</code> UUID v7 values by calling <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Clock.html#instant()" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Clock.instant()</code></a> before each generation.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/UuidV7.html#batchFromInstant(java.time.Instant,int,java.util.random.RandomGenerator)" class="member-name-link">batchFromInstant(Instant, int, RandomGenerator)</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UuidV7.html" title="org.commonutils.id内のクラス">UuidV7</a></dt>
+<dd>
+<div class="block">Returns <code>count</code> UUID v7 values sharing the same embedded Unix millisecond as <code>
+ instant</code>; random payload bits differ per element.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/UuidV7.html#batchFromInstantOrderedInRange(java.time.Instant,java.time.Instant,int,java.util.random.RandomGenerator)" class="member-name-link">batchFromInstantOrderedInRange(Instant, Instant, int, RandomGenerator)</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UuidV7.html" title="org.commonutils.id内のクラス">UuidV7</a></dt>
+<dd>
+<div class="block">Returns <code>count</code> UUID v7 values whose embedded Unix milliseconds form a non-decreasing
+ sequence; each millisecond lies in the closed range <code>[minInclusive, maxInclusive]</code>
+ (<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html#toEpochMilli()" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Instant.toEpochMilli()</code></a> after validation).</div>
+</dd>
 <dt><a href="org.commonutils/org/commonutils/util/MapSupport.html#booleans" class="search-tag-link">Boolean interpretation</a> - クラス org.commonutils.util.MapSupportの検索タグ</dt>
 <dd>セクション</dd>
 </dl>
@@ -206,6 +221,28 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the leftmost non-null argument.</div>
 </dd>
+<dt><a href="org.commonutils/org/commonutils/id/UuidV7.html#fromClock(java.time.Clock)" class="member-name-link">fromClock(Clock)</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UuidV7.html" title="org.commonutils.id内のクラス">UuidV7</a></dt>
+<dd>
+<div class="block">Creates a UUID v7 from <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Clock.html#instant()" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Clock.instant()</code></a>, using a cryptographically strong <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/UuidV7.html#fromClock(java.time.Clock,java.util.random.RandomGenerator)" class="member-name-link">fromClock(Clock, RandomGenerator)</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UuidV7.html" title="org.commonutils.id内のクラス">UuidV7</a></dt>
+<dd>
+<div class="block">Creates a UUID v7 from <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Clock.html#instant()" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Clock.instant()</code></a> and the given random generator.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/UuidV7.html#fromInstant(java.time.Instant)" class="member-name-link">fromInstant(Instant)</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UuidV7.html" title="org.commonutils.id内のクラス">UuidV7</a></dt>
+<dd>
+<div class="block">Creates a UUID v7 from an instant, using a cryptographically strong <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/UuidV7.html#fromInstant(java.time.Instant,java.util.random.RandomGenerator)" class="member-name-link">fromInstant(Instant, RandomGenerator)</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UuidV7.html" title="org.commonutils.id内のクラス">UuidV7</a></dt>
+<dd>
+<div class="block">Creates a UUID v7 from an instant and the given random generator.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/UuidV7.html#fromInstantRandomInRange(java.time.Instant,java.time.Instant,java.util.random.RandomGenerator)" class="member-name-link">fromInstantRandomInRange(Instant, Instant, RandomGenerator)</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UuidV7.html" title="org.commonutils.id内のクラス">UuidV7</a></dt>
+<dd>
+<div class="block">Picks a uniformly random Unix millisecond in the closed range <code>[minInclusive,
+ maxInclusive]</code> (compared via <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html#toEpochMilli()" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Instant.toEpochMilli()</code></a> after validation), then creates a
+ UUID v7 at that millisecond.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:G">G</h2>
 <dl class="index">
@@ -216,6 +253,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="org.commonutils/org/commonutils/id/UuidV4IdGenerator.html#generate()" class="member-name-link">generate()</a> - クラスのメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UuidV4IdGenerator.html" title="org.commonutils.id内のクラス">UuidV4IdGenerator</a></dt>
 <dd>
 <div class="block">Generates a new version-4 UUID.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/UuidV7IdGenerator.html#generate()" class="member-name-link">generate()</a> - クラスのメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UuidV7IdGenerator.html" title="org.commonutils.id内のクラス">UuidV7IdGenerator</a></dt>
+<dd>
+<div class="block">Generates a new UUID v7.</div>
 </dd>
 <dt><a href="org.commonutils/org/commonutils/util/MapSupport.html#getBoolean(java.util.Map,java.lang.Object)" class="member-name-link">getBoolean(Map&lt;?, ?&gt;, Object)</a> - クラスのstaticメソッド org.commonutils.util.<a href="org.commonutils/org/commonutils/util/MapSupport.html" title="org.commonutils.util内のクラス">MapSupport</a></dt>
 <dd>
@@ -377,6 +418,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Static helpers for <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>Map</code></a> work: null-safe emptiness checks, default substitution, and typed
  reads with fallbacks.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/UuidV7.html#MAX_UNIX_TS_MS" class="member-name-link">MAX_UNIX_TS_MS</a> - クラスのstatic変数 org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UuidV7.html" title="org.commonutils.id内のクラス">UuidV7</a></dt>
+<dd>
+<div class="block">Inclusive maximum <code>unix_ts_ms</code> (48-bit unsigned).</div>
 </dd>
 </dl>
 <h2 class="title" id="I:N">N</h2>
@@ -601,12 +646,39 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="org.commonutils/org/commonutils/id/UuidV4IdGenerator.html#%3Cinit%3E()" class="member-name-link">UuidV4IdGenerator()</a> - クラスのコンストラクタ org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UuidV4IdGenerator.html" title="org.commonutils.id内のクラス">UuidV4IdGenerator</a></dt>
 <dd>
-<div class="block">Uses <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/UUID.html#randomUUID()" title="java.util内のクラスまたはインタフェース" class="external-link"><code>UUID.randomUUID()</code></a> on each <a href="org.commonutils/org/commonutils/id/UuidV4IdGenerator.html#generate()"><code>generate()</code></a> call.</div>
+<div class="block">Uses <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/UUID.html#randomUUID()" title="java.util内のクラスまたはインタフェース" class="external-link"><code>UUID.randomUUID()</code></a> on each <a href="org.commonutils/org/commonutils/id/UuidV4IdGenerator.html#generate()"><code>UuidV4IdGenerator.generate()</code></a> call.</div>
 </dd>
 <dt><a href="org.commonutils/org/commonutils/id/UuidV4IdGenerator.html#%3Cinit%3E(java.util.random.RandomGenerator)" class="member-name-link">UuidV4IdGenerator(RandomGenerator)</a> - クラスのコンストラクタ org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UuidV4IdGenerator.html" title="org.commonutils.id内のクラス">UuidV4IdGenerator</a></dt>
 <dd>
-<div class="block">Uses the given generator to produce 16 random bytes per <a href="org.commonutils/org/commonutils/id/UuidV4IdGenerator.html#generate()"><code>generate()</code></a> call, applying RFC
+<div class="block">Uses the given generator to produce 16 random bytes per <a href="org.commonutils/org/commonutils/id/UuidV4IdGenerator.html#generate()"><code>UuidV4IdGenerator.generate()</code></a> call, applying RFC
  4122 version-4 and variant bits.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/UuidV7.html" class="type-name-link" title="org.commonutils.id内のクラス">UuidV7</a> - <a href="org.commonutils/org/commonutils/id/package-summary.html">org.commonutils.id</a>のクラス</dt>
+<dd>
+<div class="block">Static factory for <a href="https://www.rfc-editor.org/rfc/rfc9562">RFC 9562</a> UUID version 7
+ (Unix millisecond timestamp in the most significant bits, random in the remainder).</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/UuidV7IdGenerator.html" class="type-name-link" title="org.commonutils.id内のクラス">UuidV7IdGenerator</a> - <a href="org.commonutils/org/commonutils/id/package-summary.html">org.commonutils.id</a>のクラス</dt>
+<dd>
+<div class="block"><a href="org.commonutils/org/commonutils/id/IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a> for <a href="https://www.rfc-editor.org/rfc/rfc9562">RFC 9562</a> UUID
+ version 7.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/UuidV7IdGenerator.html#%3Cinit%3E(java.time.Clock)" class="member-name-link">UuidV7IdGenerator(Clock)</a> - クラスのコンストラクタ org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UuidV7IdGenerator.html" title="org.commonutils.id内のクラス">UuidV7IdGenerator</a></dt>
+<dd>
+<div class="block">Uses <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Clock.html#instant()" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Clock.instant()</code></a> on each <a href="org.commonutils/org/commonutils/id/UuidV7IdGenerator.html#generate()"><code>generate()</code></a> call with a cryptographically strong
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/UuidV7IdGenerator.html#%3Cinit%3E(java.time.Clock,java.util.random.RandomGenerator)" class="member-name-link">UuidV7IdGenerator(Clock, RandomGenerator)</a> - クラスのコンストラクタ org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UuidV7IdGenerator.html" title="org.commonutils.id内のクラス">UuidV7IdGenerator</a></dt>
+<dd>
+<div class="block">Uses <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Clock.html#instant()" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Clock.instant()</code></a> on each <a href="org.commonutils/org/commonutils/id/UuidV7IdGenerator.html#generate()"><code>generate()</code></a> call with the supplied <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/UuidV7IdGenerator.html#%3Cinit%3E(java.time.Instant)" class="member-name-link">UuidV7IdGenerator(Instant)</a> - クラスのコンストラクタ org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UuidV7IdGenerator.html" title="org.commonutils.id内のクラス">UuidV7IdGenerator</a></dt>
+<dd>
+<div class="block">Uses a fixed instant and a cryptographically strong <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a> on each <a href="org.commonutils/org/commonutils/id/UuidV7IdGenerator.html#generate()"><code>generate()</code></a> call.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/UuidV7IdGenerator.html#%3Cinit%3E(java.time.Instant,java.util.random.RandomGenerator)" class="member-name-link">UuidV7IdGenerator(Instant, RandomGenerator)</a> - クラスのコンストラクタ org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UuidV7IdGenerator.html" title="org.commonutils.id内のクラス">UuidV7IdGenerator</a></dt>
+<dd>
+<div class="block">Uses a fixed instant and the supplied <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a> on each <a href="org.commonutils/org/commonutils/id/UuidV7IdGenerator.html#generate()"><code>generate()</code></a> call.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:V">V</h2>
@@ -621,7 +693,7 @@ loadScripts(document, 'script');</script>
 返します。</div>
 </dd>
 </dl>
-<a href="#I:A">A</a>&nbsp;<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<a href="#I:V">V</a>&nbsp;<br><a href="allclasses-index.html">すべてのクラスおよびインタフェース</a><span class="vertical-separator">|</span><a href="allpackages-index.html">すべてのパッケージ</a></main>
+<a href="#I:A">A</a>&nbsp;<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<a href="#I:V">V</a>&nbsp;<br><a href="allclasses-index.html">すべてのクラスおよびインタフェース</a><span class="vertical-separator">|</span><a href="allpackages-index.html">すべてのパッケージ</a><span class="vertical-separator">|</span><a href="constant-values.html">定数フィールド値</a></main>
 </div>
 </div>
 </body>

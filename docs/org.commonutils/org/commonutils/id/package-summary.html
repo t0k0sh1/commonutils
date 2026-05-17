@@ -77,6 +77,9 @@ loadScripts(document, 'script');</script>
  <ul>
    <li><a href="IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a> &mdash; common <code>generate()</code> procedure
    <li><a href="UuidV4IdGenerator.html" title="org.commonutils.id内のクラス"><code>UuidV4IdGenerator</code></a> &mdash; RFC 4122 version-4 UUIDs
+   <li><a href="UuidV7.html" title="org.commonutils.id内のクラス"><code>UuidV7</code></a> &mdash; RFC 9562 version-7 UUIDs (<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Instant</code></a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Clock.html" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Clock</code></a>, batch and range helpers)
+   <li><a href="UuidV7IdGenerator.html" title="org.commonutils.id内のクラス"><code>UuidV7IdGenerator</code></a> &mdash; <a href="IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a>
+       for RFC 9562 version-7 UUIDs (fixed <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Instant</code></a> or per-call <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Clock.html" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Clock</code></a>)
  </ul></div>
 </section>
 <section class="summary">
@@ -96,6 +99,16 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block"><a href="IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a> for <a href="https://www.rfc-editor.org/rfc/rfc4122">RFC 4122</a> version-4
  (random) UUIDs.</div>
+</div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="UuidV7.html" title="org.commonutils.id内のクラス">UuidV7</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="block">Static factory for <a href="https://www.rfc-editor.org/rfc/rfc9562">RFC 9562</a> UUID version 7
+ (Unix millisecond timestamp in the most significant bits, random in the remainder).</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="UuidV7IdGenerator.html" title="org.commonutils.id内のクラス">UuidV7IdGenerator</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="block"><a href="IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a> for <a href="https://www.rfc-editor.org/rfc/rfc9562">RFC 9562</a> UUID
+ version 7.</div>
 </div>
 </div>
 </div>
