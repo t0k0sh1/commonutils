@@ -1,5 +1,5 @@
 ---
-description: commonutils の Cursor 開発ワークフロー（TDD・CHANGELOG／semver・@since・JavaDoc・docs／hooks・契約・null）
+description: commonutils の Cursor 開発ワークフロー（TDD・CHANGELOG／semver・@since・JavaDoc・落とし穴は javadoc.mdc・docs／hooks・契約・null）
 alwaysApply: true
 ---
 
@@ -35,6 +35,8 @@ alwaysApply: true
 **パッチで既存公開記号のみ修正** で新しい公開メンバが増えない場合、`@since` は **新しく表に出た記号** にだけ付ければよい。
 
 ## JavaDoc・`docs/`（GitHub Pages）
+
+Javadoc の**基本**は JDK／標準仕様に従えばよい。**本リポジトリ特有の落とし穴**（段落と `<p>`、標準 doclet の HTML、Spotless、生成 `docs/` の見方など）は **[`.cursor/rules/javadoc.mdc`](javadoc.mdc)** を参照する。
 
 リポジトリルートの `build.gradle` の `javadoc` タスクは **`docs/` に出力**する。**`docs/` は Git で追跡**し、**GitHub Pages で公開**している。
 
