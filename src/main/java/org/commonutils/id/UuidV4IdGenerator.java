@@ -28,7 +28,11 @@ public final class UuidV4IdGenerator implements IdGenerator<UUID> {
 
   private final @Nullable RandomGenerator randomGenerator;
 
-  /** Uses {@link UUID#randomUUID()} on each {@link #generate()} call. */
+  /**
+   * Uses {@link UUID#randomUUID()} on each {@link #generate()} call.
+   *
+   * @since 0.2.0
+   */
   public UuidV4IdGenerator() {
     randomGenerator = null;
   }
@@ -38,11 +42,18 @@ public final class UuidV4IdGenerator implements IdGenerator<UUID> {
    * 4122 version-4 and variant bits.
    *
    * @param randomGenerator source of random bytes, must not be {@code null}
+   * @since 0.2.0
    */
   public UuidV4IdGenerator(final @NonNull RandomGenerator randomGenerator) {
     this.randomGenerator = Objects.requireNonNull(randomGenerator, "randomGenerator");
   }
 
+  /**
+   * Generates a new version-4 UUID.
+   *
+   * @return a non-null UUID per RFC 4122 version 4 and this generator's configuration
+   * @since 0.2.0
+   */
   @Override
   public @NonNull UUID generate() {
     final RandomGenerator local = randomGenerator;

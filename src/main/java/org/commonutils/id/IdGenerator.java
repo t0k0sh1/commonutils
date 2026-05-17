@@ -18,6 +18,7 @@ public interface IdGenerator<T> {
    * a non-null {@link java.util.UUID UUID} for {@link UuidV4IdGenerator}.
    *
    * @return a new identifier, never {@code null}
+   * @since 0.2.0
    */
   @NonNull
   T generate();
