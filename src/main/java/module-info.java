@@ -23,6 +23,9 @@
  *   <dd>Contract markers: {@link org.commonutils.annotation.Nullable}, {@link
  *       org.commonutils.annotation.NonNull}, {@link org.commonutils.annotation.NonNegative}, {@link
  *       org.commonutils.annotation.Positive}.
+ *   <dt>{@code org.commonutils.id}
+ *   <dd>{@link org.commonutils.id.IdGenerator} and {@link org.commonutils.id.UuidV4IdGenerator}
+ *       (shared {@code generate()} contract; RFC 4122 UUID v4).
  * </dl>
  *
  * <p>Non-exported packages (for example implementation details of validation) are not part of the
@@ -32,6 +35,7 @@ module org.commonutils {
   requires java.base;
 
   exports org.commonutils.annotation;
+  exports org.commonutils.id;
   exports org.commonutils.lang;
   exports org.commonutils.util;
 }
