@@ -94,13 +94,10 @@ loadScripts(document, 'script');</script>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="java.lang内のクラスまたはインタフェース" class="external-link">Object</a></span></div>
 <div class="block">East Asian display column width from Unicode <a href="https://www.unicode.org/Public/15.1.0/ucd/EastAsianWidth.txt">EastAsianWidth.txt</a> 15.1.0
  (UAX #11). Categories F, W, and A map to 2 columns; H, Na, and N map to 1. Code points not listed
- in that file are treated as N (neutral), width 1.
-
- <p>Lookup tables are validated at class initialization: array lengths match, each range has
- <code>START &lt;= END</code>, ranges are strictly increasing with no overlap, and each width is <code>1</code>
- or <code>2</code>.
-
- <p>For use only inside this module; not exported to library consumers.</div>
+ in that file are treated as N (neutral), width 1. Lookup tables are validated at class
+ initialization: array lengths match, each range has <code>START &lt;= END</code>, ranges are strictly
+ increasing with no overlap, and each width is <code>1</code> or <code>2</code>. For use only inside this
+ module; not exported to library consumers.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
