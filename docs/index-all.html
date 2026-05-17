@@ -118,6 +118,10 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="org.commonutils/org/commonutils/lang/ObjectSupport.html#compare(T,T,java.util.Comparator)" class="member-name-link">compare(T, T, Comparator&lt;? super T&gt;)</a> - クラスのstaticメソッド org.commonutils.lang.<a href="org.commonutils/org/commonutils/lang/ObjectSupport.html" title="org.commonutils.lang内のクラス">ObjectSupport</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html#configure(java.lang.String,int)" class="member-name-link">configure(String, int)</a> - クラスのメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html" title="org.commonutils.id内のクラス">MutableNanoIdGenerator</a></dt>
+<dd>
+<div class="block">Atomically replaces alphabet and length.</div>
+</dd>
 <dt><a href="org.commonutils/org/commonutils/util/CollectionSupport.html#containment" class="search-tag-link">Containment helpers</a> - クラス org.commonutils.util.CollectionSupportの検索タグ</dt>
 <dd>セクション</dd>
 <dt><a href="org.commonutils/org/commonutils/util/CollectionSupport.html#containsAll(java.util.Collection,java.util.Collection)" class="member-name-link">containsAll(Collection&lt;?&gt;, Collection&lt;?&gt;)</a> - クラスのstaticメソッド org.commonutils.util.<a href="org.commonutils/org/commonutils/util/CollectionSupport.html" title="org.commonutils.util内のクラス">CollectionSupport</a></dt>
@@ -263,6 +267,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="org.commonutils/org/commonutils/id/IdGenerator.html#generate()" class="member-name-link">generate()</a> - インタフェースのメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/IdGenerator.html" title="org.commonutils.id内のインタフェース">IdGenerator</a></dt>
 <dd>
 <div class="block">Creates the next identifier.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html#generate()" class="member-name-link">generate()</a> - クラスのメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html" title="org.commonutils.id内のクラス">MutableNanoIdGenerator</a></dt>
+<dd>
+<div class="block">Generates an id using the configuration observed at invocation start.</div>
 </dd>
 <dt><a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#generate()" class="member-name-link">generate()</a> - クラスのメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></dt>
 <dd>
@@ -441,6 +449,33 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Inclusive maximum <code>unix_ts_ms</code> (48-bit unsigned).</div>
 </dd>
+<dt><a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html" class="type-name-link" title="org.commonutils.id内のクラス">MutableNanoIdGenerator</a> - <a href="org.commonutils/org/commonutils/id/package-summary.html">org.commonutils.id</a>のクラス</dt>
+<dd>
+<div class="block"><a href="org.commonutils/org/commonutils/id/IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a> for mutable <a href="https://github.com/ai/nanoid">Nano ID</a>-style strings:
+ alphabet and length can be changed after construction while sharing one <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html#%3Cinit%3E()" class="member-name-link">MutableNanoIdGenerator()</a> - クラスのコンストラクタ org.commonutils.id.<a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html" title="org.commonutils.id内のクラス">MutableNanoIdGenerator</a></dt>
+<dd>
+<div class="block">Uses <a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#DEFAULT_ALPHABET"><code>NanoIdGenerator.DEFAULT_ALPHABET</code></a>, <a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#DEFAULT_SIZE"><code>NanoIdGenerator.DEFAULT_SIZE</code></a>, and a
+ cryptographically strong <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html#%3Cinit%3E(int,java.util.random.RandomGenerator)" class="member-name-link">MutableNanoIdGenerator(int, RandomGenerator)</a> - クラスのコンストラクタ org.commonutils.id.<a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html" title="org.commonutils.id内のクラス">MutableNanoIdGenerator</a></dt>
+<dd>
+<div class="block">Uses <a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#DEFAULT_ALPHABET"><code>NanoIdGenerator.DEFAULT_ALPHABET</code></a> and the given length with the supplied <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html#%3Cinit%3E(java.lang.String,int)" class="member-name-link">MutableNanoIdGenerator(String, int)</a> - クラスのコンストラクタ org.commonutils.id.<a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html" title="org.commonutils.id内のクラス">MutableNanoIdGenerator</a></dt>
+<dd>
+<div class="block">Uses the given alphabet and length with a cryptographically strong <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html#%3Cinit%3E(java.lang.String,int,java.util.random.RandomGenerator)" class="member-name-link">MutableNanoIdGenerator(String, int, RandomGenerator)</a> - クラスのコンストラクタ org.commonutils.id.<a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html" title="org.commonutils.id内のクラス">MutableNanoIdGenerator</a></dt>
+<dd>
+<div class="block">Uses the given alphabet, length, and <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html#%3Cinit%3E(java.util.random.RandomGenerator)" class="member-name-link">MutableNanoIdGenerator(RandomGenerator)</a> - クラスのコンストラクタ org.commonutils.id.<a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html" title="org.commonutils.id内のクラス">MutableNanoIdGenerator</a></dt>
+<dd>
+<div class="block">Uses <a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#DEFAULT_ALPHABET"><code>NanoIdGenerator.DEFAULT_ALPHABET</code></a> and <a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#DEFAULT_SIZE"><code>NanoIdGenerator.DEFAULT_SIZE</code></a> with the
+ supplied <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:N">N</h2>
 <dl class="index">
@@ -469,6 +504,36 @@ loadScripts(document, 'script');</script>
 <dt><a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#%3Cinit%3E(java.util.random.RandomGenerator)" class="member-name-link">NanoIdGenerator(RandomGenerator)</a> - クラスのコンストラクタ org.commonutils.id.<a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></dt>
 <dd>
 <div class="block">Uses <a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#DEFAULT_ALPHABET"><code>NanoIdGenerator.DEFAULT_ALPHABET</code></a> and <a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#DEFAULT_SIZE"><code>NanoIdGenerator.DEFAULT_SIZE</code></a> with the supplied <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/package-summary.html#nano-id-generators-heading" class="search-tag-link">Nano ID generators</a> - パッケージ org.commonutils.idの検索タグ</dt>
+<dd>セクション</dd>
+<dt><a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html#nonCryptographic()" class="member-name-link">nonCryptographic()</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html" title="org.commonutils.id内のクラス">MutableNanoIdGenerator</a></dt>
+<dd>
+<div class="block">Returns a mutable generator using defaults with a new <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SplittableRandom.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>SplittableRandom</code></a>-backed
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#nonCryptographic()" class="member-name-link">nonCryptographic()</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></dt>
+<dd>
+<div class="block">Returns a generator that uses <a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#DEFAULT_ALPHABET"><code>NanoIdGenerator.DEFAULT_ALPHABET</code></a>, <a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#DEFAULT_SIZE"><code>NanoIdGenerator.DEFAULT_SIZE</code></a>, and a new
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SplittableRandom.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>SplittableRandom</code></a>-backed <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html#nonCryptographic(int)" class="member-name-link">nonCryptographic(int)</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html" title="org.commonutils.id内のクラス">MutableNanoIdGenerator</a></dt>
+<dd>
+<div class="block">Returns a mutable generator using <a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#DEFAULT_ALPHABET"><code>NanoIdGenerator.DEFAULT_ALPHABET</code></a>, <code>size</code>, and a
+ new <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SplittableRandom.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>SplittableRandom</code></a>-backed <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#nonCryptographic(int)" class="member-name-link">nonCryptographic(int)</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></dt>
+<dd>
+<div class="block">Returns a generator that uses <a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#DEFAULT_ALPHABET"><code>NanoIdGenerator.DEFAULT_ALPHABET</code></a>, the given <code>size</code>, and a new
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SplittableRandom.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>SplittableRandom</code></a>-backed <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html#nonCryptographic(java.lang.String,int)" class="member-name-link">nonCryptographic(String, int)</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html" title="org.commonutils.id内のクラス">MutableNanoIdGenerator</a></dt>
+<dd>
+<div class="block">Returns a mutable generator using <code>alphabet</code>, <code>size</code>, and a new <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SplittableRandom.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>SplittableRandom</code></a>-backed <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#nonCryptographic(java.lang.String,int)" class="member-name-link">nonCryptographic(String, int)</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></dt>
+<dd>
+<div class="block">Returns a generator that uses the given <code>alphabet</code> and <code>size</code> with a new <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SplittableRandom.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>SplittableRandom</code></a>-backed <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
 </dd>
 <dt><a href="org.commonutils/org/commonutils/annotation/NonNegative.html" class="type-name-link" title="org.commonutils.annotation内の注釈インタフェース">NonNegative</a> - <a href="org.commonutils/org/commonutils/annotation/package-summary.html">org.commonutils.annotation</a>の注釈インタフェース</dt>
 <dd>
@@ -595,6 +660,14 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:S">S</h2>
 <dl class="index">
+<dt><a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html#setAlphabet(java.lang.String)" class="member-name-link">setAlphabet(String)</a> - クラスのメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html" title="org.commonutils.id内のクラス">MutableNanoIdGenerator</a></dt>
+<dd>
+<div class="block">Updates the alphabet while preserving the latest observed <code>size</code>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html#setSize(int)" class="member-name-link">setSize(int)</a> - クラスのメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html" title="org.commonutils.id内のクラス">MutableNanoIdGenerator</a></dt>
+<dd>
+<div class="block">Updates <code>size</code> while preserving the latest observed alphabet and mask.</div>
+</dd>
 <dt><a href="org.commonutils/org/commonutils/util/CollectionSupport.html#size(java.util.Collection)" class="member-name-link">size(Collection&lt;?&gt;)</a> - クラスのstaticメソッド org.commonutils.util.<a href="org.commonutils/org/commonutils/util/CollectionSupport.html" title="org.commonutils.util内のクラス">CollectionSupport</a></dt>
 <dd>
 <div class="block">Returns <code>collection.size()</code> when <code>collection</code> is non-null; otherwise <code>0</code>.</div>

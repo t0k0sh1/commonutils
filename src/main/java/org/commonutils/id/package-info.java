@@ -14,7 +14,25 @@
  *   <li>{@link org.commonutils.id.NanoIdGenerator} &mdash; short URL-safe random strings ({@link
  *       org.commonutils.id.NanoIdGenerator#DEFAULT_ALPHABET default alphabet} / configurable),
  *       unlike fixed-width binary UUIDs
+ *   <li>{@link org.commonutils.id.MutableNanoIdGenerator} &mdash; Nano ID-style strings whose
+ *       alphabet and length can change after construction ({@link
+ *       org.commonutils.id.MutableNanoIdGenerator#configure configure} / {@link
+ *       org.commonutils.id.MutableNanoIdGenerator#setAlphabet setAlphabet} / {@link
+ *       org.commonutils.id.MutableNanoIdGenerator#setSize setSize}); prefer {@link
+ *       org.commonutils.id.NanoIdGenerator} when configuration is fixed
  * </ul>
+ *
+ * <h2>Nano ID generators</h2>
+ *
+ * <p>Defaults mirror the reference <a href="https://github.com/ai/nanoid">Nano ID</a> alphabet and
+ * length. Static {@code nonCryptographic…} factories on {@link org.commonutils.id.NanoIdGenerator}
+ * and {@link org.commonutils.id.MutableNanoIdGenerator} opt into a fast {@link
+ * java.util.SplittableRandom}-backed {@link java.util.random.RandomGenerator}; see each class's API
+ * note in its class documentation for security guidance.
+ *
+ * <p><strong>Ecosystem-specific encodings</strong> (alternate alphabets imposed by plugins or
+ * external tools without a stable specification here) are intentionally not implemented in this
+ * library until there is an agreed format and compatibility policy.
  *
  * <h2>Choosing UUID version</h2>
  *

@@ -1,6 +1,5 @@
 package org.commonutils.id;
 
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.random.RandomGenerator;
 import java.util.random.RandomGeneratorFactory;
@@ -19,13 +18,21 @@ import org.commonutils.internal.Contracts;
  * externally or confine use to one thread.
  *
  * <p>This class <strong>validates contracts</strong> on construction: non-null references with
- * {@link java.util.Objects#requireNonNull Object.requireNonNull}, positive {@code size}, and
+ * {@link java.util.Objects#requireNonNull Objects.requireNonNull}, positive {@code size}, and
  * alphabet rules as documented on each constructor.
  *
  * <p>Alphabets are validated: non-empty, BMP code points only (no supplementary characters or lone
  * surrogate code units), and each code point must appear at most once. Violations produce {@link
  * IllegalArgumentException}. Public constructors validate references with {@link
  * NullPointerException} when {@code null} is not permitted.
+ *
+ * <p><strong>API note:</strong> Constructors that default or omit an explicit {@link
+ * RandomGenerator} use a cryptographically strong implementation ({@link
+ * RandomGeneratorFactory}{@code .of("SecureRandom")}). Supplying a fast, predictable generator (for
+ * example via {@link #nonCryptographic()}, {@link #nonCryptographic(int)}, or {@link
+ * #nonCryptographic(String, int)}) is convenient for throughput or tests but is
+ * <strong>unsuitable</strong> for secrets, session identifiers in hostile environments, or other
+ * security-sensitive identifiers unless you deliberately accept weaker entropy.
  *
  * @since 0.2.0
  */
@@ -117,10 +124,59 @@ public final class NanoIdGenerator implements IdGenerator<String> {
     Objects.requireNonNull(alphabet, "alphabet");
     Objects.requireNonNull(randomGenerator, "randomGenerator");
     Contracts.requirePositive("size", size);
-    alphabetChars = alphabetCharsFrom(alphabet);
-    mask = maskForAlphabetLength(alphabetChars.length);
+    alphabetChars = NanoIdEncoding.alphabetCharsFrom(alphabet);
+    mask = NanoIdEncoding.maskForAlphabetLength(alphabetChars.length);
     this.size = size;
     random = randomGenerator;
+  }
+
+  /**
+   * Returns a generator that uses {@link #DEFAULT_ALPHABET}, {@link #DEFAULT_SIZE}, and a new
+   * {@link java.util.SplittableRandom}-backed {@link RandomGenerator}. This prioritizes speed over
+   * cryptographic unpredictability.
+   *
+   * @return a non-null generator; never {@code null}
+   * @since 0.2.0
+   */
+  public static @NonNull NanoIdGenerator nonCryptographic() {
+    return new NanoIdGenerator(DEFAULT_ALPHABET, DEFAULT_SIZE, splittableRandomGenerator());
+  }
+
+  /**
+   * Returns a generator that uses {@link #DEFAULT_ALPHABET}, the given {@code size}, and a new
+   * {@link java.util.SplittableRandom}-backed {@link RandomGenerator}.
+   *
+   * @param size number of code points per id, must be positive
+   * @return a non-null generator
+   * @throws IllegalArgumentException if {@code size} is not positive
+   * @since 0.2.0
+   */
+  public static @NonNull NanoIdGenerator nonCryptographic(final @Positive int size) {
+    Contracts.requirePositive("size", size);
+    return new NanoIdGenerator(DEFAULT_ALPHABET, size, splittableRandomGenerator());
+  }
+
+  /**
+   * Returns a generator that uses the given {@code alphabet} and {@code size} with a new {@link
+   * java.util.SplittableRandom}-backed {@link RandomGenerator}.
+   *
+   * @param alphabet BMP code points only, unique, non-empty; must not be {@code null}
+   * @param size number of characters per id, must be positive
+   * @return a non-null generator
+   * @throws NullPointerException if {@code alphabet} is {@code null}
+   * @throws IllegalArgumentException if {@code alphabet} or {@code size} violates alphabet or size
+   *     rules
+   * @since 0.2.0
+   */
+  public static @NonNull NanoIdGenerator nonCryptographic(
+      final @NonNull String alphabet, final @Positive int size) {
+    Objects.requireNonNull(alphabet, "alphabet");
+    Contracts.requirePositive("size", size);
+    return new NanoIdGenerator(alphabet, size, splittableRandomGenerator());
+  }
+
+  private static @NonNull RandomGenerator splittableRandomGenerator() {
+    return RandomGeneratorFactory.of("SplittableRandom").create();
   }
 
   /**
@@ -132,62 +188,6 @@ public final class NanoIdGenerator implements IdGenerator<String> {
    */
   @Override
   public @NonNull String generate() {
-    final char[] out = new char[size];
-    final byte[] scratch = new byte[4];
-    final int len = alphabetChars.length;
-    for (int i = 0; i < size; i++) {
-      out[i] = alphabetChars[nextIndex(random, scratch, mask, len)];
-    }
-    return new String(out);
-  }
-
-  private static char @NonNull [] alphabetCharsFrom(final String alphabet) {
-    if (alphabet.isEmpty()) {
-      throw new IllegalArgumentException("alphabet must not be empty");
-    }
-    final int[] cps = alphabet.codePoints().toArray();
-    final HashSet<Integer> seen = new HashSet<>();
-    final char[] chars = new char[cps.length];
-    for (int i = 0; i < cps.length; i++) {
-      final int cp = cps[i];
-      if (cp > Character.MAX_VALUE) {
-        throw new IllegalArgumentException("alphabet must use BMP code points only");
-      }
-      if (cp >= Character.MIN_SURROGATE && cp <= Character.MAX_SURROGATE) {
-        throw new IllegalArgumentException("alphabet must not contain surrogate code points");
-      }
-      if (!seen.add(cp)) {
-        throw new IllegalArgumentException("alphabet code points must be unique");
-      }
-      chars[i] = (char) cp;
-    }
-    return chars;
-  }
-
-  /** Same rule as Nano ID: smallest {@code (2^k - 1)} with {@code mask >= alphabetLength - 1}. */
-  private static int maskForAlphabetLength(final int alphabetLength) {
-    Contracts.requirePositive("alphabetLength", alphabetLength);
-    final int clz = Integer.numberOfLeadingZeros((alphabetLength - 1) | 1);
-    final int shift = 31 - clz;
-    if (shift < 0 || shift >= 31) {
-      throw new IllegalArgumentException("alphabetLength (" + alphabetLength + ") is too large");
-    }
-    return (2 << shift) - 1;
-  }
-
-  private static int nextIndex(
-      final RandomGenerator rng, final byte[] scratch, final int mask, final int alphabetLength) {
-    while (true) {
-      rng.nextBytes(scratch);
-      final int r =
-          (scratch[0] & 0xFF)
-              | ((scratch[1] & 0xFF) << 8)
-              | ((scratch[2] & 0xFF) << 16)
-              | ((scratch[3] & 0xFF) << 24);
-      final int idx = r & mask;
-      if (idx < alphabetLength) {
-        return idx;
-      }
-    }
+    return NanoIdEncoding.generateNanoId(random, alphabetChars, mask, size);
   }
 }

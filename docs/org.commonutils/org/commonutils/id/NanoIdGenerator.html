@@ -107,11 +107,16 @@ implements <a href="IdGenerator.html" title="org.commonutils.id内のインタ�
  externally or confine use to one thread.
 
  <p>This class <strong>validates contracts</strong> on construction: non-null references with
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Objects.html#requireNonNull(T)" title="java.util内のクラスまたはインタフェース" class="external-link"><code>Object.requireNonNull</code></a>, positive <code>size</code>, and
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Objects.html#requireNonNull(T)" title="java.util内のクラスまたはインタフェース" class="external-link"><code>Objects.requireNonNull</code></a>, positive <code>size</code>, and
  alphabet rules as documented on each constructor.
 
  <p>Alphabets are validated: non-empty, BMP code points only (no supplementary characters or lone
- surrogate code units), and each code point must appear at most once. Violations produce <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>IllegalArgumentException</code></a>. Public constructors validate references with <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/NullPointerException.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>NullPointerException</code></a> when <code>null</code> is not permitted.</div>
+ surrogate code units), and each code point must appear at most once. Violations produce <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>IllegalArgumentException</code></a>. Public constructors validate references with <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/NullPointerException.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>NullPointerException</code></a> when <code>null</code> is not permitted.
+
+ <p><strong>API note:</strong> Constructors that default or omit an explicit <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a> use a cryptographically strong implementation (<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGeneratorFactory.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGeneratorFactory</code></a><code>.of("SecureRandom")</code>). Supplying a fast, predictable generator (for
+ example via <a href="#nonCryptographic()"><code>nonCryptographic()</code></a>, <a href="#nonCryptographic(int)"><code>nonCryptographic(int)</code></a>, or <a href="#nonCryptographic(java.lang.String,int)"><code>nonCryptographic(String, int)</code></a>) is convenient for throughput or tests but is
+ <strong>unsuitable</strong> for secrets, session identifiers in hostile environments, or other
+ security-sensitive identifiers unless you deliberately accept weaker entropy.</div>
 <dl class="notes">
 <dt>導入されたバージョン:</dt>
 <dd>0.2.0</dd>
@@ -186,7 +191,7 @@ implements <a href="IdGenerator.html" title="org.commonutils.id内のインタ�
 <section class="method-summary" id="method-summary">
 <h2>メソッドの概要</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">すべてのメソッド</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">インスタンス・メソッド</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">concreteメソッド</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">すべてのメソッド</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">staticメソッド</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">インスタンス・メソッド</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">concreteメソッド</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel">
 <div class="summary-table three-column-summary" aria-labelledby="method-summary-table-tab0">
 <div class="table-header col-first">修飾子とタイプ</div>
@@ -196,6 +201,24 @@ implements <a href="IdGenerator.html" title="org.commonutils.id内のインタ�
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#generate()" class="member-name-link">generate</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Generates a new Nano ID string using this generator's alphabet, length, and random source.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../annotation/NonNull.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNull</a> <a href="NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#nonCryptographic()" class="member-name-link">nonCryptographic</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Returns a generator that uses <a href="#DEFAULT_ALPHABET"><code>DEFAULT_ALPHABET</code></a>, <a href="#DEFAULT_SIZE"><code>DEFAULT_SIZE</code></a>, and a new
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SplittableRandom.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>SplittableRandom</code></a>-backed <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../annotation/NonNull.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNull</a> <a href="NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#nonCryptographic(int)" class="member-name-link">nonCryptographic</a><wbr>(@org.commonutils.annotation.Positive int&nbsp;size)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Returns a generator that uses <a href="#DEFAULT_ALPHABET"><code>DEFAULT_ALPHABET</code></a>, the given <code>size</code>, and a new
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SplittableRandom.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>SplittableRandom</code></a>-backed <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../annotation/NonNull.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNull</a> <a href="NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#nonCryptographic(java.lang.String,int)" class="member-name-link">nonCryptographic</a><wbr>(<a href="../annotation/NonNull.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNull</a> <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>&nbsp;alphabet,
+ @org.commonutils.annotation.Positive int&nbsp;size)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Returns a generator that uses the given <code>alphabet</code> and <code>size</code> with a new <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SplittableRandom.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>SplittableRandom</code></a>-backed <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
 </div>
 </div>
 </div>
@@ -365,6 +388,66 @@ implements <a href="IdGenerator.html" title="org.commonutils.id内のインタ�
 <section class="method-details" id="method-detail">
 <h2>メソッドの詳細</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="nonCryptographic()">
+<h3>nonCryptographic</h3>
+<div class="member-signature"><span class="annotations"><a href="../annotation/NonNull.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNull</a>
+</span><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../annotation/NonNull.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNull</a> <a href="NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></span>&nbsp;<span class="element-name">nonCryptographic</span>()</div>
+<div class="block">Returns a generator that uses <a href="#DEFAULT_ALPHABET"><code>DEFAULT_ALPHABET</code></a>, <a href="#DEFAULT_SIZE"><code>DEFAULT_SIZE</code></a>, and a new
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SplittableRandom.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>SplittableRandom</code></a>-backed <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>. This prioritizes speed over
+ cryptographic unpredictability.</div>
+<dl class="notes">
+<dt>戻り値:</dt>
+<dd>a non-null generator; never <code>null</code></dd>
+<dt>導入されたバージョン:</dt>
+<dd>0.2.0</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="nonCryptographic(int)">
+<h3>nonCryptographic</h3>
+<div class="member-signature"><span class="annotations"><a href="../annotation/NonNull.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNull</a>
+</span><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../annotation/NonNull.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNull</a> <a href="NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></span>&nbsp;<span class="element-name">nonCryptographic</span><wbr><span class="parameters">(<a href="../annotation/Positive.html" title="org.commonutils.annotation内の注釈インタフェース">@Positive</a>
+ @org.commonutils.annotation.Positive int&nbsp;size)</span></div>
+<div class="block">Returns a generator that uses <a href="#DEFAULT_ALPHABET"><code>DEFAULT_ALPHABET</code></a>, the given <code>size</code>, and a new
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SplittableRandom.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>SplittableRandom</code></a>-backed <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+<dl class="notes">
+<dt>パラメータ:</dt>
+<dd><code>size</code> - number of code points per id, must be positive</dd>
+<dt>戻り値:</dt>
+<dd>a non-null generator</dd>
+<dt>例外:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></code> - if <code>size</code> is not positive</dd>
+<dt>導入されたバージョン:</dt>
+<dd>0.2.0</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="nonCryptographic(java.lang.String,int)">
+<h3>nonCryptographic</h3>
+<div class="member-signature"><span class="annotations"><a href="../annotation/NonNull.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNull</a>
+</span><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../annotation/NonNull.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNull</a> <a href="NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></span>&nbsp;<span class="element-name">nonCryptographic</span><wbr><span class="parameters">(<a href="../annotation/NonNull.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNull</a>
+ <a href="../annotation/NonNull.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNull</a> <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>&nbsp;alphabet,
+ <a href="../annotation/Positive.html" title="org.commonutils.annotation内の注釈インタフェース">@Positive</a>
+ @org.commonutils.annotation.Positive int&nbsp;size)</span></div>
+<div class="block">Returns a generator that uses the given <code>alphabet</code> and <code>size</code> with a new <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SplittableRandom.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>SplittableRandom</code></a>-backed <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+<dl class="notes">
+<dt>パラメータ:</dt>
+<dd><code>alphabet</code> - BMP code points only, unique, non-empty; must not be <code>null</code></dd>
+<dd><code>size</code> - number of characters per id, must be positive</dd>
+<dt>戻り値:</dt>
+<dd>a non-null generator</dd>
+<dt>例外:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/NullPointerException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">NullPointerException</a></code> - if <code>alphabet</code> is <code>null</code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></code> - if <code>alphabet</code> or <code>size</code> violates alphabet or size
+     rules</dd>
+<dt>導入されたバージョン:</dt>
+<dd>0.2.0</dd>
+</dl>
+</section>
+</li>
 <li>
 <section class="detail" id="generate()">
 <h3>generate</h3>
