@@ -80,7 +80,17 @@ loadScripts(document, 'script');</script>
    <li><a href="UuidV7.html" title="org.commonutils.id内のクラス"><code>UuidV7</code></a> &mdash; RFC 9562 version-7 UUIDs (<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Instant</code></a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Clock.html" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Clock</code></a>, batch and range helpers)
    <li><a href="UuidV7IdGenerator.html" title="org.commonutils.id内のクラス"><code>UuidV7IdGenerator</code></a> &mdash; <a href="IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a>
        for RFC 9562 version-7 UUIDs (fixed <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Instant</code></a> or per-call <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Clock.html" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Clock</code></a>)
- </ul></div>
+ </ul>
+
+ <h2 id="choosing-uuid-version-heading">Choosing UUID version</h2>
+
+ <p><strong>Version 4</strong> (RFC 4122) embeds no timestamp: identifiers are random. Use <a href="UuidV4IdGenerator.html" title="org.commonutils.id内のクラス"><code>UuidV4IdGenerator</code></a> or <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/UUID.html#randomUUID()" title="java.util内のクラスまたはインタフェース" class="external-link"><code>UUID.randomUUID()</code></a> when you need
+ opaque, unpredictable IDs without time semantics.
+
+ <p><strong>Version 7</strong> (RFC 9562) carries Unix milliseconds in the most significant bits
+ for rough time order and sorting. Use <a href="UuidV7.html" title="org.commonutils.id内のクラス"><code>UuidV7</code></a> or <a href="UuidV7IdGenerator.html" title="org.commonutils.id内のクラス"><code>UuidV7IdGenerator</code></a> when you need that encoding or test-friendly control via
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Clock.html" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Clock</code></a>; version 4 deliberately does not accept <code>Clock</code> or date-time
+ parameters.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">

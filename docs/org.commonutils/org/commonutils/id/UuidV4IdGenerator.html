@@ -109,10 +109,22 @@ implements <a href="IdGenerator.html" title="org.commonutils.id内のインタ�
  thread-safe, callers must synchronize externally or confine use to one thread.
 
  <p>Public constructors validate references with <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/NullPointerException.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>NullPointerException</code></a> when <code>null</code> is
- not permitted.</div>
+ not permitted.
+
+ <p>For timestamps, lexicographic time order by embedded milliseconds, or reproducible instants in
+ tests via <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Clock.html" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Clock</code></a>, use <a href="UuidV7.html" title="org.commonutils.id内のクラス"><code>UuidV7</code></a> or <a href="UuidV7IdGenerator.html" title="org.commonutils.id内のクラス"><code>UuidV7IdGenerator</code></a> instead; RFC
+ 4122 version 4 does not encode time and this type does not add <code>Clock</code> or date-time
+ parameters by design.</div>
 <dl class="notes">
 <dt>導入されたバージョン:</dt>
 <dd>0.2.0</dd>
+<dt>関連項目:</dt>
+<dd>
+<ul class="tag-list">
+<li><a href="UuidV7.html" title="org.commonutils.id内のクラス"><code>UuidV7</code></a></li>
+<li><a href="UuidV7IdGenerator.html" title="org.commonutils.id内のクラス"><code>UuidV7IdGenerator</code></a></li>
+</ul>
+</dd>
 </dl>
 </section>
 <section class="summary">
