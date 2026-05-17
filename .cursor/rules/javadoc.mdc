@@ -1,0 +1,29 @@
+---
+description: commonutils の Javadoc（標準準拠の前提・doclet／フォーマッタ／生成 docs の落とし穴）
+alwaysApply: true
+---
+
+# Javadoc（commonutils）
+
+## 前提
+
+クラス／メンバーのドキュメントコメントの**基本**（タグの意味・一般的な構造など）は **JDK の Javadoc（Documentation Comment）仕様**に従えばよい。詳細は公式を参照する。
+
+- [Documentation Comments for the `javadoc` Tool](https://docs.oracle.com/en/java/javase/21/docs/specs/javadoc-doc-comment-spec.html)（Java 21／このリポジトリの toolchain に合わせた 1 本）
+
+## 本リポジトリで漏れやすい・誤検知しやすい点
+
+- **クラス Javadoc の段落**: 先頭のサマリは **`<p>` なし**でよい。2 段落目以降は **空行のあと `<p>`** で始める（[`UuidV7` のクラスコメント](src/main/java/org/commonutils/id/UuidV7.java) と同型）。
+- **JDK 標準 doclet の HTML**: 先頭段落は、生成 HTML では **`<p>` で包まれない**形になりうる。レビュー時は **同じ doclet で生成された既存ページ**と見比べる。
+- **Spotless（google-java-format）**: 先頭に付けた `<p>` は **除去されうる**。フォーマッタと衝突しない形に寄せる。
+- **インラインタグ**: `{@link}` や `{@value}` などを **行の途中で分割しない**（doclet が壊しうる）。
+- **生成物 `docs/`**: ルートで `./gradlew javadoc` を実行したときの出力。**`<p>` の有無だけ**を理由に「バグ」と断定しない。上記のとおり **既存の生成 HTML** と比較する。
+
+## プロジェクト固有（詳細は別ルール）
+
+**`@since`、CHANGELOG／semver、`@param` / `@throws` と契約アノテーションの整合**などは、本文をここに複製しない。[`.cursor/rules/development-workflow.mdc`](.cursor/rules/development-workflow.mdc) と [`.cursor/rules/commonutils-contracts.mdc`](.cursor/rules/commonutils-contracts.mdc) を参照する。
+
+## 段落構造の范例
+
+- クラス: `org.commonutils.id.UuidV7`
+- ソース: [`src/main/java/org/commonutils/id/UuidV7.java`](src/main/java/org/commonutils/id/UuidV7.java)
