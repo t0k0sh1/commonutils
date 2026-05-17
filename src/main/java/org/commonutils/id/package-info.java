@@ -28,6 +28,14 @@
  *       org.commonutils.id.MutableNanoIdGenerator#setAlphabet setAlphabet} / {@link
  *       org.commonutils.id.MutableNanoIdGenerator#setSize setSize}); prefer {@link
  *       org.commonutils.id.NanoIdGenerator} when configuration is fixed
+ *   <li>{@link org.commonutils.id.Cuid2} &mdash; <a href="https://github.com/paralleldrive/cuid2">
+ *       Cuid2</a>-compatible helpers ({@code SHA3-512} / base36, fingerprint, validation)
+ *   <li>{@link org.commonutils.id.Cuid2IdGenerator} &mdash; {@link org.commonutils.id.IdGenerator}
+ *       for Cuid2 strings (length 2–32, default 24); {@link
+ *       org.commonutils.id.Cuid2IdGenerator#nonCryptographic() nonCryptographic()} uses {@link
+ *       java.util.SplittableRandom}-backed entropy (see class Javadoc). Cuid2 is not k-sortable;
+ *       prefer {@link org.commonutils.id.Ulid} / {@link org.commonutils.id.UlidIdGenerator} for
+ *       coarse time order in encoded form.
  * </ul>
  *
  * <h2>Nano ID generators</h2>
@@ -42,7 +50,7 @@
  * external tools without a stable specification here) are intentionally not implemented in this
  * library until there is an agreed format and compatibility policy.
  *
- * <h2>ULID vs UUID v7 vs Nano ID</h2>
+ * <h2>ULID vs UUID v7 vs Nano ID vs Cuid2</h2>
  *
  * <p><strong>ULID</strong> ({@link org.commonutils.id.Ulid} / {@link
  * org.commonutils.id.UlidIdGenerator}) encodes the same 48-bit Unix millisecond idea as {@link
@@ -53,9 +61,9 @@
  * 9562; use {@link org.commonutils.id.UuidV7} / {@link org.commonutils.id.UuidV7IdGenerator} when
  * you need UUID types and tooling.
  *
- * <p><strong>Nano ID</strong> ({@link org.commonutils.id.NanoIdGenerator}) produces shorter,
- * URL-safe strings with a configurable alphabet and length; unlike ULID it does not embed a
- * timestamp in a standardized layout.
+ * <p><strong>Cuid2</strong> ({@link org.commonutils.id.Cuid2} / {@link
+ * org.commonutils.id.Cuid2IdGenerator}) follows {@code @paralleldrive/cuid2}: hashed ids that are
+ * not designed as k-sortable keys; use ULID or UUID v7 when you need that property.
  *
  * <h2>Choosing UUID version</h2>
  *
