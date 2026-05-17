@@ -19,7 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`org.commonutils.id`** (JPMS export and package docs): identifier generators with a shared contract.
 - **`IdGenerator`**: `@FunctionalInterface` with `generate()` as the common procedure for all generators in this package.
 - **`UuidV4IdGenerator`**: RFC 4122 version-4 UUIDs; defaults to `UUID.randomUUID()`, or accepts a `RandomGenerator` for tests and custom entropy (validated; `NullPointerException` when null).
+- **`UuidV7`**: RFC 9562 version-7 UUIDs from 48-bit Unix epoch milliseconds (`Instant.toEpochMilli()` semantics) plus random payload; `Clock` overloads; batch APIs (same instant, repeated clock sampling, non-decreasing timestamps within a closed millisecond range); validates non-null references and representable timestamps (`NullPointerException`, `IllegalArgumentException`).
+- **`UuidV7IdGenerator`**: `IdGenerator` for UUID v7 using either a fixed `Instant` or `Clock` per `generate()` call; optional `RandomGenerator` (validated; defaults to cryptographically strong entropy).
 - **Tests**: `UuidV4IdGeneratorTest` for version/variant, canonical lowercase string form, deterministic output with a seeded `RandomGenerator`, and null rejection.
+- **Tests**: `UuidV7Test` (RFC 9562 appendix test vector, bounds, batch ordering, clock usage); `UuidV7IdGeneratorTest`.
 
 ### Changed
 
