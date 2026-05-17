@@ -1,3 +1,4 @@
+// spotless:off
 /**
  * Identifier generators with a shared {@link org.commonutils.id.IdGenerator IdGenerator} contract.
  *
@@ -30,12 +31,12 @@
  *       org.commonutils.id.NanoIdGenerator} when configuration is fixed
  *   <li>{@link org.commonutils.id.Cuid2} &mdash; <a href="https://github.com/paralleldrive/cuid2">
  *       Cuid2</a>-compatible helpers ({@code SHA3-512} / base36, fingerprint, validation)
- *   <li>{@link org.commonutils.id.Cuid2IdGenerator} &mdash; {@link org.commonutils.id.IdGenerator}
- *       for Cuid2 strings (length 2–32, default 24); {@link
- *       org.commonutils.id.Cuid2IdGenerator#nonCryptographic() nonCryptographic()} uses {@link
- *       java.util.SplittableRandom}-backed entropy (see class Javadoc). Cuid2 is not k-sortable;
- *       prefer {@link org.commonutils.id.Ulid} / {@link org.commonutils.id.UlidIdGenerator} for
- *       coarse time order in encoded form.
+ *   <li>{@link org.commonutils.id.Cuid2IdGenerator} &mdash;
+ *       {@link org.commonutils.id.IdGenerator} for Cuid2 strings (length 2–32, default 24);
+ *       {@link org.commonutils.id.Cuid2IdGenerator#nonCryptographic() nonCryptographic()} uses
+ *       {@link java.util.SplittableRandom}-backed entropy (see class Javadoc). Cuid2 is not
+ *       k-sortable; prefer {@link org.commonutils.id.Ulid} /
+ *       {@link org.commonutils.id.UlidIdGenerator} for coarse time order in encoded form.
  * </ul>
  *
  * <h2>Nano ID generators</h2>
@@ -77,4 +78,5 @@
  * {@link java.time.Clock}; version 4 deliberately does not accept {@code Clock} or date-time
  * parameters.
  */
+// spotless:on
 package org.commonutils.id;

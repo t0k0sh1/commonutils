@@ -13,15 +13,17 @@ import org.commonutils.annotation.NonNull;
 @FunctionalInterface
 public interface IdGenerator<T> {
 
+  // spotless:off
   /**
    * Creates the next identifier. Implementations in this module validate their contracts and return
    * a non-null {@link java.util.UUID UUID} for {@link UuidV4IdGenerator} and {@link
-   * UuidV7IdGenerator}, or a non-null {@link String} for {@link NanoIdGenerator}, {@link
-   * MutableNanoIdGenerator}, {@link UlidIdGenerator}, and {@link Cuid2IdGenerator}.
+   * UuidV7IdGenerator}, or a non-null {@link String} for {@link NanoIdGenerator},
+   * {@link MutableNanoIdGenerator}, {@link UlidIdGenerator}, and {@link Cuid2IdGenerator}.
    *
    * @return a new identifier, never {@code null}
    * @since 0.2.0
    */
+  // spotless:on
   @NonNull
   T generate();
 }

@@ -91,10 +91,12 @@ loadScripts(document, 'script');</script>
        alphabet and length can change after construction (<a href="MutableNanoIdGenerator.html#configure(java.lang.String,int)"><code>configure</code></a> / <a href="MutableNanoIdGenerator.html#setAlphabet(java.lang.String)"><code>setAlphabet</code></a> / <a href="MutableNanoIdGenerator.html#setSize(int)"><code>setSize</code></a>); prefer <a href="NanoIdGenerator.html" title="org.commonutils.id内のクラス"><code>NanoIdGenerator</code></a> when configuration is fixed
    <li><a href="Cuid2.html" title="org.commonutils.id内のクラス"><code>Cuid2</code></a> &mdash; <a href="https://github.com/paralleldrive/cuid2">
        Cuid2</a>-compatible helpers (<code>SHA3-512</code> / base36, fingerprint, validation)
-   <li><a href="Cuid2IdGenerator.html" title="org.commonutils.id内のクラス"><code>Cuid2IdGenerator</code></a> &mdash; <a href="IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a>
-       for Cuid2 strings (length 2–32, default 24); <a href="Cuid2IdGenerator.html#nonCryptographic()"><code>nonCryptographic()</code></a> uses <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SplittableRandom.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>SplittableRandom</code></a>-backed entropy (see class Javadoc). Cuid2 is not k-sortable;
-       prefer <a href="Ulid.html" title="org.commonutils.id内のクラス"><code>Ulid</code></a> / <a href="UlidIdGenerator.html" title="org.commonutils.id内のクラス"><code>UlidIdGenerator</code></a> for
-       coarse time order in encoded form.
+   <li><a href="Cuid2IdGenerator.html" title="org.commonutils.id内のクラス"><code>Cuid2IdGenerator</code></a> &mdash;
+       <a href="IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a> for Cuid2 strings (length 2–32, default 24);
+       <a href="Cuid2IdGenerator.html#nonCryptographic()"><code>nonCryptographic()</code></a> uses
+       <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SplittableRandom.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>SplittableRandom</code></a>-backed entropy (see class Javadoc). Cuid2 is not
+       k-sortable; prefer <a href="Ulid.html" title="org.commonutils.id内のクラス"><code>Ulid</code></a> /
+       <a href="UlidIdGenerator.html" title="org.commonutils.id内のクラス"><code>UlidIdGenerator</code></a> for coarse time order in encoded form.
  </ul>
 
  <h2 id="nano-id-generators-heading">Nano ID generators</h2>
