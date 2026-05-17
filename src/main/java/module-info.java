@@ -25,8 +25,9 @@
  *       org.commonutils.annotation.Positive}.
  *   <dt>{@code org.commonutils.id}
  *   <dd>{@link org.commonutils.id.IdGenerator}, {@link org.commonutils.id.UuidV4IdGenerator},
- *       {@link org.commonutils.id.UuidV7}, and {@link org.commonutils.id.UuidV7IdGenerator} (RFC
- *       4122 v4 and RFC 9562 v7 UUIDs).
+ *       {@link org.commonutils.id.UuidV7}, {@link org.commonutils.id.UuidV7IdGenerator} (RFC 4122
+ *       v4 and RFC 9562 v7 UUIDs), and {@link org.commonutils.id.NanoIdGenerator} (URL-safe string
+ *       IDs).
  * </dl>
  *
  * <p>Non-exported packages (for example implementation details of validation) are not part of the
