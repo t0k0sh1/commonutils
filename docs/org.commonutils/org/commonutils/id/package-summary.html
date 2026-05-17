@@ -82,6 +82,11 @@ loadScripts(document, 'script');</script>
        for RFC 9562 version-7 UUIDs (fixed <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Instant</code></a> or per-call <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Clock.html" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Clock</code></a>)
    <li><a href="NanoIdGenerator.html" title="org.commonutils.id内のクラス"><code>NanoIdGenerator</code></a> &mdash; short URL-safe random strings (<a href="NanoIdGenerator.html#DEFAULT_ALPHABET"><code>default alphabet</code></a> / configurable),
        unlike fixed-width binary UUIDs
+   <li><a href="Ulid.html" title="org.commonutils.id内のクラス"><code>Ulid</code></a> &mdash; ULID strings (48-bit Unix milliseconds + 80-bit
+       randomness, Crockford Base32; <a href="Ulid.html#fromInstant(java.time.Instant)"><code>fromInstant</code></a> / <a href="Ulid.html#fromClock(java.time.Clock)"><code>fromClock</code></a> and
+       <a href="Ulid.html#encode(long,byte%5B%5D)"><code>Ulid.encode(long, byte[])</code></a> for tests)
+   <li><a href="UlidIdGenerator.html" title="org.commonutils.id内のクラス"><code>UlidIdGenerator</code></a> &mdash; <a href="IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a>
+       for ULIDs (fixed <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Instant</code></a> or per-call <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Clock.html" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Clock</code></a>); <a href="UlidIdGenerator.html#nonCryptographic()"><code>nonCryptographic</code></a> uses <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SplittableRandom.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>SplittableRandom</code></a>-backed entropy (see class Javadoc)
    <li><a href="MutableNanoIdGenerator.html" title="org.commonutils.id内のクラス"><code>MutableNanoIdGenerator</code></a> &mdash; Nano ID-style strings whose
        alphabet and length can change after construction (<a href="MutableNanoIdGenerator.html#configure(java.lang.String,int)"><code>configure</code></a> / <a href="MutableNanoIdGenerator.html#setAlphabet(java.lang.String)"><code>setAlphabet</code></a> / <a href="MutableNanoIdGenerator.html#setSize(int)"><code>setSize</code></a>); prefer <a href="NanoIdGenerator.html" title="org.commonutils.id内のクラス"><code>NanoIdGenerator</code></a> when configuration is fixed
  </ul>
@@ -96,6 +101,19 @@ loadScripts(document, 'script');</script>
  <p><strong>Ecosystem-specific encodings</strong> (alternate alphabets imposed by plugins or
  external tools without a stable specification here) are intentionally not implemented in this
  library until there is an agreed format and compatibility policy.
+
+ <h2 id="ulid-vs-uuid-v7-vs-nano-id-heading">ULID vs UUID v7 vs Nano ID</h2>
+
+ <p><strong>ULID</strong> (<a href="Ulid.html" title="org.commonutils.id内のクラス"><code>Ulid</code></a> / <a href="UlidIdGenerator.html" title="org.commonutils.id内のクラス"><code>UlidIdGenerator</code></a>) encodes the same 48-bit Unix millisecond idea as <a href="UuidV7.html" title="org.commonutils.id内のクラス"><code>UuidV7</code></a> into a fixed-length, lexicographically sortable Crockford Base32
+ <em>string</em>, which is convenient for human-readable keys and many text-first storage formats.
+
+ <p><strong>UUID version 7</strong> is a standardized binary UUID (<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/UUID.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>UUID</code></a>) in RFC
+ 9562; use <a href="UuidV7.html" title="org.commonutils.id内のクラス"><code>UuidV7</code></a> / <a href="UuidV7IdGenerator.html" title="org.commonutils.id内のクラス"><code>UuidV7IdGenerator</code></a> when
+ you need UUID types and tooling.
+
+ <p><strong>Nano ID</strong> (<a href="NanoIdGenerator.html" title="org.commonutils.id内のクラス"><code>NanoIdGenerator</code></a>) produces shorter,
+ URL-safe strings with a configurable alphabet and length; unlike ULID it does not embed a
+ timestamp in a standardized layout.
 
  <h2 id="choosing-uuid-version-heading">Choosing UUID version</h2>
 
@@ -130,6 +148,17 @@ loadScripts(document, 'script');</script>
 <div class="block"><a href="IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a> for <a href="https://github.com/ai/nanoid">Nano ID</a>-style strings: a
  random, URL-safe identifier using a fixed alphabet and length, with bias-free index selection
  (reject masked values outside the alphabet range).</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Ulid.html" title="org.commonutils.id内のクラス">Ulid</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="block">Static factory for <a href="https://github.com/ulid/spec">ULID</a>s: 48-bit Unix millisecond
+ timestamp (<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html#toEpochMilli()" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Instant.toEpochMilli()</code></a> semantics) in the most significant bits, 80 bits of
+ randomness, encoded as 26 uppercase Crockford Base32 characters.</div>
+</div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="UlidIdGenerator.html" title="org.commonutils.id内のクラス">UlidIdGenerator</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="block"><a href="IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a> for <a href="https://github.com/ulid/spec">ULID</a> strings (Crockford Base32
+ encoding of 48-bit Unix epoch milliseconds and 80 bits of randomness).</div>
 </div>
 <div class="col-first odd-row-color class-summary class-summary-tab2"><a href="UuidV4IdGenerator.html" title="org.commonutils.id内のクラス">UuidV4IdGenerator</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
