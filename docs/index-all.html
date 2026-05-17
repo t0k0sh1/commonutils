@@ -146,6 +146,18 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Equality for arrays and nested structures; same as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Objects.html#deepEquals(java.lang.Object,java.lang.Object)" title="java.util内のクラスまたはインタフェース" class="external-link"><code>Objects.deepEquals(Object, Object)</code></a>.</div>
 </dd>
+<dt><a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#DEFAULT_ALPHABET" class="member-name-link">DEFAULT_ALPHABET</a> - クラスのstatic変数 org.commonutils.id.<a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></dt>
+<dd>
+<div class="block">Default URL-safe alphabet from <a href="https://github.com/ai/nanoid">Nano ID</a> (<a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#DEFAULT_ALPHABET_SIZE">64</a> characters, order preserved).</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#DEFAULT_ALPHABET_SIZE" class="member-name-link">DEFAULT_ALPHABET_SIZE</a> - クラスのstatic変数 org.commonutils.id.<a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></dt>
+<dd>
+<div class="block">Number of code points in <a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#DEFAULT_ALPHABET"><code>NanoIdGenerator.DEFAULT_ALPHABET</code></a>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#DEFAULT_SIZE" class="member-name-link">DEFAULT_SIZE</a> - クラスのstatic変数 org.commonutils.id.<a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></dt>
+<dd>
+<div class="block">Default string length (Nano ID default).</div>
+</dd>
 <dt><a href="org.commonutils/org/commonutils/lang/StringSupport.html#defaultIfBlank(java.lang.String,java.lang.String)" class="member-name-link">defaultIfBlank(String, String)</a> - クラスのstaticメソッド org.commonutils.lang.<a href="org.commonutils/org/commonutils/lang/StringSupport.html" title="org.commonutils.lang内のクラス">StringSupport</a></dt>
 <dd>
 <div class="block">Returns <code>defaultValue</code> when <code>value</code> is <code>null</code>, empty, or <a href="org.commonutils/org/commonutils/lang/StringSupport.html#isBlank(java.lang.CharSequence)"><code>blank</code></a>; otherwise returns <code>value</code> unchanged.</div>
@@ -251,6 +263,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="org.commonutils/org/commonutils/id/IdGenerator.html#generate()" class="member-name-link">generate()</a> - インタフェースのメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/IdGenerator.html" title="org.commonutils.id内のインタフェース">IdGenerator</a></dt>
 <dd>
 <div class="block">Creates the next identifier.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#generate()" class="member-name-link">generate()</a> - クラスのメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></dt>
+<dd>
+<div class="block">Generates a new Nano ID string using this generator's alphabet, length, and random source.</div>
 </dd>
 <dt><a href="org.commonutils/org/commonutils/id/UuidV4IdGenerator.html#generate()" class="member-name-link">generate()</a> - クラスのメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UuidV4IdGenerator.html" title="org.commonutils.id内のクラス">UuidV4IdGenerator</a></dt>
 <dd>
@@ -428,6 +444,32 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:N">N</h2>
 <dl class="index">
+<dt><a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html" class="type-name-link" title="org.commonutils.id内のクラス">NanoIdGenerator</a> - <a href="org.commonutils/org/commonutils/id/package-summary.html">org.commonutils.id</a>のクラス</dt>
+<dd>
+<div class="block"><a href="org.commonutils/org/commonutils/id/IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a> for <a href="https://github.com/ai/nanoid">Nano ID</a>-style strings: a
+ random, URL-safe identifier using a fixed alphabet and length, with bias-free index selection
+ (reject masked values outside the alphabet range).</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#%3Cinit%3E()" class="member-name-link">NanoIdGenerator()</a> - クラスのコンストラクタ org.commonutils.id.<a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></dt>
+<dd>
+<div class="block">Uses <a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#DEFAULT_ALPHABET"><code>NanoIdGenerator.DEFAULT_ALPHABET</code></a>, <a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#DEFAULT_SIZE"><code>NanoIdGenerator.DEFAULT_SIZE</code></a>, and a cryptographically strong <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#%3Cinit%3E(int,java.util.random.RandomGenerator)" class="member-name-link">NanoIdGenerator(int, RandomGenerator)</a> - クラスのコンストラクタ org.commonutils.id.<a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></dt>
+<dd>
+<div class="block">Uses <a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#DEFAULT_ALPHABET"><code>NanoIdGenerator.DEFAULT_ALPHABET</code></a> and the given length with the supplied <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#%3Cinit%3E(java.lang.String,int)" class="member-name-link">NanoIdGenerator(String, int)</a> - クラスのコンストラクタ org.commonutils.id.<a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></dt>
+<dd>
+<div class="block">Uses the given alphabet and length with a cryptographically strong <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#%3Cinit%3E(java.lang.String,int,java.util.random.RandomGenerator)" class="member-name-link">NanoIdGenerator(String, int, RandomGenerator)</a> - クラスのコンストラクタ org.commonutils.id.<a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></dt>
+<dd>
+<div class="block">Uses the given alphabet, length, and <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#%3Cinit%3E(java.util.random.RandomGenerator)" class="member-name-link">NanoIdGenerator(RandomGenerator)</a> - クラスのコンストラクタ org.commonutils.id.<a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></dt>
+<dd>
+<div class="block">Uses <a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#DEFAULT_ALPHABET"><code>NanoIdGenerator.DEFAULT_ALPHABET</code></a> and <a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#DEFAULT_SIZE"><code>NanoIdGenerator.DEFAULT_SIZE</code></a> with the supplied <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
 <dt><a href="org.commonutils/org/commonutils/annotation/NonNegative.html" class="type-name-link" title="org.commonutils.annotation内の注釈インタフェース">NonNegative</a> - <a href="org.commonutils/org/commonutils/annotation/package-summary.html">org.commonutils.annotation</a>の注釈インタフェース</dt>
 <dd>
 <div class="block">Marks a numeric type usage intended to be zero or greater: primitive integrals (<code>int</code>,

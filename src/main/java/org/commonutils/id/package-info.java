@@ -11,6 +11,9 @@
  *   <li>{@link org.commonutils.id.UuidV7IdGenerator} &mdash; {@link org.commonutils.id.IdGenerator}
  *       for RFC 9562 version-7 UUIDs (fixed {@link java.time.Instant} or per-call {@link
  *       java.time.Clock})
+ *   <li>{@link org.commonutils.id.NanoIdGenerator} &mdash; short URL-safe random strings ({@link
+ *       org.commonutils.id.NanoIdGenerator#DEFAULT_ALPHABET default alphabet} / configurable),
+ *       unlike fixed-width binary UUIDs
  * </ul>
  *
  * <h2>Choosing UUID version</h2>

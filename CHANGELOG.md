@@ -23,6 +23,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`UuidV7IdGenerator`**: `IdGenerator` for UUID v7 using either a fixed `Instant` or `Clock` per `generate()` call; optional `RandomGenerator` (validated; defaults to cryptographically strong entropy).
 - **Tests**: `UuidV4IdGeneratorTest` for version/variant, canonical lowercase string form, deterministic output with a seeded `RandomGenerator`, and null rejection.
 - **Tests**: `UuidV7Test` (RFC 9562 appendix test vector, bounds, batch ordering, clock usage); `UuidV7IdGeneratorTest`.
+- **`NanoIdGenerator`**: Nano ID-style URL-safe strings with bias-free index selection; default alphabet and length match the reference implementation; optional custom alphabet and size; cryptographically strong `RandomGenerator` by default or an injected `RandomGenerator` for tests.
+- **Tests**: `NanoIdGeneratorTest` for shape, deterministic output with a seeded `RandomGenerator`, distinct successive values, alphabet contracts, and null rejection.
 
 ### Changed
 
