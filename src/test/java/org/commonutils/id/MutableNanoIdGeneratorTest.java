@@ -5,6 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.random.RandomGenerator;
 import java.util.random.RandomGeneratorFactory;
 import org.junit.jupiter.api.Test;
@@ -100,6 +105,65 @@ class MutableNanoIdGeneratorTest {
   }
 
   @Test
+  void nonCryptographicWithSizeProducesDistinctSuccessiveIds() {
+    final MutableNanoIdGenerator gen = MutableNanoIdGenerator.nonCryptographic(11);
+    assertEquals(11, gen.generate().length());
+    assertNotEquals(gen.generate(), gen.generate());
+  }
+
+  @Test
+  void nonCryptographicFactoryRejectsInvalidAlphabets() {
+    assertThrows(
+        IllegalArgumentException.class, () -> MutableNanoIdGenerator.nonCryptographic("", 2));
+    assertThrows(
+        IllegalArgumentException.class, () -> MutableNanoIdGenerator.nonCryptographic("aa", 2));
+  }
+
+  @Test
+  void concurrentConfigureAndGenerateProduceSnapshotCoherentIds() throws InterruptedException {
+    final RandomGenerator rng = RandomGeneratorFactory.of("SecureRandom").create();
+    final MutableNanoIdGenerator gen = new MutableNanoIdGenerator(rng);
+    gen.configure("01", 10);
+
+    final String[] alphabets = {"01", "ab", "XY"};
+    final int[] sizes = {10, 12, 15};
+    final int updaterThreads = 2;
+    final int generatorThreads = 4;
+    final int generatesPerThread = 2500;
+
+    final ExecutorService pool = Executors.newFixedThreadPool(updaterThreads + generatorThreads);
+    try {
+      final AtomicBoolean coherent = new AtomicBoolean(true);
+      for (int u = 0; u < updaterThreads; u++) {
+        pool.submit(
+            () -> {
+              for (int i = 0; i < 8000 && coherent.get(); i++) {
+                final int idx = ThreadLocalRandom.current().nextInt(alphabets.length);
+                gen.configure(alphabets[idx], sizes[idx]);
+              }
+            });
+      }
+      for (int g = 0; g < generatorThreads; g++) {
+        pool.submit(
+            () -> {
+              for (int i = 0; i < generatesPerThread && coherent.get(); i++) {
+                final String id = gen.generate();
+                if (!matchesOneAllowedSnapshot(id, alphabets, sizes)) {
+                  coherent.set(false);
+                  return;
+                }
+              }
+            });
+      }
+      pool.shutdown();
+      assertTrue(pool.awaitTermination(120, TimeUnit.SECONDS));
+      assertTrue(coherent.get(), "generated id violated snapshot coherence");
+    } finally {
+      pool.shutdownNow();
+    }
+  }
+
+  @Test
   void nullRandomGeneratorRejected() {
     assertThrows(NullPointerException.class, () -> new MutableNanoIdGenerator(null));
     assertThrows(NullPointerException.class, () -> new MutableNanoIdGenerator(5, null));
@@ -146,5 +210,28 @@ class MutableNanoIdGeneratorTest {
     final MutableNanoIdGenerator gen = new MutableNanoIdGenerator(rng);
     assertThrows(IllegalArgumentException.class, () -> gen.setAlphabet("aa"));
     assertThrows(IllegalArgumentException.class, () -> gen.configure("aa", 2));
+  }
+
+  private static boolean matchesOneAllowedSnapshot(
+      final String id, final String[] alphabets, final int[] sizes) {
+    for (int k = 0; k < alphabets.length; k++) {
+      if (matchesAlphabetAndLength(id, alphabets[k], sizes[k])) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private static boolean matchesAlphabetAndLength(
+      final String id, final String alphabet, final int size) {
+    if (id.length() != size) {
+      return false;
+    }
+    for (int i = 0; i < id.length(); i++) {
+      if (alphabet.indexOf(id.charAt(i)) < 0) {
+        return false;
+      }
+    }
+    return true;
   }
 }

@@ -18,7 +18,7 @@ import org.commonutils.internal.Contracts;
  * externally or confine use to one thread.
  *
  * <p>This class <strong>validates contracts</strong> on construction: non-null references with
- * {@link java.util.Objects#requireNonNull Object.requireNonNull}, positive {@code size}, and
+ * {@link java.util.Objects#requireNonNull Objects.requireNonNull}, positive {@code size}, and
  * alphabet rules as documented on each constructor.
  *
  * <p>Alphabets are validated: non-empty, BMP code points only (no supplementary characters or lone

@@ -24,9 +24,10 @@ import org.commonutils.internal.Contracts;
  * or confine use to one thread.
  *
  * <p>This class <strong>validates contracts</strong> on construction and on configuration mutators:
- * non-null references with {@link java.util.Objects#requireNonNull Object.requireNonNull}, positive
- * {@code size}, and alphabet rules aligned with {@link NanoIdGenerator}. Violations produce {@link
- * NullPointerException} or {@link IllegalArgumentException} as documented per method.
+ * non-null references with {@link java.util.Objects#requireNonNull Objects.requireNonNull},
+ * positive {@code size}, and alphabet rules aligned with {@link NanoIdGenerator}. Violations
+ * produce {@link NullPointerException} or {@link IllegalArgumentException} as documented per
+ * method.
  *
  * <p><strong>API note:</strong> Prefer {@link #configure(String, int)} when changing both alphabet
  * and length so callers never observe transient combinations of old alphabet with new length (or

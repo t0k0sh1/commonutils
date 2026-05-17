@@ -157,6 +157,16 @@ class NanoIdGeneratorTest {
   }
 
   @Test
+  void nonCryptographicWithAlphabetRejectsInvalidAlphabets() {
+    assertThrows(IllegalArgumentException.class, () -> NanoIdGenerator.nonCryptographic("", 1));
+    assertThrows(IllegalArgumentException.class, () -> NanoIdGenerator.nonCryptographic("aa", 1));
+    assertThrows(
+        IllegalArgumentException.class, () -> NanoIdGenerator.nonCryptographic("\uD800", 1));
+    assertThrows(
+        IllegalArgumentException.class, () -> NanoIdGenerator.nonCryptographic("\uD83D\uDE00", 1));
+  }
+
+  @Test
   void successiveNonCryptographicGenerationsDiffer() {
     final NanoIdGenerator gen = NanoIdGenerator.nonCryptographic();
     assertNotEquals(gen.generate(), gen.generate());

@@ -4,11 +4,17 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.random.RandomGenerator;
 import org.commonutils.annotation.NonNull;
+import org.commonutils.annotation.Positive;
 import org.commonutils.internal.Contracts;
 
 /**
  * Shared Nano ID-style alphabet validation, bitmask sizing, bias-free index sampling, and string
  * generation for implementations in this package.
+ *
+ * <p>This class <strong>validates contracts</strong> on entry where noted: non-null references with
+ * {@link java.util.Objects#requireNonNull Objects.requireNonNull}, positive lengths with {@link
+ * org.commonutils.internal.Contracts Contracts}, and alphabet rules aligned with Nano ID
+ * conventions.
  */
 final class NanoIdEncoding {
 
@@ -20,7 +26,7 @@ final class NanoIdEncoding {
    * @throws IllegalArgumentException if {@code alphabet} is empty, has duplicates, or contains
    *     non-BMP or surrogate code points
    */
-  static char @NonNull [] alphabetCharsFrom(final String alphabet) {
+  static char @NonNull [] alphabetCharsFrom(final @NonNull String alphabet) {
     Objects.requireNonNull(alphabet, "alphabet");
     if (alphabet.isEmpty()) {
       throw new IllegalArgumentException("alphabet must not be empty");
@@ -45,7 +51,7 @@ final class NanoIdEncoding {
   }
 
   /** Same rule as Nano ID: smallest {@code (2^k - 1)} with {@code mask >= alphabetLength - 1}. */
-  static int maskForAlphabetLength(final int alphabetLength) {
+  static int maskForAlphabetLength(final @Positive int alphabetLength) {
     Contracts.requirePositive("alphabetLength", alphabetLength);
     final int clz = Integer.numberOfLeadingZeros((alphabetLength - 1) | 1);
     final int shift = 31 - clz;
@@ -59,10 +65,10 @@ final class NanoIdEncoding {
    * Builds a Nano ID-style string of length {@code size} using bias-free masked rejection sampling.
    */
   static @NonNull String generateNanoId(
-      final RandomGenerator rng,
+      final @NonNull RandomGenerator rng,
       final char @NonNull [] alphabetChars,
       final int mask,
-      final int size) {
+      final @Positive int size) {
     Objects.requireNonNull(rng, "rng");
     Objects.requireNonNull(alphabetChars, "alphabetChars");
     Contracts.requirePositive("size", size);

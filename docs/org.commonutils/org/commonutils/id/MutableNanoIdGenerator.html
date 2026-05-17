@@ -112,8 +112,10 @@ implements <a href="IdGenerator.html" title="org.commonutils.id内のインタ�
  or confine use to one thread.
 
  <p>This class <strong>validates contracts</strong> on construction and on configuration mutators:
- non-null references with <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Objects.html#requireNonNull(T)" title="java.util内のクラスまたはインタフェース" class="external-link"><code>Object.requireNonNull</code></a>, positive
- <code>size</code>, and alphabet rules aligned with <a href="NanoIdGenerator.html" title="org.commonutils.id内のクラス"><code>NanoIdGenerator</code></a>. Violations produce <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/NullPointerException.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>NullPointerException</code></a> or <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>IllegalArgumentException</code></a> as documented per method.
+ non-null references with <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Objects.html#requireNonNull(T)" title="java.util内のクラスまたはインタフェース" class="external-link"><code>Objects.requireNonNull</code></a>,
+ positive <code>size</code>, and alphabet rules aligned with <a href="NanoIdGenerator.html" title="org.commonutils.id内のクラス"><code>NanoIdGenerator</code></a>. Violations
+ produce <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/NullPointerException.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>NullPointerException</code></a> or <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>IllegalArgumentException</code></a> as documented per
+ method.
 
  <p><strong>API note:</strong> Prefer <a href="#configure(java.lang.String,int)"><code>configure(String, int)</code></a> when changing both alphabet
  and length so callers never observe transient combinations of old alphabet with new length (or
