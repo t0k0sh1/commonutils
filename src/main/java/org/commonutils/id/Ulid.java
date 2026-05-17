@@ -5,7 +5,9 @@ import java.time.Instant;
 import java.util.Objects;
 import java.util.random.RandomGenerator;
 import java.util.random.RandomGeneratorFactory;
+import org.commonutils.annotation.NonNegative;
 import org.commonutils.annotation.NonNull;
+import org.commonutils.internal.Contracts;
 
 /**
  * Static factory for <a href="https://github.com/ulid/spec">ULID</a>s: 48-bit Unix millisecond
@@ -134,17 +136,21 @@ public final class Ulid {
    * into a canonical ULID string. Useful for deterministic tests; production code often prefers
    * {@link #fromInstant(Instant, RandomGenerator)}.
    *
-   * @param unixTsMs Unix epoch milliseconds (same representability rules as {@link UuidV7})
+   * @param unixTsMs Unix epoch milliseconds, must be non-negative (same representability rules as
+   *     {@link UuidV7})
    * @param randomness exactly {@value #RANDOM_BYTES} bytes interpreted as big-endian for Base32
    *     encoding of the random section, must not be {@code null}
    * @return a non-null ULID string of length {@link #ENCODED_LENGTH}
    * @throws NullPointerException if {@code randomness} is {@code null}
-   * @throws IllegalArgumentException if {@code randomness.length != }{@link #RANDOM_BYTES} or
-   *     {@code unixTsMs} is not representable as a 48-bit unsigned Unix timestamp
+   * @throws IllegalArgumentException if {@code unixTsMs} is negative, if {@code randomness.length
+   *     != }{@link #RANDOM_BYTES}, or if {@code unixTsMs} is not representable as a 48-bit unsigned
+   *     Unix timestamp
    * @since 0.2.0
    */
-  public static @NonNull String encode(final long unixTsMs, final byte @NonNull [] randomness) {
+  public static @NonNull String encode(
+      final @NonNegative long unixTsMs, final byte @NonNull [] randomness) {
     Objects.requireNonNull(randomness, "randomness");
+    Contracts.requireNonNegative("unixTsMs", unixTsMs);
     if (randomness.length != RANDOM_BYTES) {
       throw new IllegalArgumentException(
           "randomness must have length " + RANDOM_BYTES + ", got " + randomness.length);

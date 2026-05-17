@@ -129,6 +129,7 @@ public final class UlidIdGenerator implements IdGenerator<String> {
    * @since 0.2.0
    */
   public static @NonNull UlidIdGenerator nonCryptographic(final @NonNull Clock clock) {
+    Objects.requireNonNull(clock, "clock");
     return new UlidIdGenerator(clock, splittableRandomGenerator());
   }
 

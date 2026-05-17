@@ -163,7 +163,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">メソッド</div>
 <div class="table-header col-last">説明</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../annotation/NonNull.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNull</a> <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#encode(long,byte%5B%5D)" class="member-name-link">encode</a><wbr>(long&nbsp;unixTsMs,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#encode(long,byte%5B%5D)" class="member-name-link">encode</a><wbr>(@org.commonutils.annotation.NonNegative long&nbsp;unixTsMs,
  byte <a href="../annotation/NonNull.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNull</a> []&nbsp;randomness)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Encodes a validated Unix millisecond timestamp and exactly <a href="#RANDOM_BYTES">10</a> random bytes
@@ -389,22 +389,25 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="encode(long,byte[])">
 <h3>encode</h3>
 <div class="member-signature"><span class="annotations"><a href="../annotation/NonNull.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNull</a>
-</span><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../annotation/NonNull.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNull</a> <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a></span>&nbsp;<span class="element-name">encode</span><wbr><span class="parameters">(long&nbsp;unixTsMs,
+</span><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../annotation/NonNull.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNull</a> <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a></span>&nbsp;<span class="element-name">encode</span><wbr><span class="parameters">(<a href="../annotation/NonNegative.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNegative</a>
+ @org.commonutils.annotation.NonNegative long&nbsp;unixTsMs,
  byte <a href="../annotation/NonNull.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNull</a> []&nbsp;randomness)</span></div>
 <div class="block">Encodes a validated Unix millisecond timestamp and exactly <a href="#RANDOM_BYTES">10</a> random bytes
  into a canonical ULID string. Useful for deterministic tests; production code often prefers
  <a href="#fromInstant(java.time.Instant,java.util.random.RandomGenerator)"><code>fromInstant(Instant, RandomGenerator)</code></a>.</div>
 <dl class="notes">
 <dt>パラメータ:</dt>
-<dd><code>unixTsMs</code> - Unix epoch milliseconds (same representability rules as <a href="UuidV7.html" title="org.commonutils.id内のクラス"><code>UuidV7</code></a>)</dd>
+<dd><code>unixTsMs</code> - Unix epoch milliseconds, must be non-negative (same representability rules as
+     <a href="UuidV7.html" title="org.commonutils.id内のクラス"><code>UuidV7</code></a>)</dd>
 <dd><code>randomness</code> - exactly <a href="#RANDOM_BYTES">10</a> bytes interpreted as big-endian for Base32
      encoding of the random section, must not be <code>null</code></dd>
 <dt>戻り値:</dt>
 <dd>a non-null ULID string of length <a href="#ENCODED_LENGTH"><code>ENCODED_LENGTH</code></a></dd>
 <dt>例外:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/NullPointerException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">NullPointerException</a></code> - if <code>randomness</code> is <code>null</code></dd>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></code> - if <code>randomness.length != </code><a href="#RANDOM_BYTES"><code>RANDOM_BYTES</code></a> or
-     <code>unixTsMs</code> is not representable as a 48-bit unsigned Unix timestamp</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></code> - if <code>unixTsMs</code> is negative, if <code>randomness.length
+     != </code><a href="#RANDOM_BYTES"><code>RANDOM_BYTES</code></a>, or if <code>unixTsMs</code> is not representable as a 48-bit unsigned
+     Unix timestamp</dd>
 <dt>導入されたバージョン:</dt>
 <dd>0.2.0</dd>
 </dl>
