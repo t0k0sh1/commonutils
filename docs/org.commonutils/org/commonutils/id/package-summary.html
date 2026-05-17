@@ -82,7 +82,20 @@ loadScripts(document, 'script');</script>
        for RFC 9562 version-7 UUIDs (fixed <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Instant</code></a> or per-call <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Clock.html" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Clock</code></a>)
    <li><a href="NanoIdGenerator.html" title="org.commonutils.id内のクラス"><code>NanoIdGenerator</code></a> &mdash; short URL-safe random strings (<a href="NanoIdGenerator.html#DEFAULT_ALPHABET"><code>default alphabet</code></a> / configurable),
        unlike fixed-width binary UUIDs
+   <li><a href="MutableNanoIdGenerator.html" title="org.commonutils.id内のクラス"><code>MutableNanoIdGenerator</code></a> &mdash; Nano ID-style strings whose
+       alphabet and length can change after construction (<a href="MutableNanoIdGenerator.html#configure(java.lang.String,int)"><code>configure</code></a> / <a href="MutableNanoIdGenerator.html#setAlphabet(java.lang.String)"><code>setAlphabet</code></a> / <a href="MutableNanoIdGenerator.html#setSize(int)"><code>setSize</code></a>); prefer <a href="NanoIdGenerator.html" title="org.commonutils.id内のクラス"><code>NanoIdGenerator</code></a> when configuration is fixed
  </ul>
+
+ <h2 id="nano-id-generators-heading">Nano ID generators</h2>
+
+ <p>Defaults mirror the reference <a href="https://github.com/ai/nanoid">Nano ID</a> alphabet and
+ length. Static <code>nonCryptographic…</code> factories on <a href="NanoIdGenerator.html" title="org.commonutils.id内のクラス"><code>NanoIdGenerator</code></a>
+ and <a href="MutableNanoIdGenerator.html" title="org.commonutils.id内のクラス"><code>MutableNanoIdGenerator</code></a> opt into a fast <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SplittableRandom.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>SplittableRandom</code></a>-backed <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>; see each class's API
+ note in its class documentation for security guidance.
+
+ <p><strong>Ecosystem-specific encodings</strong> (alternate alphabets imposed by plugins or
+ external tools without a stable specification here) are intentionally not implemented in this
+ library until there is an agreed format and compatibility policy.
 
  <h2 id="choosing-uuid-version-heading">Choosing UUID version</h2>
 
@@ -107,24 +120,29 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color class-summary class-summary-tab1">
 <div class="block">Generates identifiers of type <code>T</code>.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="MutableNanoIdGenerator.html" title="org.commonutils.id内のクラス">MutableNanoIdGenerator</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="block"><a href="IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a> for mutable <a href="https://github.com/ai/nanoid">Nano ID</a>-style strings:
+ alphabet and length can be changed after construction while sharing one <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block"><a href="IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a> for <a href="https://github.com/ai/nanoid">Nano ID</a>-style strings: a
  random, URL-safe identifier using a fixed alphabet and length, with bias-free index selection
  (reject masked values outside the alphabet range).</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="UuidV4IdGenerator.html" title="org.commonutils.id内のクラス">UuidV4IdGenerator</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="UuidV4IdGenerator.html" title="org.commonutils.id内のクラス">UuidV4IdGenerator</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block"><a href="IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a> for <a href="https://www.rfc-editor.org/rfc/rfc4122">RFC 4122</a> version-4
  (random) UUIDs.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="UuidV7.html" title="org.commonutils.id内のクラス">UuidV7</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="UuidV7.html" title="org.commonutils.id内のクラス">UuidV7</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">Static factory for <a href="https://www.rfc-editor.org/rfc/rfc9562">RFC 9562</a> UUID version 7
  (Unix millisecond timestamp in the most significant bits, random in the remainder).</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="UuidV7IdGenerator.html" title="org.commonutils.id内のクラス">UuidV7IdGenerator</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="UuidV7IdGenerator.html" title="org.commonutils.id内のクラス">UuidV7IdGenerator</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block"><a href="IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a> for <a href="https://www.rfc-editor.org/rfc/rfc9562">RFC 9562</a> UUID
  version 7.</div>
 </div>

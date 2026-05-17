@@ -86,56 +86,61 @@ loadScripts(document, 'script');</script>
 <div class="block">Static helpers for <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>Map</code></a> work: null-safe emptiness checks, default substitution, and typed
  reads with fallbacks.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html" title="org.commonutils.id内のクラス">MutableNanoIdGenerator</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="block"><a href="org.commonutils/org/commonutils/id/IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a> for mutable <a href="https://github.com/ai/nanoid">Nano ID</a>-style strings:
+ alphabet and length can be changed after construction while sharing one <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block"><a href="org.commonutils/org/commonutils/id/IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a> for <a href="https://github.com/ai/nanoid">Nano ID</a>-style strings: a
  random, URL-safe identifier using a fixed alphabet and length, with bias-free index selection
  (reject masked values outside the alphabet range).</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab6"><a href="org.commonutils/org/commonutils/annotation/NonNegative.html" title="org.commonutils.annotation内の注釈インタフェース">NonNegative</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab6">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab6"><a href="org.commonutils/org/commonutils/annotation/NonNegative.html" title="org.commonutils.annotation内の注釈インタフェース">NonNegative</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab6">
 <div class="block">Marks a numeric type usage intended to be zero or greater: primitive integrals (<code>int</code>,
  <code>long</code>, …) — &gt;= 0; non-<code>NaN</code> floating-point — &gt;= 0.0.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab6"><a href="org.commonutils/org/commonutils/annotation/NonNull.html" title="org.commonutils.annotation内の注釈インタフェース">NonNull</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab6">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab6"><a href="org.commonutils/org/commonutils/annotation/NonNull.html" title="org.commonutils.annotation内の注釈インタフェース">NonNull</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab6">
 <div class="block">Marks a type usage whose value must not be <code>null</code>.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab6"><a href="org.commonutils/org/commonutils/annotation/Nullable.html" title="org.commonutils.annotation内の注釈インタフェース">Nullable</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab6">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab6"><a href="org.commonutils/org/commonutils/annotation/Nullable.html" title="org.commonutils.annotation内の注釈インタフェース">Nullable</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab6">
 <div class="block">Marks a type usage whose value may be <code>null</code>.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="org.commonutils/org/commonutils/lang/NumberSupport.html" title="org.commonutils.lang内のクラス">NumberSupport</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="org.commonutils/org/commonutils/lang/NumberSupport.html" title="org.commonutils.lang内のクラス">NumberSupport</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Static helpers for numeric strings and simple bounds: digit checks, JDK-compatible parsing with
  optional defaults, and <code>clamp</code>.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="org.commonutils/org/commonutils/lang/ObjectSupport.html" title="org.commonutils.lang内のクラス">ObjectSupport</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="org.commonutils/org/commonutils/lang/ObjectSupport.html" title="org.commonutils.lang内のクラス">ObjectSupport</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Static helpers aligned with <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Objects.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>Objects</code></a>: almost every method forwards to the JDK so
  semantics stay identical to the platform.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab6"><a href="org.commonutils/org/commonutils/annotation/Positive.html" title="org.commonutils.annotation内の注釈インタフェース">Positive</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab6">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab6"><a href="org.commonutils/org/commonutils/annotation/Positive.html" title="org.commonutils.annotation内の注釈インタフェース">Positive</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab6">
 <div class="block">Marks a numeric type usage intended to be strictly positive.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="org.commonutils/org/commonutils/lang/StringSupport.html" title="org.commonutils.lang内のクラス">StringSupport</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="org.commonutils/org/commonutils/lang/StringSupport.html" title="org.commonutils.lang内のクラス">StringSupport</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Static helpers for <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>String</code></a> and <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/CharSequence.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>CharSequence</code></a> work: presence checks, safe defaults,
  content equality, and trimming helpers.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="org.commonutils/org/commonutils/id/UuidV4IdGenerator.html" title="org.commonutils.id内のクラス">UuidV4IdGenerator</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="org.commonutils/org/commonutils/id/UuidV4IdGenerator.html" title="org.commonutils.id内のクラス">UuidV4IdGenerator</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block"><a href="org.commonutils/org/commonutils/id/IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a> for <a href="https://www.rfc-editor.org/rfc/rfc4122">RFC 4122</a> version-4
  (random) UUIDs.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="org.commonutils/org/commonutils/id/UuidV7.html" title="org.commonutils.id内のクラス">UuidV7</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="org.commonutils/org/commonutils/id/UuidV7.html" title="org.commonutils.id内のクラス">UuidV7</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Static factory for <a href="https://www.rfc-editor.org/rfc/rfc9562">RFC 9562</a> UUID version 7
  (Unix millisecond timestamp in the most significant bits, random in the remainder).</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="org.commonutils/org/commonutils/id/UuidV7IdGenerator.html" title="org.commonutils.id内のクラス">UuidV7IdGenerator</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="org.commonutils/org/commonutils/id/UuidV7IdGenerator.html" title="org.commonutils.id内のクラス">UuidV7IdGenerator</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block"><a href="org.commonutils/org/commonutils/id/IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a> for <a href="https://www.rfc-editor.org/rfc/rfc9562">RFC 9562</a> UUID
  version 7.</div>
 </div>

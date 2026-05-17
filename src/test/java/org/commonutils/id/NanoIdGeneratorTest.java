@@ -114,4 +114,51 @@ class NanoIdGeneratorTest {
             new NanoIdGenerator(
                 "\uD83D\uDE00", 1, RandomGeneratorFactory.of("L128X256MixRandom").create(1L)));
   }
+
+  @Test
+  void nonCryptographicProducesUrlSafeShape() {
+    final NanoIdGenerator gen = NanoIdGenerator.nonCryptographic();
+    final String id = gen.generate();
+    assertEquals(NanoIdGenerator.DEFAULT_SIZE, id.length());
+    for (int i = 0; i < id.length(); i++) {
+      assertTrue(
+          NanoIdGenerator.DEFAULT_ALPHABET.indexOf(id.charAt(i)) >= 0,
+          "unexpected char at " + i + ": " + id.charAt(i));
+    }
+  }
+
+  @Test
+  void nonCryptographicWithSizeUsesLength() {
+    final NanoIdGenerator gen = NanoIdGenerator.nonCryptographic(12);
+    final String id = gen.generate();
+    assertEquals(12, id.length());
+  }
+
+  @Test
+  void nonCryptographicWithAlphabetAndSize() {
+    final NanoIdGenerator gen = NanoIdGenerator.nonCryptographic("xyz", 8);
+    final String id = gen.generate();
+    assertEquals(8, id.length());
+    for (int i = 0; i < id.length(); i++) {
+      assertTrue("xyz".indexOf(id.charAt(i)) >= 0);
+    }
+  }
+
+  @Test
+  void nonCryptographicWithInvalidSizeRejected() {
+    assertThrows(IllegalArgumentException.class, () -> NanoIdGenerator.nonCryptographic(0));
+    assertThrows(IllegalArgumentException.class, () -> NanoIdGenerator.nonCryptographic(-1));
+  }
+
+  @Test
+  void nonCryptographicWithAlphabetRejectsNullAndInvalidSize() {
+    assertThrows(NullPointerException.class, () -> NanoIdGenerator.nonCryptographic(null, 1));
+    assertThrows(IllegalArgumentException.class, () -> NanoIdGenerator.nonCryptographic("a", 0));
+  }
+
+  @Test
+  void successiveNonCryptographicGenerationsDiffer() {
+    final NanoIdGenerator gen = NanoIdGenerator.nonCryptographic();
+    assertNotEquals(gen.generate(), gen.generate());
+  }
 }
