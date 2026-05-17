@@ -5,8 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -107,8 +111,13 @@ class MutableNanoIdGeneratorTest {
   @Test
   void nonCryptographicWithSizeProducesDistinctSuccessiveIds() {
     final MutableNanoIdGenerator gen = MutableNanoIdGenerator.nonCryptographic(11);
-    assertEquals(11, gen.generate().length());
-    assertNotEquals(gen.generate(), gen.generate());
+    final int batch = 16;
+    final HashSet<String> distinct = new HashSet<>();
+    for (int i = 0; i < batch; i++) {
+      final String id = gen.generate();
+      assertEquals(11, id.length());
+      assertTrue(distinct.add(id), "expected unique id in batch, got duplicate: " + id);
+    }
   }
 
   @Test
@@ -120,7 +129,7 @@ class MutableNanoIdGeneratorTest {
   }
 
   @Test
-  void concurrentConfigureAndGenerateProduceSnapshotCoherentIds() throws InterruptedException {
+  void concurrentConfigureAndGenerateProduceSnapshotCoherentIds() throws Exception {
     final RandomGenerator rng = RandomGeneratorFactory.of("SecureRandom").create();
     final MutableNanoIdGenerator gen = new MutableNanoIdGenerator(rng);
     gen.configure("01", 10);
@@ -132,31 +141,37 @@ class MutableNanoIdGeneratorTest {
     final int generatesPerThread = 2500;
 
     final ExecutorService pool = Executors.newFixedThreadPool(updaterThreads + generatorThreads);
+    final List<Future<?>> futures = new ArrayList<>();
     try {
       final AtomicBoolean coherent = new AtomicBoolean(true);
       for (int u = 0; u < updaterThreads; u++) {
-        pool.submit(
-            () -> {
-              for (int i = 0; i < 8000 && coherent.get(); i++) {
-                final int idx = ThreadLocalRandom.current().nextInt(alphabets.length);
-                gen.configure(alphabets[idx], sizes[idx]);
-              }
-            });
+        futures.add(
+            pool.submit(
+                () -> {
+                  for (int i = 0; i < 8000 && coherent.get(); i++) {
+                    final int idx = ThreadLocalRandom.current().nextInt(alphabets.length);
+                    gen.configure(alphabets[idx], sizes[idx]);
+                  }
+                }));
       }
       for (int g = 0; g < generatorThreads; g++) {
-        pool.submit(
-            () -> {
-              for (int i = 0; i < generatesPerThread && coherent.get(); i++) {
-                final String id = gen.generate();
-                if (!matchesOneAllowedSnapshot(id, alphabets, sizes)) {
-                  coherent.set(false);
-                  return;
-                }
-              }
-            });
+        futures.add(
+            pool.submit(
+                () -> {
+                  for (int i = 0; i < generatesPerThread && coherent.get(); i++) {
+                    final String id = gen.generate();
+                    if (!matchesOneAllowedSnapshot(id, alphabets, sizes)) {
+                      coherent.set(false);
+                      return;
+                    }
+                  }
+                }));
       }
       pool.shutdown();
       assertTrue(pool.awaitTermination(120, TimeUnit.SECONDS));
+      for (Future<?> future : futures) {
+        future.get();
+      }
       assertTrue(coherent.get(), "generated id violated snapshot coherence");
     } finally {
       pool.shutdownNow();
