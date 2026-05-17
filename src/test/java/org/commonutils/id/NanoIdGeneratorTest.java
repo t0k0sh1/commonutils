@@ -80,6 +80,7 @@ class NanoIdGeneratorTest {
   void nonPositiveSizeRejected() {
     final RandomGenerator rng = RandomGeneratorFactory.of("L128X256MixRandom").create(1L);
     assertThrows(IllegalArgumentException.class, () -> new NanoIdGenerator(0, rng));
+    assertThrows(IllegalArgumentException.class, () -> new NanoIdGenerator(-1, rng));
   }
 
   @Test

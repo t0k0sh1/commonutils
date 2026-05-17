@@ -18,6 +18,10 @@ import org.commonutils.internal.Contracts;
  * matches that of the given generator; if it is not thread-safe, callers must synchronize
  * externally or confine use to one thread.
  *
+ * <p>This class <strong>validates contracts</strong> on construction: non-null references with
+ * {@link java.util.Objects#requireNonNull Object.requireNonNull}, positive {@code size}, and
+ * alphabet rules as documented on each constructor.
+ *
  * <p>Alphabets are validated: non-empty, BMP code points only (no supplementary characters or lone
  * surrogate code units), and each code point must appear at most once. Violations produce {@link
  * IllegalArgumentException}. Public constructors validate references with {@link

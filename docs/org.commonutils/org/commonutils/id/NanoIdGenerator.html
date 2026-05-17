@@ -106,6 +106,10 @@ implements <a href="IdGenerator.html" title="org.commonutils.id内のインタ�
  matches that of the given generator; if it is not thread-safe, callers must synchronize
  externally or confine use to one thread.
 
+ <p>This class <strong>validates contracts</strong> on construction: non-null references with
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Objects.html#requireNonNull(T)" title="java.util内のクラスまたはインタフェース" class="external-link"><code>Object.requireNonNull</code></a>, positive <code>size</code>, and
+ alphabet rules as documented on each constructor.
+
  <p>Alphabets are validated: non-empty, BMP code points only (no supplementary characters or lone
  surrogate code units), and each code point must appear at most once. Violations produce <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>IllegalArgumentException</code></a>. Public constructors validate references with <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/NullPointerException.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>NullPointerException</code></a> when <code>null</code> is not permitted.</div>
 <dl class="notes">
