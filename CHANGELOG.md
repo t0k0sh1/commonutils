@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`StringSupport.length`**: one-arg form uses `UNITS`; two-arg form takes a `LengthCounter` (non-null); `how` null throws `NullPointerException`.
 - **`EastAsianWidthColumns`** (non-exported `org.commonutils.internal`): data derived from Unicode 15.1.0 `EastAsianWidth.txt`.
 - **Tests**: `StringSupportTest` coverage for length APIs; `StringSupportLengthEdgeCasesTest` for ill-formed UTF-16, combining marks, regional indicators, VS16, and EAW fallbacks.
+- **`org.commonutils.id`** (JPMS export and package docs): identifier generators with a shared contract.
+- **`IdGenerator`**: `@FunctionalInterface` with `generate()` as the common procedure for all generators in this package.
+- **`UuidV4IdGenerator`**: RFC 4122 version-4 UUIDs; defaults to `UUID.randomUUID()`, or accepts a `RandomGenerator` for tests and custom entropy (validated; `NullPointerException` when null).
+- **Tests**: `UuidV4IdGeneratorTest` for version/variant, canonical lowercase string form, deterministic output with a seeded `RandomGenerator`, and null rejection.
 
 ### Changed
 
