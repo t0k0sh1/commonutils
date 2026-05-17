@@ -22,6 +22,13 @@ import org.commonutils.annotation.Nullable;
  * <p>Public constructors validate references with {@link NullPointerException} when {@code null} is
  * not permitted.
  *
+ * <p>For timestamps, lexicographic time order by embedded milliseconds, or reproducible instants in
+ * tests via {@link java.time.Clock}, use {@link UuidV7} or {@link UuidV7IdGenerator} instead; RFC
+ * 4122 version 4 does not encode time and this type does not add {@code Clock} or date-time
+ * parameters by design.
+ *
+ * @see UuidV7
+ * @see UuidV7IdGenerator
  * @since 0.2.0
  */
 public final class UuidV4IdGenerator implements IdGenerator<UUID> {

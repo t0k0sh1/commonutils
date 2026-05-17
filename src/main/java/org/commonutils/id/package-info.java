@@ -12,5 +12,17 @@
  *       for RFC 9562 version-7 UUIDs (fixed {@link java.time.Instant} or per-call {@link
  *       java.time.Clock})
  * </ul>
+ *
+ * <h2>Choosing UUID version</h2>
+ *
+ * <p><strong>Version 4</strong> (RFC 4122) embeds no timestamp: identifiers are random. Use {@link
+ * org.commonutils.id.UuidV4IdGenerator} or {@link java.util.UUID#randomUUID()} when you need
+ * opaque, unpredictable IDs without time semantics.
+ *
+ * <p><strong>Version 7</strong> (RFC 9562) carries Unix milliseconds in the most significant bits
+ * for rough time order and sorting. Use {@link org.commonutils.id.UuidV7} or {@link
+ * org.commonutils.id.UuidV7IdGenerator} when you need that encoding or test-friendly control via
+ * {@link java.time.Clock}; version 4 deliberately does not accept {@code Clock} or date-time
+ * parameters.
  */
 package org.commonutils.id;
