@@ -23,7 +23,7 @@ alwaysApply: true
 
 **`@since`、CHANGELOG／semver、`@param` / `@throws` と契約アノテーションの整合**などは、本文をここに複製しない。[`development-workflow.mdc`](development-workflow.mdc) と [`commonutils-contracts.mdc`](commonutils-contracts.mdc) を参照する。
 
-## 段落構造の范例
+## 段落構造の例
 
 - クラス: `org.commonutils.id.UuidV7`
 - ソース: [`src/main/java/org/commonutils/id/UuidV7.java`](../../src/main/java/org/commonutils/id/UuidV7.java)
