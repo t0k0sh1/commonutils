@@ -129,6 +129,17 @@ loadScripts(document, 'script');</script>
 <div class="block">Static helpers for <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>String</code></a> and <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/CharSequence.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>CharSequence</code></a> work: presence checks, safe defaults,
  content equality, and trimming helpers.</div>
 </div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="org.commonutils/org/commonutils/id/Ulid.html" title="org.commonutils.id内のクラス">Ulid</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Static factory for <a href="https://github.com/ulid/spec">ULID</a>s: 48-bit Unix millisecond
+ timestamp (<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html#toEpochMilli()" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Instant.toEpochMilli()</code></a> semantics) in the most significant bits, 80 bits of
+ randomness, encoded as 26 uppercase Crockford Base32 characters.</div>
+</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="org.commonutils/org/commonutils/id/UlidIdGenerator.html" title="org.commonutils.id内のクラス">UlidIdGenerator</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="block"><a href="org.commonutils/org/commonutils/id/IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a> for <a href="https://github.com/ulid/spec">ULID</a> strings (Crockford Base32
+ encoding of 48-bit Unix epoch milliseconds and 80 bits of randomness).</div>
+</div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="org.commonutils/org/commonutils/id/UuidV4IdGenerator.html" title="org.commonutils.id内のクラス">UuidV4IdGenerator</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block"><a href="org.commonutils/org/commonutils/id/IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a> for <a href="https://www.rfc-editor.org/rfc/rfc4122">RFC 4122</a> version-4

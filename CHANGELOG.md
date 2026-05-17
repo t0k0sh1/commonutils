@@ -25,13 +25,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Tests**: `UuidV7Test` (RFC 9562 appendix test vector, bounds, batch ordering, clock usage); `UuidV7IdGeneratorTest`.
 - **`NanoIdGenerator`**: Nano ID-style URL-safe strings with bias-free index selection; default alphabet and length match the reference implementation; optional custom alphabet and size; cryptographically strong `RandomGenerator` by default or an injected `RandomGenerator` for tests; **`nonCryptographic()`** / **`nonCryptographic(int)`** / **`nonCryptographic(String, int)`** use **`SplittableRandom`** for throughput (documented as unsuitable for security-sensitive identifiers).
 - **`MutableNanoIdGenerator`**: same encoding rules as **`NanoIdGenerator`** with runtime **`configure`**, **`setAlphabet`**, and **`setSize`** (compare-and-set loops for concurrent updates; snapshot-per-**`generate`**); **`nonCryptographic…`** factories mirror **`NanoIdGenerator`**.
+- **`Ulid`**: [ULID](https://github.com/ulid/spec) strings (48-bit Unix **`Instant#toEpochMilli()`** timestamp + 80 bits randomness, Crockford Base32); **`fromInstant`** / **`fromClock`** (default **`SecureRandom`** or injected **`RandomGenerator`**); **`encode(long, byte[])`** for deterministic tests; validates timestamp range like **`UuidV7`**.
+- **`UlidIdGenerator`**: **`IdGenerator<String>`** for ULIDs with fixed **`Instant`** or **`Clock`**, mirroring **`UuidV7IdGenerator`**; **`nonCryptographic()`** / **`nonCryptographic(Clock)`** use **`SplittableRandom`** (documented as not for security-sensitive identifiers).
 - **Tests**: **`NanoIdGeneratorTest`** for shape, deterministic output with a seeded **`RandomGenerator`**, successive values, alphabet contracts, null rejection, and **`nonCryptographic…`**; **`MutableNanoIdGeneratorTest`** for mutation contracts and defaults.
+- **Tests**: **`UlidTest`** (encoding vectors, bounds, shape, clock stepping); **`UlidIdGeneratorTest`**.
 
 ### Changed
 
 - **`org.commonutils.lang` package docs**: mention `LengthCounter` / `Lengths` and `StringSupport` length counting.
 - **`org.commonutils.id`**: package documentation adds “Choosing UUID version” (v4 random vs v7 timestamp / `Clock`); **`UuidV4IdGenerator`** class Javadoc cross-links **`UuidV7`** / **`UuidV7IdGenerator`** for time-based use cases (GitHub issue #8).
-- **`org.commonutils.id`** / **`IdGenerator`**: package docs add **`MutableNanoIdGenerator`**, a **`Nano ID generators`** section, and encoding-scope guidance; **`IdGenerator`** documents **`MutableNanoIdGenerator`** for string ids (GitHub issue #10).
+- **`org.commonutils.id`** / **`IdGenerator`**: package docs add **`MutableNanoIdGenerator`**, **`Ulid`** / **`UlidIdGenerator`**, a **`Nano ID generators`** section, ULID vs UUID v7 vs Nano ID guidance, and encoding-scope guidance; **`IdGenerator`** documents **`MutableNanoIdGenerator`** and **`UlidIdGenerator`** for string ids (GitHub issue #10).
 
 ### Notes
 

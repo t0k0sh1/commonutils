@@ -143,6 +143,11 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns a non-negative length count.</div>
 </dd>
+<dt><a href="org.commonutils/org/commonutils/id/Ulid.html#CROCKFORD_BASE32" class="member-name-link">CROCKFORD_BASE32</a> - クラスのstatic変数 org.commonutils.id.<a href="org.commonutils/org/commonutils/id/Ulid.html" title="org.commonutils.id内のクラス">Ulid</a></dt>
+<dd>
+<div class="block">Canonical Crockford Base32 alphabet for ULID (uppercase only in generated strings); ULIDs are
+ case-insensitive when parsing elsewhere, but this library emits uppercase only.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:D">D</h2>
 <dl class="index">
@@ -200,6 +205,15 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="org.commonutils/org/commonutils/lang/StringSupport.html#empty-vs-blank" class="search-tag-link">Empty vs blank</a> - クラス org.commonutils.lang.StringSupportの検索タグ</dt>
 <dd>セクション</dd>
+<dt><a href="org.commonutils/org/commonutils/id/Ulid.html#encode(long,byte%5B%5D)" class="member-name-link">encode(long, byte[])</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/Ulid.html" title="org.commonutils.id内のクラス">Ulid</a></dt>
+<dd>
+<div class="block">Encodes a validated Unix millisecond timestamp and exactly <a href="org.commonutils/org/commonutils/id/Ulid.html#RANDOM_BYTES">10</a> random bytes
+ into a canonical ULID string.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/Ulid.html#ENCODED_LENGTH" class="member-name-link">ENCODED_LENGTH</a> - クラスのstatic変数 org.commonutils.id.<a href="org.commonutils/org/commonutils/id/Ulid.html" title="org.commonutils.id内のクラス">Ulid</a></dt>
+<dd>
+<div class="block">Number of characters in a canonical ULID string (<a href="org.commonutils/org/commonutils/id/Ulid.html#TIME_CHARS">10</a> time + <a href="org.commonutils/org/commonutils/id/Ulid.html#RANDOM_CHARS">16</a> random).</div>
+</dd>
 <dt><a href="org.commonutils/org/commonutils/lang/StringSupport.html#equality" class="search-tag-link">Equality</a> - クラス org.commonutils.lang.StringSupportの検索タグ</dt>
 <dd>セクション</dd>
 <dt><a href="org.commonutils/org/commonutils/lang/StringSupport.html#equals(java.lang.CharSequence,java.lang.CharSequence)" class="member-name-link">equals(CharSequence, CharSequence)</a> - クラスのstaticメソッド org.commonutils.lang.<a href="org.commonutils/org/commonutils/lang/StringSupport.html" title="org.commonutils.lang内のクラス">StringSupport</a></dt>
@@ -239,17 +253,33 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the leftmost non-null argument.</div>
 </dd>
+<dt><a href="org.commonutils/org/commonutils/id/Ulid.html#fromClock(java.time.Clock)" class="member-name-link">fromClock(Clock)</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/Ulid.html" title="org.commonutils.id内のクラス">Ulid</a></dt>
+<dd>
+<div class="block">Creates a ULID from <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Clock.html#instant()" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Clock.instant()</code></a> using a cryptographically strong <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
 <dt><a href="org.commonutils/org/commonutils/id/UuidV7.html#fromClock(java.time.Clock)" class="member-name-link">fromClock(Clock)</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UuidV7.html" title="org.commonutils.id内のクラス">UuidV7</a></dt>
 <dd>
 <div class="block">Creates a UUID v7 from <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Clock.html#instant()" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Clock.instant()</code></a>, using a cryptographically strong <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/Ulid.html#fromClock(java.time.Clock,java.util.random.RandomGenerator)" class="member-name-link">fromClock(Clock, RandomGenerator)</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/Ulid.html" title="org.commonutils.id内のクラス">Ulid</a></dt>
+<dd>
+<div class="block">Creates a ULID from <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Clock.html#instant()" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Clock.instant()</code></a> and the given random source.</div>
 </dd>
 <dt><a href="org.commonutils/org/commonutils/id/UuidV7.html#fromClock(java.time.Clock,java.util.random.RandomGenerator)" class="member-name-link">fromClock(Clock, RandomGenerator)</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UuidV7.html" title="org.commonutils.id内のクラス">UuidV7</a></dt>
 <dd>
 <div class="block">Creates a UUID v7 from <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Clock.html#instant()" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Clock.instant()</code></a> and the given random generator.</div>
 </dd>
+<dt><a href="org.commonutils/org/commonutils/id/Ulid.html#fromInstant(java.time.Instant)" class="member-name-link">fromInstant(Instant)</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/Ulid.html" title="org.commonutils.id内のクラス">Ulid</a></dt>
+<dd>
+<div class="block">Creates a ULID from an instant using a cryptographically strong <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
 <dt><a href="org.commonutils/org/commonutils/id/UuidV7.html#fromInstant(java.time.Instant)" class="member-name-link">fromInstant(Instant)</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UuidV7.html" title="org.commonutils.id内のクラス">UuidV7</a></dt>
 <dd>
 <div class="block">Creates a UUID v7 from an instant, using a cryptographically strong <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/Ulid.html#fromInstant(java.time.Instant,java.util.random.RandomGenerator)" class="member-name-link">fromInstant(Instant, RandomGenerator)</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/Ulid.html" title="org.commonutils.id内のクラス">Ulid</a></dt>
+<dd>
+<div class="block">Creates a ULID from <code>instant</code> and the given random source.</div>
 </dd>
 <dt><a href="org.commonutils/org/commonutils/id/UuidV7.html#fromInstant(java.time.Instant,java.util.random.RandomGenerator)" class="member-name-link">fromInstant(Instant, RandomGenerator)</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UuidV7.html" title="org.commonutils.id内のクラス">UuidV7</a></dt>
 <dd>
@@ -275,6 +305,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#generate()" class="member-name-link">generate()</a> - クラスのメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></dt>
 <dd>
 <div class="block">Generates a new Nano ID string using this generator's alphabet, length, and random source.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/UlidIdGenerator.html#generate()" class="member-name-link">generate()</a> - クラスのメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UlidIdGenerator.html" title="org.commonutils.id内のクラス">UlidIdGenerator</a></dt>
+<dd>
+<div class="block">Generates a new ULID string.</div>
 </dd>
 <dt><a href="org.commonutils/org/commonutils/id/UuidV4IdGenerator.html#generate()" class="member-name-link">generate()</a> - クラスのメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UuidV4IdGenerator.html" title="org.commonutils.id内のクラス">UuidV4IdGenerator</a></dt>
 <dd>
@@ -517,6 +551,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns a generator that uses <a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#DEFAULT_ALPHABET"><code>NanoIdGenerator.DEFAULT_ALPHABET</code></a>, <a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#DEFAULT_SIZE"><code>NanoIdGenerator.DEFAULT_SIZE</code></a>, and a new
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SplittableRandom.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>SplittableRandom</code></a>-backed <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
 </dd>
+<dt><a href="org.commonutils/org/commonutils/id/UlidIdGenerator.html#nonCryptographic()" class="member-name-link">nonCryptographic()</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UlidIdGenerator.html" title="org.commonutils.id内のクラス">UlidIdGenerator</a></dt>
+<dd>
+<div class="block">Returns a generator that uses <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Clock.html#systemUTC()" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Clock.systemUTC()</code></a> and a new <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SplittableRandom.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>SplittableRandom</code></a>-backed <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
 <dt><a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html#nonCryptographic(int)" class="member-name-link">nonCryptographic(int)</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/MutableNanoIdGenerator.html" title="org.commonutils.id内のクラス">MutableNanoIdGenerator</a></dt>
 <dd>
 <div class="block">Returns a mutable generator using <a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#DEFAULT_ALPHABET"><code>NanoIdGenerator.DEFAULT_ALPHABET</code></a>, <code>size</code>, and a
@@ -534,6 +572,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html#nonCryptographic(java.lang.String,int)" class="member-name-link">nonCryptographic(String, int)</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/NanoIdGenerator.html" title="org.commonutils.id内のクラス">NanoIdGenerator</a></dt>
 <dd>
 <div class="block">Returns a generator that uses the given <code>alphabet</code> and <code>size</code> with a new <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SplittableRandom.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>SplittableRandom</code></a>-backed <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/UlidIdGenerator.html#nonCryptographic(java.time.Clock)" class="member-name-link">nonCryptographic(Clock)</a> - クラスのstaticメソッド org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UlidIdGenerator.html" title="org.commonutils.id内のクラス">UlidIdGenerator</a></dt>
+<dd>
+<div class="block">Returns a generator that uses the given <code>clock</code> and a new <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SplittableRandom.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>SplittableRandom</code></a>-backed <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
 </dd>
 <dt><a href="org.commonutils/org/commonutils/annotation/NonNegative.html" class="type-name-link" title="org.commonutils.annotation内の注釈インタフェース">NonNegative</a> - <a href="org.commonutils/org/commonutils/annotation/package-summary.html">org.commonutils.annotation</a>の注釈インタフェース</dt>
 <dd>
@@ -635,6 +677,14 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:R">R</h2>
 <dl class="index">
+<dt><a href="org.commonutils/org/commonutils/id/Ulid.html#RANDOM_BYTES" class="member-name-link">RANDOM_BYTES</a> - クラスのstatic変数 org.commonutils.id.<a href="org.commonutils/org/commonutils/id/Ulid.html" title="org.commonutils.id内のクラス">Ulid</a></dt>
+<dd>
+<div class="block">Length of the random component in bytes (80 bits).</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/Ulid.html#RANDOM_CHARS" class="member-name-link">RANDOM_CHARS</a> - クラスのstatic変数 org.commonutils.id.<a href="org.commonutils/org/commonutils/id/Ulid.html" title="org.commonutils.id内のクラス">Ulid</a></dt>
+<dd>
+<div class="block">Crockford Base32 characters encoding the 80-bit random component.</div>
+</dd>
 <dt><a href="org.commonutils/org/commonutils/internal/Contracts.html#requireNonNegative(java.lang.String,int)" class="member-name-link">requireNonNegative(String, int)</a> - クラスのstaticメソッド org.commonutils.internal.<a href="org.commonutils/org/commonutils/internal/Contracts.html" title="org.commonutils.internal内のクラス">Contracts</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org.commonutils/org/commonutils/internal/Contracts.html#requireNonNegative(java.lang.String,long)" class="member-name-link">requireNonNegative(String, long)</a> - クラスのstaticメソッド org.commonutils.internal.<a href="org.commonutils/org/commonutils/internal/Contracts.html" title="org.commonutils.internal内のクラス">Contracts</a></dt>
@@ -694,6 +744,11 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:T">T</h2>
 <dl class="index">
+<dt><a href="org.commonutils/org/commonutils/id/Ulid.html#TIME_CHARS" class="member-name-link">TIME_CHARS</a> - クラスのstatic変数 org.commonutils.id.<a href="org.commonutils/org/commonutils/id/Ulid.html" title="org.commonutils.id内のクラス">Ulid</a></dt>
+<dd>
+<div class="block">Crockford Base32 characters encoding the 48-bit timestamp (10×5 bits, last group zero-pads by
+ two bits).</div>
+</dd>
 <dt><a href="org.commonutils/org/commonutils/lang/NumberSupport.html#toDouble(java.lang.String)" class="member-name-link">toDouble(String)</a> - クラスのstaticメソッド org.commonutils.lang.<a href="org.commonutils/org/commonutils/lang/NumberSupport.html" title="org.commonutils.lang内のクラス">NumberSupport</a></dt>
 <dd>
 <div class="block">Parses <code>value</code> as a <code>double</code>, or returns <code>0.0</code> when missing or invalid.</div>
@@ -751,6 +806,36 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:U">U</h2>
 <dl class="index">
+<dt><a href="org.commonutils/org/commonutils/id/Ulid.html" class="type-name-link" title="org.commonutils.id内のクラス">Ulid</a> - <a href="org.commonutils/org/commonutils/id/package-summary.html">org.commonutils.id</a>のクラス</dt>
+<dd>
+<div class="block">Static factory for <a href="https://github.com/ulid/spec">ULID</a>s: 48-bit Unix millisecond
+ timestamp (<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html#toEpochMilli()" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Instant.toEpochMilli()</code></a> semantics) in the most significant bits, 80 bits of
+ randomness, encoded as 26 uppercase Crockford Base32 characters.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/UlidIdGenerator.html" class="type-name-link" title="org.commonutils.id内のクラス">UlidIdGenerator</a> - <a href="org.commonutils/org/commonutils/id/package-summary.html">org.commonutils.id</a>のクラス</dt>
+<dd>
+<div class="block"><a href="org.commonutils/org/commonutils/id/IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a> for <a href="https://github.com/ulid/spec">ULID</a> strings (Crockford Base32
+ encoding of 48-bit Unix epoch milliseconds and 80 bits of randomness).</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/UlidIdGenerator.html#%3Cinit%3E(java.time.Clock)" class="member-name-link">UlidIdGenerator(Clock)</a> - クラスのコンストラクタ org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UlidIdGenerator.html" title="org.commonutils.id内のクラス">UlidIdGenerator</a></dt>
+<dd>
+<div class="block">Uses <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Clock.html#instant()" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Clock.instant()</code></a> on each <a href="org.commonutils/org/commonutils/id/UlidIdGenerator.html#generate()"><code>UlidIdGenerator.generate()</code></a> call with a cryptographically strong
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/UlidIdGenerator.html#%3Cinit%3E(java.time.Clock,java.util.random.RandomGenerator)" class="member-name-link">UlidIdGenerator(Clock, RandomGenerator)</a> - クラスのコンストラクタ org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UlidIdGenerator.html" title="org.commonutils.id内のクラス">UlidIdGenerator</a></dt>
+<dd>
+<div class="block">Uses <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Clock.html#instant()" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Clock.instant()</code></a> on each <a href="org.commonutils/org/commonutils/id/UlidIdGenerator.html#generate()"><code>UlidIdGenerator.generate()</code></a> call with the supplied <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a>.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/UlidIdGenerator.html#%3Cinit%3E(java.time.Instant)" class="member-name-link">UlidIdGenerator(Instant)</a> - クラスのコンストラクタ org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UlidIdGenerator.html" title="org.commonutils.id内のクラス">UlidIdGenerator</a></dt>
+<dd>
+<div class="block">Uses a fixed instant and a cryptographically strong <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a> on each <a href="org.commonutils/org/commonutils/id/UlidIdGenerator.html#generate()"><code>UlidIdGenerator.generate()</code></a> call.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/UlidIdGenerator.html#%3Cinit%3E(java.time.Instant,java.util.random.RandomGenerator)" class="member-name-link">UlidIdGenerator(Instant, RandomGenerator)</a> - クラスのコンストラクタ org.commonutils.id.<a href="org.commonutils/org/commonutils/id/UlidIdGenerator.html" title="org.commonutils.id内のクラス">UlidIdGenerator</a></dt>
+<dd>
+<div class="block">Uses a fixed instant and the supplied <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/random/RandomGenerator.html" title="java.util.random内のクラスまたはインタフェース" class="external-link"><code>RandomGenerator</code></a> on each <a href="org.commonutils/org/commonutils/id/UlidIdGenerator.html#generate()"><code>UlidIdGenerator.generate()</code></a> call.</div>
+</dd>
+<dt><a href="org.commonutils/org/commonutils/id/package-summary.html#ulid-vs-uuid-v7-vs-nano-id-heading" class="search-tag-link">ULID vs UUID v7 vs Nano ID</a> - パッケージ org.commonutils.idの検索タグ</dt>
+<dd>セクション</dd>
 <dt><a href="org.commonutils/org/commonutils/lang/Lengths.html#UNITS" class="member-name-link">UNITS</a> - 列挙クラスの列挙型定数 org.commonutils.lang.<a href="org.commonutils/org/commonutils/lang/Lengths.html" title="org.commonutils.langの列挙クラス">Lengths</a></dt>
 <dd>
 <div class="block">UTF-16 code units: non-<code>null</code> sequences use <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/CharSequence.html#length()" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>CharSequence.length()</code></a>; <code>null</code>

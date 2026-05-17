@@ -14,6 +14,14 @@
  *   <li>{@link org.commonutils.id.NanoIdGenerator} &mdash; short URL-safe random strings ({@link
  *       org.commonutils.id.NanoIdGenerator#DEFAULT_ALPHABET default alphabet} / configurable),
  *       unlike fixed-width binary UUIDs
+ *   <li>{@link org.commonutils.id.Ulid} &mdash; ULID strings (48-bit Unix milliseconds + 80-bit
+ *       randomness, Crockford Base32; {@link org.commonutils.id.Ulid#fromInstant(java.time.Instant)
+ *       fromInstant} / {@link org.commonutils.id.Ulid#fromClock(java.time.Clock) fromClock} and
+ *       {@link org.commonutils.id.Ulid#encode(long, byte[])} for tests)
+ *   <li>{@link org.commonutils.id.UlidIdGenerator} &mdash; {@link org.commonutils.id.IdGenerator}
+ *       for ULIDs (fixed {@link java.time.Instant} or per-call {@link java.time.Clock}); {@link
+ *       org.commonutils.id.UlidIdGenerator#nonCryptographic() nonCryptographic} uses {@link
+ *       java.util.SplittableRandom}-backed entropy (see class Javadoc)
  *   <li>{@link org.commonutils.id.MutableNanoIdGenerator} &mdash; Nano ID-style strings whose
  *       alphabet and length can change after construction ({@link
  *       org.commonutils.id.MutableNanoIdGenerator#configure configure} / {@link
@@ -33,6 +41,21 @@
  * <p><strong>Ecosystem-specific encodings</strong> (alternate alphabets imposed by plugins or
  * external tools without a stable specification here) are intentionally not implemented in this
  * library until there is an agreed format and compatibility policy.
+ *
+ * <h2>ULID vs UUID v7 vs Nano ID</h2>
+ *
+ * <p><strong>ULID</strong> ({@link org.commonutils.id.Ulid} / {@link
+ * org.commonutils.id.UlidIdGenerator}) encodes the same 48-bit Unix millisecond idea as {@link
+ * org.commonutils.id.UuidV7} into a fixed-length, lexicographically sortable Crockford Base32
+ * <em>string</em>, which is convenient for human-readable keys and many text-first storage formats.
+ *
+ * <p><strong>UUID version 7</strong> is a standardized binary UUID ({@link java.util.UUID}) in RFC
+ * 9562; use {@link org.commonutils.id.UuidV7} / {@link org.commonutils.id.UuidV7IdGenerator} when
+ * you need UUID types and tooling.
+ *
+ * <p><strong>Nano ID</strong> ({@link org.commonutils.id.NanoIdGenerator}) produces shorter,
+ * URL-safe strings with a configurable alphabet and length; unlike ULID it does not embed a
+ * timestamp in a standardized layout.
  *
  * <h2>Choosing UUID version</h2>
  *
