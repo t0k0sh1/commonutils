@@ -178,6 +178,7 @@ public final class StringSupport {
    * @return non-negative code unit count
    * @see Lengths#UNITS
    * @see CharSequence#length()
+   * @since 0.2.0
    */
   public static @NonNegative int length(final @Nullable CharSequence s) {
     return length(s, Lengths.UNITS);
@@ -191,6 +192,7 @@ public final class StringSupport {
    * @param how counting strategy; must not be {@code null}
    * @return count from {@code how}
    * @throws IllegalArgumentException if {@code how.count(s)} is negative
+   * @since 0.2.0
    */
   public static @NonNegative int length(
       final @Nullable CharSequence s, final @NonNull LengthCounter how) {

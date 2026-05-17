@@ -15,6 +15,8 @@ import org.commonutils.internal.EastAsianWidthColumns;
  * using Unicode East Asian Width (UAX #11): categories F, W, and A count as 2 columns; H, Na, and N
  * as 1. Unlisted code points are treated as N (width 1). Data: Unicode 15.1.0 {@code
  * EastAsianWidth.txt}.
+ *
+ * @since 0.2.0
  */
 public enum Lengths implements LengthCounter {
   /**

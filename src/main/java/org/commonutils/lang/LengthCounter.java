@@ -10,6 +10,8 @@ import org.commonutils.annotation.Nullable;
  *
  * <p>Implementations must return a non-negative count and treat {@code null} like an empty sequence
  * (count {@code 0}).
+ *
+ * @since 0.2.0
  */
 @FunctionalInterface
 public interface LengthCounter {
