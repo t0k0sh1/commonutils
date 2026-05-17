@@ -148,6 +148,14 @@ loadScripts(document, 'script');</script>
  folding suitable for typical ASCII/Unicode strings; it is not a substitute for locale-sensitive
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/text/Collator.html" title="java.text内のクラスまたはインタフェース" class="external-link"><code>Collator</code></a> comparisons.
 
+ <h2 id="length-counting">Length counting</h2>
+
+ <a href="#length(java.lang.CharSequence)"><code>length(CharSequence)</code></a> and <a href="#length(java.lang.CharSequence,org.commonutils.lang.LengthCounter)"><code>length(CharSequence, LengthCounter)</code></a> measure size in
+ different ways. Pass <a href="Lengths.html#UNITS"><code>Lengths.UNITS</code></a> for UTF-16 code units (Java <code>String</code>-style
+ length), <a href="Lengths.html#POINTS"><code>Lengths.POINTS</code></a> for Unicode code points, or <a href="Lengths.html#EAW"><code>Lengths.EAW</code></a> for East Asian
+ display columns (UAX #11). Like <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>Comparator</code></a>, you can supply a custom <a href="LengthCounter.html" title="org.commonutils.lang内のインタフェース"><code>LengthCounter</code></a> when none of the built-in enum constants fit. <code>null</code> sequences count as
+ length <code>0</code>; the <a href="LengthCounter.html" title="org.commonutils.lang内のインタフェース"><code>LengthCounter</code></a> argument must not be <code>null</code>.
+
  <h2 id="examples">Examples</h2>
 
  <pre><code>
@@ -255,6 +263,17 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Negation of <a href="#isEmpty(java.lang.CharSequence)"><code>isEmpty(CharSequence)</code></a>: <code>true</code> when <code>value</code> is non-null and has
  length greater than zero.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static @org.commonutils.annotation.NonNegative int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#length(java.lang.CharSequence)" class="member-name-link">length</a><wbr>(<a href="../annotation/Nullable.html" title="org.commonutils.annotation内の注釈インタフェース">@Nullable</a> <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/CharSequence.html" title="java.lang内のクラスまたはインタフェース" class="external-link">CharSequence</a>&nbsp;s)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Returns the UTF-16 code unit count: same as <a href="#length(java.lang.CharSequence,org.commonutils.lang.LengthCounter)"><code>length</code></a><code>(s, Lengths.UNITS)</code>.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static @org.commonutils.annotation.NonNegative int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#length(java.lang.CharSequence,org.commonutils.lang.LengthCounter)" class="member-name-link">length</a><wbr>(<a href="../annotation/Nullable.html" title="org.commonutils.annotation内の注釈インタフェース">@Nullable</a> <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/CharSequence.html" title="java.lang内のクラスまたはインタフェース" class="external-link">CharSequence</a>&nbsp;s,
+ <a href="../annotation/NonNull.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNull</a> <a href="LengthCounter.html" title="org.commonutils.lang内のインタフェース">LengthCounter</a>&nbsp;how)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Returns a non-negative length count for <code>s</code> using <code>how</code>.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../annotation/NonNull.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNull</a> <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#padEnd(java.lang.String,int,char)" class="member-name-link">padEnd</a><wbr>(<a href="../annotation/Nullable.html" title="org.commonutils.annotation内の注釈インタフェース">@Nullable</a> <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link">String</a>&nbsp;value,
@@ -397,6 +416,53 @@ loadScripts(document, 'script');</script>
 <li><a href="#isNotEmpty(java.lang.CharSequence)"><code>isNotEmpty(CharSequence)</code></a></li>
 </ul>
 </dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="length(java.lang.CharSequence)">
+<h3>length</h3>
+<div class="member-signature"><span class="annotations"><a href="../annotation/NonNegative.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNegative</a>
+</span><span class="modifiers">public static</span>&nbsp;<span class="return-type">@org.commonutils.annotation.NonNegative int</span>&nbsp;<span class="element-name">length</span><wbr><span class="parameters">(<a href="../annotation/Nullable.html" title="org.commonutils.annotation内の注釈インタフェース">@Nullable</a>
+ <a href="../annotation/Nullable.html" title="org.commonutils.annotation内の注釈インタフェース">@Nullable</a> <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/CharSequence.html" title="java.lang内のクラスまたはインタフェース" class="external-link">CharSequence</a>&nbsp;s)</span></div>
+<div class="block">Returns the UTF-16 code unit count: same as <a href="#length(java.lang.CharSequence,org.commonutils.lang.LengthCounter)"><code>length</code></a><code>(s, Lengths.UNITS)</code>.</div>
+<dl class="notes">
+<dt>パラメータ:</dt>
+<dd><code>s</code> - text to measure, may be <code>null</code> (treated as length <code>0</code>)</dd>
+<dt>戻り値:</dt>
+<dd>non-negative code unit count</dd>
+<dt>導入されたバージョン:</dt>
+<dd>0.2.0</dd>
+<dt>関連項目:</dt>
+<dd>
+<ul class="tag-list">
+<li><a href="Lengths.html#UNITS"><code>Lengths.UNITS</code></a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/CharSequence.html#length()" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>CharSequence.length()</code></a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="length(java.lang.CharSequence,org.commonutils.lang.LengthCounter)">
+<h3>length</h3>
+<div class="member-signature"><span class="annotations"><a href="../annotation/NonNegative.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNegative</a>
+</span><span class="modifiers">public static</span>&nbsp;<span class="return-type">@org.commonutils.annotation.NonNegative int</span>&nbsp;<span class="element-name">length</span><wbr><span class="parameters">(<a href="../annotation/Nullable.html" title="org.commonutils.annotation内の注釈インタフェース">@Nullable</a>
+ <a href="../annotation/Nullable.html" title="org.commonutils.annotation内の注釈インタフェース">@Nullable</a> <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/CharSequence.html" title="java.lang内のクラスまたはインタフェース" class="external-link">CharSequence</a>&nbsp;s,
+ <a href="../annotation/NonNull.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNull</a>
+ <a href="../annotation/NonNull.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNull</a> <a href="LengthCounter.html" title="org.commonutils.lang内のインタフェース">LengthCounter</a>&nbsp;how)</span></div>
+<div class="block">Returns a non-negative length count for <code>s</code> using <code>how</code>. <code>null</code> <code>s</code>
+ counts as <code>0</code>.</div>
+<dl class="notes">
+<dt>パラメータ:</dt>
+<dd><code>s</code> - text to measure, may be <code>null</code></dd>
+<dd><code>how</code> - counting strategy; must not be <code>null</code></dd>
+<dt>戻り値:</dt>
+<dd>count from <code>how</code></dd>
+<dt>例外:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></code> - if <code>how.count(s)</code> is negative</dd>
+<dt>導入されたバージョン:</dt>
+<dd>0.2.0</dd>
 </dl>
 </section>
 </li>

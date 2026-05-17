@@ -1,16 +1,13 @@
 package org.commonutils.internal;
 
 /**
- * East Asian display column width from Unicode {@linkplain
- * https://www.unicode.org/Public/15.1.0/ucd/EastAsianWidth.txt EastAsianWidth} 15.1.0 (UAX #11).
- * Categories F, W, and A map to 2 columns; H, Na, and N map to 1. Code points not listed in that
- * file are treated as N (neutral), width 1.
- *
- * <p>Lookup tables are validated at class initialization: array lengths match, each range has
- * {@code START <= END}, ranges are strictly increasing with no overlap, and each width is {@code 1}
- * or {@code 2}.
- *
- * <p>For use only inside this module; not exported to library consumers.
+ * East Asian display column width from Unicode <a
+ * href="https://www.unicode.org/Public/15.1.0/ucd/EastAsianWidth.txt">EastAsianWidth.txt</a> 15.1.0
+ * (UAX #11). Categories F, W, and A map to 2 columns; H, Na, and N map to 1. Code points not listed
+ * in that file are treated as N (neutral), width 1. Lookup tables are validated at class
+ * initialization: array lengths match, each range has {@code START <= END}, ranges are strictly
+ * increasing with no overlap, and each width is {@code 1} or {@code 2}. For use only inside this
+ * module; not exported to library consumers.
  */
 public final class EastAsianWidthColumns {
   private EastAsianWidthColumns() {}

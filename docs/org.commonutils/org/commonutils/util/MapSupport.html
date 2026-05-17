@@ -102,6 +102,7 @@ loadScripts(document, 'script');</script>
 
  <ul>
    <li>Predicates such as <a href="#isEmpty(java.util.Map)"><code>isEmpty(Map)</code></a> treat <code>null</code> like an empty map.
+   <li><a href="#size(java.util.Map)"><code>size(Map)</code></a> returns <code>0</code> when <code>map</code> is <code>null</code>; otherwise <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html#size()" title="java.util内のクラスまたはインタフェース" class="external-link"><code>Map.size()</code></a>.
    <li>Accessor methods return the supplied default when the map is <code>null</code>, the key is not
        contained, parsing fails, or (for some methods) the stored value is <code>null</code>; see each
        method for exact rules.
@@ -137,10 +138,9 @@ loadScripts(document, 'script');</script>
  <h2 id="exceptions">Exceptions</h2>
 
  These helpers do <em>not</em> throw for ordinary null maps, missing keys, or failed parsing of
- string values: they return defaults as documented. <a href="#defaultIfNull(T,T)"><code>defaultIfNull(Map, Map)</code></a> delegates to
- <a href="../lang/ObjectSupport.html#requireNonNullElse(T,T)"><code>ObjectSupport.requireNonNullElse(Object, Object)</code></a> and throws <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/NullPointerException.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>NullPointerException</code></a>
- if both arguments are <code>null</code>. A broken <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>Map</code></a> implementation in user code may still
- throw at runtime.
+ string values: they return defaults as documented. <a href="#size(java.util.Map)"><code>size(Map)</code></a> throws <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>IllegalArgumentException</code></a> when <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html#size()" title="java.util内のクラスまたはインタフェース" class="external-link"><code>Map.size()</code></a> returns a negative value. <a href="#defaultIfNull(T,T)"><code>defaultIfNull(Map, Map)</code></a> delegates to <a href="../lang/ObjectSupport.html#requireNonNullElse(T,T)"><code>ObjectSupport.requireNonNullElse(Object, Object)</code></a>
+ and throws <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/NullPointerException.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>NullPointerException</code></a> if both arguments are <code>null</code>. A broken <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>Map</code></a>
+ implementation in user code may still throw at runtime.
 
  <h2 id="examples">Examples</h2>
 
@@ -158,13 +158,14 @@ loadScripts(document, 'script');</script>
  contracts on signatures; <a href="#defaultIfNull(T,T)"><code>defaultIfNull(Map, Map)</code></a> follows <a href="../lang/ObjectSupport.html#requireNonNullElse(T,T)"><code>ObjectSupport.requireNonNullElse(Object, Object)</code></a> (both maps <code>null</code> yields <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/NullPointerException.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>NullPointerException</code></a>).
 
  <p><strong id="numeric-contracts">Numeric constraints</strong> (<a href="../annotation/NonNegative.html" title="org.commonutils.annotation内の注釈インタフェース"><code>NonNegative</code></a>, <a href="../annotation/Positive.html" title="org.commonutils.annotation内の注釈インタフェース"><code>Positive</code></a>) document
- ranges where applicable in related APIs; map accessors here use defaults rather than validating
- numeric ranges on keys.</div>
+ ranges where applicable in related APIs; <a href="#size(java.util.Map)"><code>size(Map)</code></a> enforces <a href="../annotation/NonNegative.html" title="org.commonutils.annotation内の注釈インタフェース"><code>NonNegative</code></a> at runtime when <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html#size()" title="java.util内のクラスまたはインタフェース" class="external-link"><code>Map.size()</code></a> returns a negative
+ value. Other map accessors use defaults rather than validating numeric ranges on keys.</div>
 <dl class="notes">
 <dt>関連項目:</dt>
 <dd>
 <ul class="tag-list">
 <li><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html#isEmpty()" title="java.util内のクラスまたはインタフェース" class="external-link"><code>Map.isEmpty()</code></a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html#size()" title="java.util内のクラスまたはインタフェース" class="external-link"><code>Map.size()</code></a></li>
 <li><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html#containsKey(java.lang.Object)" title="java.util内のクラスまたはインタフェース" class="external-link"><code>Map.containsKey(Object)</code></a></li>
 <li><a href="CollectionSupport.html" title="org.commonutils.util内のクラス"><code>CollectionSupport</code></a></li>
 </ul>
@@ -263,6 +264,11 @@ loadScripts(document, 'script');</script>
 <div class="block">Negation of <a href="#isEmpty(java.util.Map)"><code>isEmpty(Map)</code></a>: <code>true</code> when <code>map</code> is non-null and has at least
  one entry.</div>
 </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static @org.commonutils.annotation.NonNegative int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#size(java.util.Map)" class="member-name-link">size</a><wbr>(<a href="../annotation/Nullable.html" title="org.commonutils.annotation内の注釈インタフェース">@Nullable</a> <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="java.util内のクラスまたはインタフェース" class="external-link">Map</a>&lt;?,<wbr>?&gt;&nbsp;map)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Returns <code>map.size()</code> when <code>map</code> is non-null; otherwise <code>0</code>.</div>
+</div>
 </div>
 </div>
 </div>
@@ -317,6 +323,34 @@ loadScripts(document, 'script');</script>
 <dd>
 <ul class="tag-list">
 <li><a href="#isEmpty(java.util.Map)"><code>isEmpty(Map)</code></a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="size(java.util.Map)">
+<h3>size</h3>
+<div class="member-signature"><span class="annotations"><a href="../annotation/NonNegative.html" title="org.commonutils.annotation内の注釈インタフェース">@NonNegative</a>
+</span><span class="modifiers">public static</span>&nbsp;<span class="return-type">@org.commonutils.annotation.NonNegative int</span>&nbsp;<span class="element-name">size</span><wbr><span class="parameters">(<a href="../annotation/Nullable.html" title="org.commonutils.annotation内の注釈インタフェース">@Nullable</a>
+ <a href="../annotation/Nullable.html" title="org.commonutils.annotation内の注釈インタフェース">@Nullable</a> <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="java.util内のクラスまたはインタフェース" class="external-link">Map</a>&lt;?,<wbr>?&gt;&nbsp;map)</span></div>
+<div class="block">Returns <code>map.size()</code> when <code>map</code> is non-null; otherwise <code>0</code>. Use instead of
+ <code>map == null ? 0 : map.size()</code> at call sites.</div>
+<dl class="notes">
+<dt>パラメータ:</dt>
+<dd><code>map</code> - map to measure, may be <code>null</code></dd>
+<dt>戻り値:</dt>
+<dd>entry count, or <code>0</code> when <code>map</code> is <code>null</code></dd>
+<dt>例外:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/IllegalArgumentException.html" title="java.lang内のクラスまたはインタフェース" class="external-link">IllegalArgumentException</a></code> - when <code>map</code> is non-null and <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html#size()" title="java.util内のクラスまたはインタフェース" class="external-link"><code>Map.size()</code></a> is
+     negative</dd>
+<dt>導入されたバージョン:</dt>
+<dd>0.2.0</dd>
+<dt>関連項目:</dt>
+<dd>
+<ul class="tag-list-long">
+<li><a href="#isEmpty(java.util.Map)"><code>isEmpty(Map)</code></a></li>
+<li><a href="CollectionSupport.html#size(java.util.Collection)"><code>CollectionSupport.size(java.util.Collection)</code></a></li>
 </ul>
 </dd>
 </dl>
