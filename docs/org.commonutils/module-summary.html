@@ -91,6 +91,9 @@ loadScripts(document, 'script');</script>
    <dd><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Collection.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>Collection</code></a> and <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>Map</code></a> helpers (<a href="org/commonutils/util/CollectionSupport.html" title="org.commonutils.util内のクラス"><code>CollectionSupport</code></a>, <a href="org/commonutils/util/MapSupport.html" title="org.commonutils.util内のクラス"><code>MapSupport</code></a>).
    <dt><code>org.commonutils.annotation</code>
    <dd>Contract markers: <a href="org/commonutils/annotation/Nullable.html" title="org.commonutils.annotation内の注釈インタフェース"><code>Nullable</code></a>, <a href="org/commonutils/annotation/NonNull.html" title="org.commonutils.annotation内の注釈インタフェース"><code>NonNull</code></a>, <a href="org/commonutils/annotation/NonNegative.html" title="org.commonutils.annotation内の注釈インタフェース"><code>NonNegative</code></a>, <a href="org/commonutils/annotation/Positive.html" title="org.commonutils.annotation内の注釈インタフェース"><code>Positive</code></a>.
+   <dt><code>org.commonutils.id</code>
+   <dd><a href="org/commonutils/id/IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a> and <a href="org/commonutils/id/UuidV4IdGenerator.html" title="org.commonutils.id内のクラス"><code>UuidV4IdGenerator</code></a>
+       (shared <code>generate()</code> contract; RFC 4122 UUID v4).
  </dl>
 
  <p>Non-exported packages (for example implementation details of validation) are not part of the
@@ -111,13 +114,17 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color package-summary-table package-summary-table-tab1">
 <div class="block">Marker annotations documenting nullability and numeric ranges on this library's public API.</div>
 </div>
-<div class="col-first odd-row-color package-summary-table package-summary-table-tab1"><a href="org/commonutils/lang/package-summary.html">org.commonutils.lang</a></div>
+<div class="col-first odd-row-color package-summary-table package-summary-table-tab1"><a href="org/commonutils/id/package-summary.html">org.commonutils.id</a></div>
 <div class="col-last odd-row-color package-summary-table package-summary-table-tab1">
+<div class="block">Identifier generators with a shared <a href="org/commonutils/id/IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a> contract.</div>
+</div>
+<div class="col-first even-row-color package-summary-table package-summary-table-tab1"><a href="org/commonutils/lang/package-summary.html">org.commonutils.lang</a></div>
+<div class="col-last even-row-color package-summary-table package-summary-table-tab1">
 <div class="block">Language-level helpers: strings, character sequences, numeric strings, and wrappers aligned with
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Objects.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>Objects</code></a>.</div>
 </div>
-<div class="col-first even-row-color package-summary-table package-summary-table-tab1"><a href="org/commonutils/util/package-summary.html">org.commonutils.util</a></div>
-<div class="col-last even-row-color package-summary-table package-summary-table-tab1">
+<div class="col-first odd-row-color package-summary-table package-summary-table-tab1"><a href="org/commonutils/util/package-summary.html">org.commonutils.util</a></div>
+<div class="col-last odd-row-color package-summary-table package-summary-table-tab1">
 <div class="block">Helpers for <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Collection.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>Collection</code></a> and <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>Map</code></a>: null-safe emptiness, sizing,
  membership, ordered endpoints, and typed map reads with defaults.</div>
 </div>

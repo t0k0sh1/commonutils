@@ -1,5 +1,6 @@
 module:org.commonutils
 org.commonutils.annotation
+org.commonutils.id
 org.commonutils.internal
 org.commonutils.lang
 org.commonutils.util

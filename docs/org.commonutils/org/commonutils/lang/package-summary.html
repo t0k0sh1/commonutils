@@ -76,8 +76,11 @@ loadScripts(document, 'script');</script>
  <h2 id="main-entry-points-heading">Main entry points</h2>
 
  <ul>
-   <li><a href="StringSupport.html" title="org.commonutils.lang内のクラス"><code>StringSupport</code></a> &mdash; empty/blank, trim/strip, padding, safe
-       equality
+   <li><a href="StringSupport.html" title="org.commonutils.lang内のクラス"><code>StringSupport</code></a> &mdash; empty/blank, trim/strip, padding, length
+       counting, safe equality
+   <li><a href="LengthCounter.html" title="org.commonutils.lang内のインタフェース"><code>LengthCounter</code></a> / <a href="Lengths.html" title="org.commonutils.langの列挙クラス"><code>Lengths</code></a> &mdash;
+       how to count <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/CharSequence.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>CharSequence</code></a> length (code units, code points, East Asian
+       columns)
    <li><a href="NumberSupport.html" title="org.commonutils.lang内のクラス"><code>NumberSupport</code></a> &mdash; digit checks, parsing with defaults,
        <code>clamp</code>
    <li><a href="ObjectSupport.html" title="org.commonutils.lang内のクラス"><code>ObjectSupport</code></a> &mdash; forwarding to <code>Objects</code> plus extra
@@ -88,10 +91,19 @@ loadScripts(document, 'script');</script>
 <ul class="summary-list">
 <li>
 <div id="class-summary">
-<div class="caption"><span>クラス</span></div>
-<div class="summary-table two-column-summary">
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="class-summary-tab0" role="tab" aria-selected="true" aria-controls="class-summary.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary', 2)" class="active-table-tab">すべてのクラスおよびインタフェース</button><button id="class-summary-tab1" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab1', 2)" class="table-tab">インタフェース</button><button id="class-summary-tab2" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab2', 2)" class="table-tab">クラス</button><button id="class-summary-tab3" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab3', 2)" class="table-tab">列挙クラス</button></div>
+<div id="class-summary.tabpanel" role="tabpanel">
+<div class="summary-table two-column-summary" aria-labelledby="class-summary-tab0">
 <div class="table-header col-first">クラス</div>
 <div class="table-header col-last">説明</div>
+<div class="col-first even-row-color class-summary class-summary-tab1"><a href="LengthCounter.html" title="org.commonutils.lang内のインタフェース">LengthCounter</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab1">
+<div class="block">Strategy for measuring the &quot;length&quot; of a <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/CharSequence.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>CharSequence</code></a>.</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab3"><a href="Lengths.html" title="org.commonutils.langの列挙クラス">Lengths</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab3">
+<div class="block">Built-in <a href="LengthCounter.html" title="org.commonutils.lang内のインタフェース"><code>LengthCounter</code></a> strategies.</div>
+</div>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="NumberSupport.html" title="org.commonutils.lang内のクラス">NumberSupport</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">Static helpers for numeric strings and simple bounds: digit checks, JDK-compatible parsing with
@@ -106,6 +118,7 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">Static helpers for <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>String</code></a> and <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/CharSequence.html" title="java.lang内のクラスまたはインタフェース" class="external-link"><code>CharSequence</code></a> work: presence checks, safe defaults,
  content equality, and trimming helpers.</div>
+</div>
 </div>
 </div>
 </div>
