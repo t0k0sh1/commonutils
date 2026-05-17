@@ -1,3 +1,4 @@
+// spotless:off
 /**
  * Small JDK 21+ utility library. The public API is <em>curated</em>: it favors high-frequency,
  * broadly useful helpers over exhaustive coverage of every category, and it is not limited to any
@@ -26,14 +27,17 @@
  *   <dt>{@code org.commonutils.id}
  *   <dd>{@link org.commonutils.id.IdGenerator}, {@link org.commonutils.id.UuidV4IdGenerator},
  *       {@link org.commonutils.id.UuidV7}, {@link org.commonutils.id.UuidV7IdGenerator} (RFC 4122
- *       v4 and RFC 9562 v7 UUIDs), {@link org.commonutils.id.Ulid} / {@link
- *       org.commonutils.id.UlidIdGenerator} (ULID strings), and {@link
- *       org.commonutils.id.NanoIdGenerator} (URL-safe string IDs).
+ *       v4 and RFC 9562 v7 UUIDs), {@link org.commonutils.id.Ulid} /
+ *       {@link org.commonutils.id.UlidIdGenerator} (ULID strings),
+ *       {@link org.commonutils.id.NanoIdGenerator} (URL-safe string IDs), and
+ *       {@link org.commonutils.id.Cuid2} / {@link org.commonutils.id.Cuid2IdGenerator} (Cuid2
+ *       strings).
  * </dl>
  *
  * <p>Non-exported packages (for example implementation details of validation) are not part of the
  * supported surface when using the module path.
  */
+// spotless:on
 module org.commonutils {
   requires java.base;
 

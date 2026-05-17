@@ -89,6 +89,14 @@ loadScripts(document, 'script');</script>
        for ULIDs (fixed <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Instant</code></a> or per-call <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Clock.html" title="java.time内のクラスまたはインタフェース" class="external-link"><code>Clock</code></a>); <a href="UlidIdGenerator.html#nonCryptographic()"><code>nonCryptographic</code></a> uses <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SplittableRandom.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>SplittableRandom</code></a>-backed entropy (see class Javadoc)
    <li><a href="MutableNanoIdGenerator.html" title="org.commonutils.id内のクラス"><code>MutableNanoIdGenerator</code></a> &mdash; Nano ID-style strings whose
        alphabet and length can change after construction (<a href="MutableNanoIdGenerator.html#configure(java.lang.String,int)"><code>configure</code></a> / <a href="MutableNanoIdGenerator.html#setAlphabet(java.lang.String)"><code>setAlphabet</code></a> / <a href="MutableNanoIdGenerator.html#setSize(int)"><code>setSize</code></a>); prefer <a href="NanoIdGenerator.html" title="org.commonutils.id内のクラス"><code>NanoIdGenerator</code></a> when configuration is fixed
+   <li><a href="Cuid2.html" title="org.commonutils.id内のクラス"><code>Cuid2</code></a> &mdash; <a href="https://github.com/paralleldrive/cuid2">
+       Cuid2</a>-compatible helpers (<code>SHA3-512</code> / base36, fingerprint, validation)
+   <li><a href="Cuid2IdGenerator.html" title="org.commonutils.id内のクラス"><code>Cuid2IdGenerator</code></a> &mdash;
+       <a href="IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a> for Cuid2 strings (length 2–32, default 24);
+       <a href="Cuid2IdGenerator.html#nonCryptographic()"><code>nonCryptographic()</code></a> uses
+       <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SplittableRandom.html" title="java.util内のクラスまたはインタフェース" class="external-link"><code>SplittableRandom</code></a>-backed entropy (see class Javadoc). Cuid2 is not
+       k-sortable; prefer <a href="Ulid.html" title="org.commonutils.id内のクラス"><code>Ulid</code></a> /
+       <a href="UlidIdGenerator.html" title="org.commonutils.id内のクラス"><code>UlidIdGenerator</code></a> for coarse time order in encoded form.
  </ul>
 
  <h2 id="nano-id-generators-heading">Nano ID generators</h2>
@@ -102,7 +110,7 @@ loadScripts(document, 'script');</script>
  external tools without a stable specification here) are intentionally not implemented in this
  library until there is an agreed format and compatibility policy.
 
- <h2 id="ulid-vs-uuid-v7-vs-nano-id-heading">ULID vs UUID v7 vs Nano ID</h2>
+ <h2 id="ulid-vs-uuid-v7-vs-nano-id-vs-cuid2-heading">ULID vs UUID v7 vs Nano ID vs Cuid2</h2>
 
  <p><strong>ULID</strong> (<a href="Ulid.html" title="org.commonutils.id内のクラス"><code>Ulid</code></a> / <a href="UlidIdGenerator.html" title="org.commonutils.id内のクラス"><code>UlidIdGenerator</code></a>) encodes the same 48-bit Unix millisecond idea as <a href="UuidV7.html" title="org.commonutils.id内のクラス"><code>UuidV7</code></a> into a fixed-length, lexicographically sortable Crockford Base32
  <em>string</em>, which is convenient for human-readable keys and many text-first storage formats.
@@ -111,9 +119,8 @@ loadScripts(document, 'script');</script>
  9562; use <a href="UuidV7.html" title="org.commonutils.id内のクラス"><code>UuidV7</code></a> / <a href="UuidV7IdGenerator.html" title="org.commonutils.id内のクラス"><code>UuidV7IdGenerator</code></a> when
  you need UUID types and tooling.
 
- <p><strong>Nano ID</strong> (<a href="NanoIdGenerator.html" title="org.commonutils.id内のクラス"><code>NanoIdGenerator</code></a>) produces shorter,
- URL-safe strings with a configurable alphabet and length; unlike ULID it does not embed a
- timestamp in a standardized layout.
+ <p><strong>Cuid2</strong> (<a href="Cuid2.html" title="org.commonutils.id内のクラス"><code>Cuid2</code></a> / <a href="Cuid2IdGenerator.html" title="org.commonutils.id内のクラス"><code>Cuid2IdGenerator</code></a>) follows <code>@paralleldrive/cuid2</code>: hashed ids that are
+ not designed as k-sortable keys; use ULID or UUID v7 when you need that property.
 
  <h2 id="choosing-uuid-version-heading">Choosing UUID version</h2>
 
@@ -134,6 +141,17 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary" aria-labelledby="class-summary-tab0">
 <div class="table-header col-first">クラス</div>
 <div class="table-header col-last">説明</div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Cuid2.html" title="org.commonutils.id内のクラス">Cuid2</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="block">Utilities and constants for <a href="https://github.com/paralleldrive/cuid2">Cuid2</a>-compatible
+ string identifiers (<code>SHA3-512</code>, base36, session counter, fingerprint).</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Cuid2IdGenerator.html" title="org.commonutils.id内のクラス">Cuid2IdGenerator</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="block"><a href="IdGenerator.html" title="org.commonutils.id内のインタフェース"><code>IdGenerator</code></a> for <a href="https://github.com/paralleldrive/cuid2">Cuid2</a>-compatible
+ strings: <code>SHA3-512</code> over UTF-8 inputs, base36, a per-instance session counter, a fixed
+ fingerprint (entropy-derived by default), and a leading random lowercase letter.</div>
+</div>
 <div class="col-first even-row-color class-summary class-summary-tab1"><a href="IdGenerator.html" title="org.commonutils.id内のインタフェース">IdGenerator</a>&lt;T&gt;</div>
 <div class="col-last even-row-color class-summary class-summary-tab1">
 <div class="block">Generates identifiers of type <code>T</code>.</div>

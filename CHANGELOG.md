@@ -29,12 +29,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`UlidIdGenerator`**: **`IdGenerator<String>`** for ULIDs with fixed **`Instant`** or `Clock`, mirroring **`UuidV7IdGenerator`**; **`nonCryptographic()`** / **`nonCryptographic(Clock)`** use `SplittableRandom` (documented as not for security-sensitive identifiers).
 - **Tests**: **`NanoIdGeneratorTest`** for shape, deterministic output with a seeded **`RandomGenerator`**, successive values, alphabet contracts, null rejection, and **`nonCryptographic…`**; **`MutableNanoIdGeneratorTest`** for mutation contracts and defaults.
 - **Tests**: **`UlidTest`** (encoding vectors, bounds, shape, clock stepping); **`UlidIdGeneratorTest`**.
+- **`Cuid2`**: helpers for [Cuid2](https://github.com/paralleldrive/cuid2)-compatible strings (`SHA3-512`, base36, default entropy-only fingerprint matching the reference when no global keys exist); **`isValid`**, **`createDefaultFingerprint`**, **`generate`** (for tests and advanced call sites).
+- **`Cuid2IdGenerator`**: **`IdGenerator<String>`** for Cuid2 (length **2–32**, default **24**); **`Clock`** and **`RandomGenerator`** injection; custom fingerprint and fixed initial counter overloads for deployment- or test-specific control; **`nonCryptographic()`** / **`nonCryptographic(int)`** use **`SplittableRandom`** (documented as not for security-sensitive identifiers).
+- **Tests**: **`Cuid2IdGeneratorTest`** (golden sequence, shape, bounds, distinct batch, null/empty rejection).
 
 ### Changed
 
 - **`org.commonutils.lang` package docs**: mention `LengthCounter` / `Lengths` and `StringSupport` length counting.
 - **`org.commonutils.id`**: package documentation adds “Choosing UUID version” (v4 random vs v7 timestamp / `Clock`); **`UuidV4IdGenerator`** class Javadoc cross-links **`UuidV7`** / **`UuidV7IdGenerator`** for time-based use cases (GitHub issue #8).
-- **`org.commonutils.id`** / **`IdGenerator`**: package docs add **`MutableNanoIdGenerator`**, **`Ulid`** / **`UlidIdGenerator`**, a **`Nano ID generators`** section, ULID vs UUID v7 vs Nano ID guidance, and encoding-scope guidance; **`IdGenerator`** documents **`MutableNanoIdGenerator`** and **`UlidIdGenerator`** for string ids (GitHub issue #10).
+- **`org.commonutils.id`** / **`IdGenerator`**: package docs add **`MutableNanoIdGenerator`**, **`Ulid`** / **`UlidIdGenerator`**, **`Cuid2`** / **`Cuid2IdGenerator`**, a **`Nano ID generators`** section, ULID vs UUID v7 vs Nano ID vs Cuid2 guidance, and encoding-scope guidance; **`IdGenerator`** documents **`MutableNanoIdGenerator`**, **`UlidIdGenerator`**, and **`Cuid2IdGenerator`** for string ids (GitHub issue #10).
 
 ### Notes
 

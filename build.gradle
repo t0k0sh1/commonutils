@@ -60,6 +60,7 @@ spotless {
     java {
         target 'src/**/*.java'
         googleJavaFormat(libs.versions.google.java.format.get())
+        toggleOffOn()
         trimTrailingWhitespace()
         endWithNewline()
     }
