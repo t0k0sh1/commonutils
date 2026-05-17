@@ -13,7 +13,7 @@ alwaysApply: true
 
 ## 本リポジトリで漏れやすい・誤検知しやすい点
 
-- **クラス Javadoc の段落**: 先頭のサマリは **`<p>` なし**でよい。2 段落目以降は **空行のあと `<p>`** で始める（[`UuidV7` のクラスコメント](src/main/java/org/commonutils/id/UuidV7.java) と同型）。
+- **クラス Javadoc の段落**: 先頭のサマリは **`<p>` なし**でよい。2 段落目以降は **空行のあと `<p>`** で始める（[`UuidV7` のクラスコメント](../../src/main/java/org/commonutils/id/UuidV7.java) と同型）。
 - **JDK 標準 doclet の HTML**: 先頭段落は、生成 HTML では **`<p>` で包まれない**形になりうる。レビュー時は **同じ doclet で生成された既存ページ**と見比べる。
 - **Spotless（google-java-format）**: 先頭に付けた `<p>` は **除去されうる**。フォーマッタと衝突しない形に寄せる。
 - **インラインタグ**: `{@link}` や `{@value}` などを **行の途中で分割しない**（doclet が壊しうる）。
@@ -21,9 +21,9 @@ alwaysApply: true
 
 ## プロジェクト固有（詳細は別ルール）
 
-**`@since`、CHANGELOG／semver、`@param` / `@throws` と契約アノテーションの整合**などは、本文をここに複製しない。[`.cursor/rules/development-workflow.mdc`](.cursor/rules/development-workflow.mdc) と [`.cursor/rules/commonutils-contracts.mdc`](.cursor/rules/commonutils-contracts.mdc) を参照する。
+**`@since`、CHANGELOG／semver、`@param` / `@throws` と契約アノテーションの整合**などは、本文をここに複製しない。[`development-workflow.mdc`](development-workflow.mdc) と [`commonutils-contracts.mdc`](commonutils-contracts.mdc) を参照する。
 
 ## 段落構造の范例
 
 - クラス: `org.commonutils.id.UuidV7`
-- ソース: [`src/main/java/org/commonutils/id/UuidV7.java`](src/main/java/org/commonutils/id/UuidV7.java)
+- ソース: [`src/main/java/org/commonutils/id/UuidV7.java`](../../src/main/java/org/commonutils/id/UuidV7.java)
